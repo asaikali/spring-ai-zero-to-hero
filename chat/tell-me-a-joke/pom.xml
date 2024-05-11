@@ -10,9 +10,12 @@
 	<groupId>com.example</groupId>
 	<artifactId>tell-me-a-joke</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	
-	<modules>
-		<module>ollama</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-core</artifactId>
+		</dependency>
+	</dependencies>
 </project>

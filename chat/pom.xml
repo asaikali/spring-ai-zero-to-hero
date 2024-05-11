@@ -14,5 +14,6 @@
 
 	<modules>
 		<module>tell-me-a-joke</module>
+		<module>ollama</module>
 	</modules>
 </project>
