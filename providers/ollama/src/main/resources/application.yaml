@@ -1,11 +1,4 @@
-#logging:
-#  level:
-#    root: DEBUG
-
-
 spring:
-  main:
-    web-application-type: none
   ai:
     ollama:
       chat:
