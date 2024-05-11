@@ -21,6 +21,7 @@
   </properties>
 
   <modules>
+    <module>basics</module>
     <module>template</module>
   </modules>
   <dependencyManagement>
