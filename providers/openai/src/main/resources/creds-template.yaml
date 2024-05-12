@@ -1,3 +1,4 @@
+# copy this file to creds.yaml and fill in the api-key
 spring:
   ai:
     openai:

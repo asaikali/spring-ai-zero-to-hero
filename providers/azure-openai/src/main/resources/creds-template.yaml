@@ -1,0 +1,6 @@
+spring:
+  ai:
+    azure:
+      openai:
+        api-key:
+        endpoint:

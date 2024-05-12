@@ -1,3 +1,14 @@
+spring:
+  config:
+    import: "optional:classpath:/creds.yaml"
+  ai:
+    azure:
+      openai:
+        chat:
+          options:
+            deployment-name: "gpt-35-turbo-16k"
+            temperature: 0.7
+
 management:
   endpoint:
     health:
