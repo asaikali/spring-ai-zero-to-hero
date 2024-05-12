@@ -1,3 +1,7 @@
+spring:
+  config:
+    import: "optional:classpath:/creds.yaml"
+
 management:
   endpoint:
     health:
@@ -6,9 +10,4 @@ management:
     web:
       exposure:
         include: "*"
-logging:
-  level:
-    org:
-      springframework:
-        ai: DEBUG
 
