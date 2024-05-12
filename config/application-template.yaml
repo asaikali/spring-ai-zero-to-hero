@@ -1,4 +1,8 @@
-# see
+# copy and paste this file to be config/application.yaml and fill in your
+# your api keys.
+#
+# see https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.files
+#
 spring:
   ai:
     azure:
