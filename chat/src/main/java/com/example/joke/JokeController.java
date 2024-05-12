@@ -1,4 +1,4 @@
-package com.example;
+package com.example.joke;
 
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;
