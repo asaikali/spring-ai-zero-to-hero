@@ -1,0 +1,54 @@
+package com.example.chat._02;
+
+import org.springframework.ai.chat.ChatClient;
+import org.springframework.ai.chat.ChatResponse;
+import org.springframework.ai.chat.Generation;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/chat/02")
+public class PromptController {
+    private final ChatClient chatClient;
+
+    public PromptController(ChatClient chatClient) {
+        this.chatClient = chatClient;
+    }
+
+    @GetMapping("/joke")
+    public String getJoke(@RequestParam(value = "topic", defaultValue = "cows") String topic){
+
+        // Prompt is the primary class that represents a request to an LLM.
+        // it can be configured with more options to enable more complex interactions
+        // with the AI service. We will see more options later.
+        Prompt prompt = new Prompt("Tell me a joke about " + topic);
+
+        // chat client takes a prompt and returns a chat response
+        ChatResponse response = chatClient.call(prompt);
+
+        // The response object contains a result object called a generation
+        // containing the text from the AI LLM
+        Generation generation = response.getResult();
+
+        // The actual data from an LLM is stroed in a Message object, there
+        // are different types of messages. AssistantMessage indicates that the
+        // contents came from the AI service.
+        AssistantMessage assistantMessage = generation.getOutput();
+
+        // All these layers of objects might seem to be overkills. However,
+        // keep in mind that the same interfaces are used for dealing with
+        // text, audio, video, images, and raw numbers. As such the underlying
+        // low level inerfaces need to be factored out in way, that enables
+        // higher level interfaces to be built. The API you are see in this
+        // controller is more like JDBC API as apposed to a higher level Spring
+        // data jpa. Spring AI will be adding higher level interfaces on top
+        // the low level intefaces you have seen so far.
+        return assistantMessage.getContent();
+    }
+}
