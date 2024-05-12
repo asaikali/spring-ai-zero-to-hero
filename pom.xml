@@ -23,7 +23,6 @@
   <modules>
     <module>chat</module>
     <module>providers</module>
-    <module>template</module>
   </modules>
   <dependencyManagement>
     <dependencies>
