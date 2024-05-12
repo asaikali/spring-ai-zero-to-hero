@@ -1,0 +1,4 @@
+spring:
+  ai:
+    openai:
+      api-key: add your API key here
