@@ -22,7 +22,7 @@
 
   <modules>
     <module>chat</module>
-    <module>ai-providers</module>
+    <module>providers</module>
     <module>template</module>
   </modules>
   <dependencyManagement>
