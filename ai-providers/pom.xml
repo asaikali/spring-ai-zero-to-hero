@@ -15,5 +15,6 @@
 	<modules>
 		<module>ollama</module>
 		<module>openai</module>
+		<module>azure-openai</module>
 	</modules>
 </project>
