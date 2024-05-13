@@ -1,4 +1,4 @@
-package com.example.chat._02;
+package com.example.chat_02;
 
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.ChatResponse;

@@ -1,4 +1,4 @@
-package com.example.chat._01;
+package com.example.chat_01;
 
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.web.bind.annotation.*;
