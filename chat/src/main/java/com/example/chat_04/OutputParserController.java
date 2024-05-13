@@ -102,7 +102,6 @@ public class OutputParserController {
 
         PromptTemplate promptTemplate = new PromptTemplate(""" 
                 Provide a list of the plays written by {author}, include the year of publication.
-                use JSON format with three fields author,title,year.
                 {format}
                 """);
         promptTemplate.add("author", topic);
