@@ -4,3 +4,4 @@ spring:
       openai:
         api-key:
         endpoint:
+        deployment-name:
