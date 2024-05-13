@@ -22,6 +22,7 @@
 
   <modules>
     <module>chat</module>
+    <module>embedding</module>
     <module>providers</module>
   </modules>
   <dependencyManagement>
