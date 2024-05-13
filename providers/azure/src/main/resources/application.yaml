@@ -6,8 +6,11 @@ spring:
       openai:
         chat:
           options:
+            functions:
+              - weatherFunction
             deployment-name: "gpt-35-turbo-16k"
             temperature: 0.7
+
 
 management:
   endpoint:

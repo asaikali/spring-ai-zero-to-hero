@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/chat/02")
@@ -50,5 +53,28 @@ public class PromptController {
         // data jpa. Spring AI will be adding higher level interfaces on top
         // the low level intefaces you have seen so far.
         return assistantMessage.getContent();
+    }
+
+    @GetMapping("/threeJokes")
+    public List<String> getThreeJokes(){
+
+        // Prompt is the primary class that represents a request to an LLM.
+        // it can be configured with more options to enable more complex interactions
+        // with the AI service. We will see more options later.
+        Prompt prompt = new Prompt("Tell me a joke");
+
+        // chat client takes a prompt and returns a chat response
+        ChatResponse response = chatClient.call(prompt);
+
+        // The response object contains a result object called a generation
+        // containing the text from the AI LLM
+        List<Generation> generations = response.getResults();
+        List<String> jokes = new ArrayList<>();
+        for (var generation: generations) {
+            AssistantMessage assistantMessage = generation.getOutput();
+            jokes.add(assistantMessage.getContent());
+        }
+
+      return jokes;
     }
 }
