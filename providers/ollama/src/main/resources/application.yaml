@@ -1,5 +1,7 @@
 spring:
   ai:
     ollama:
+      embedding:
+        model: llama3
       chat:
         model: llama3
