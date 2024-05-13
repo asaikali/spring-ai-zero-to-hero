@@ -2,7 +2,7 @@ package com.example.chat_05;
 
 import java.time.LocalDateTime;
 
-public class CurrentWeatherResponse {
+class WeatherResponse {
 
     private String city;
     private double temperature;

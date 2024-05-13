@@ -6,15 +6,15 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 @Service
-public class WeatherService {
+class WeatherService {
 
     private static final String[] CONDITIONS = {"Sunny", "Cloudy", "Rainy", "Partly Cloudy", "Snowy"};
     private static final String[] WIND_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
-    public CurrentWeatherResponse getCurrentWeather(String city) {
+    public WeatherResponse getCurrentWeather(String city) {
         Random random = new Random();
 
-        CurrentWeatherResponse weather = new CurrentWeatherResponse();
+        WeatherResponse weather = new WeatherResponse();
         weather.setCity(city);
         weather.setTemperature(roundToOneDecimalPlace(10 + (30 - 10) * random.nextDouble())); // Random temperature between 10 and 30, rounded to one decimal place
         weather.setWeatherCondition(CONDITIONS[random.nextInt(CONDITIONS.length)]);
@@ -27,7 +27,7 @@ public class WeatherService {
     }
 
     public String getWeatherReport(String city) {
-        final CurrentWeatherResponse weather = this.getCurrentWeather(city);
+        final WeatherResponse weather = this.getCurrentWeather(city);
         return String.format("""
                         Weather update for %s. 
                         Currently, the skies are %s with the temperature at %.1f degrees.
