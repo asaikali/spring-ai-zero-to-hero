@@ -10,7 +10,6 @@ import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.parser.BeanOutputParser;
 import org.springframework.ai.parser.ListOutputParser;
 import org.springframework.ai.parser.MapOutputParser;
-import org.springframework.ai.parser.OutputParser;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +22,11 @@ import java.util.Map;
 
 @RestController()
 @RequestMapping("/chat/04")
-public class ListOutputParserController {
+public class OutputParserController {
     private final ChatClient chatClient;
-    private final Logger logger = LoggerFactory.getLogger(ListOutputParserController.class);
+    private final Logger logger = LoggerFactory.getLogger(OutputParserController.class);
 
-    public ListOutputParserController(ChatClient chatClient) {
+    public OutputParserController(ChatClient chatClient) {
         this.chatClient = chatClient;
     }
 
