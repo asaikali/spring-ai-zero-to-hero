@@ -5,6 +5,8 @@ import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,10 +40,8 @@ public class PromptTemplateController {
 
     @GetMapping("/plays")
     public String getPlays(@RequestParam(value = "author", defaultValue = "Shakespeare") String topic){
-        PromptTemplate promptTemplate = new PromptTemplate(""" 
-                Provide a list of the plays written by {author}. 
-                Provide only the list no other commentary.
-                """);
+        Resource plays = new ClassPathResource("prompts/plays.st");
+        PromptTemplate promptTemplate = new PromptTemplate(plays);
         promptTemplate.add("author", topic);
 
         Prompt prompt = promptTemplate.create();
