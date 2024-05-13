@@ -1,7 +1,12 @@
 spring:
   config:
     import: "optional:classpath:/creds.yaml"
-
+  ai:
+    openai:
+      chat:
+        options:
+          functions:
+            - weatherFunction
 management:
   endpoint:
     health:
