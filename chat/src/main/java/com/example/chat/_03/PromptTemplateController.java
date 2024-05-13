@@ -35,4 +35,20 @@ public class PromptTemplateController {
         AssistantMessage assistantMessage = response.getResult().getOutput();
         return assistantMessage.getContent();
     }
+
+    @GetMapping("/plays")
+    public String getPlays(@RequestParam(value = "author", defaultValue = "Shakespeare") String topic){
+        PromptTemplate promptTemplate = new PromptTemplate(""" 
+                Provide a list of the plays written by {author}. 
+                Provide only the list no other commentary.
+                """);
+        promptTemplate.add("author", topic);
+
+        Prompt prompt = promptTemplate.create();
+
+        // call the AI model and get the response.
+        ChatResponse response = chatClient.call(prompt);
+        AssistantMessage assistantMessage = response.getResult().getOutput();
+        return assistantMessage.getContent();
+    }
 }
