@@ -1,4 +1,4 @@
-package com.example.embed_01;
+package com.example.audio_01;
 
 import org.springframework.ai.openai.OpenAiAudioTranscriptionClient;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionOptions;
