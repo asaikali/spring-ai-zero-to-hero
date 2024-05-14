@@ -37,7 +37,7 @@ takes at most 24h to process.
 
 ## Save the conference wifi
 
-Pleaes run the `download-deps.sh` script to download the dependencies for the
+Please run the `download-deps.sh` script to download the dependencies for the
 workshop before the conference starts so you can follow along without 
 getting stuck downloading stuff during the workshop with slow conference wifi.
 
