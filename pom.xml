@@ -25,6 +25,7 @@
     <module>chat</module>
     <module>embedding</module>
     <module>audio</module>
+    <module>image</module>
     <module>providers</module>
   </modules>
   <dependencyManagement>
