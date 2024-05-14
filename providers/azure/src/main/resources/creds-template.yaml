@@ -4,4 +4,6 @@ spring:
       openai:
         api-key:
         endpoint:
-        deployment-name:
+        chat:
+          options:
+            deployment-name: "gpt-35-turbo-16k"
