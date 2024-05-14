@@ -1,4 +1,4 @@
-# Embeddings Examples
+# Embedding Examples
 
 All Embedding examples are packaged in `embedding` module, e.g.
 * Embedding Example 01

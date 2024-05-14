@@ -135,5 +135,5 @@ http://localhost:8080/chat/01/joke
 ```
 
 See [Chat Examples](examples_chat.md)
-See [Embeddings Examples](examples_embeddings.md)
+See [Embedding Examples](examples_embedding.md)
 
