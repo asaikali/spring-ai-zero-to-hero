@@ -16,7 +16,6 @@ public class BasicEmbeddingController {
         this.embeddingClient = embeddingClient;
     }
 
-
     @GetMapping("joke")
     public List<Double> getJoke() {
         return embeddingClient.embed("Tell me a joke");
