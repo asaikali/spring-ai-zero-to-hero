@@ -9,8 +9,11 @@ public class DebugController {
   @Value("${spring.ai.openai.api-key:notfound}")
   private String apiKey;
 
+  @Value("${spring.ai.openai.endpoint:notfound}")
+  private String endpoint;
+
   @GetMapping("/debug")
   public String getDebug() {
-    return apiKey;
+    return "You are running OpenAI Application with apiKey=" + apiKey;
   }
 }
