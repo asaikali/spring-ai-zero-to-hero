@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DebugController {
-  @Value("${spring.ai.openai.api-key:notfound}")
+  @Value("${spring.ai.azure.openai.api-key:notfound}")
   private String apiKey;
 
+  @Value("${spring.ai.azure.openai.endpoint:notfound}")
+  private String endpoint;
+  
   @GetMapping("/debug")
   public String getDebug() {
-    return apiKey;
+    return "You are running Azure OpenAI Application with apiKey=" + apiKey + " and endpoint=" + endpoint;
   }
 }
