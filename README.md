@@ -69,11 +69,13 @@ Your favourite IDE will probably compile code as you change it. If you prefer ru
 
 This will build the following JAR files, e.g.
 ```
-./chat/target/chat-0.0.1-SNAPSHOT.jar
 ./providers/azure/target/azure-0.0.1-SNAPSHOT.jar
 ./providers/ollama/target/ollama-0.0.1-SNAPSHOT.jar
 ./providers/openai/target/openai-0.0.1-SNAPSHOT.jar
+./chat/target/chat-0.0.1-SNAPSHOT.jar
 ./embedding/target/embedding-0.0.1-SNAPSHOT.jar
+./image/target/image-0.0.1-SNAPSHOT.jar
+./audio/target/audio-0.0.1-SNAPSHOT.jar
 ```
 
 ### Run the Azure OpenAI Application
