@@ -117,3 +117,23 @@ You can test the application locally, e.g.
 ```
 http localhost:8080/debug
 ```
+
+## Examples
+
+All examples are located in the corresponding packages, e.g.
+* `chat`
+* `embedding`
+
+Each example is running as a controller in each of the provider applications, e.g.
+```
+chat/src/main/java/com/example/chat_01/BasicPromptController.java
+```
+
+You can inspect each of the controller and infer the example URL, e.g.
+```
+http://localhost:8080/chat/01/joke
+```
+
+See [Chat Examples](examples_chat.md)
+See [Embeddings Examples](examples_embeddings.md)
+
