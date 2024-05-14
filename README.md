@@ -123,6 +123,8 @@ http localhost:8080/debug
 All examples are located in the corresponding packages, e.g.
 * `chat`
 * `embedding`
+* `image`
+* `audio`
 
 Each example is running as a controller in each of the provider applications, e.g.
 ```
@@ -137,4 +139,8 @@ http://localhost:8080/chat/01/joke
 See [Chat Examples](examples_chat.md)
 
 See [Embedding Examples](examples_embedding.md)
+
+See [Image Examples](examples_image.md)
+
+See [Audio Examples](examples_audio.md)
 
