@@ -12,43 +12,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController()
 @RequestMapping("/chat/03")
 public class PromptTemplateController {
-    private final ChatClient chatClient;
+  private final ChatClient chatClient;
 
-    public PromptTemplateController(ChatClient chatClient) {
-        this.chatClient = chatClient;
-    }
+  public PromptTemplateController(ChatClient chatClient) {
+    this.chatClient = chatClient;
+  }
 
-    @GetMapping("/joke")
-    public String getJoke(@RequestParam(value = "topic", defaultValue = "cows") String topic){
+  @GetMapping("/joke")
+  public String getJoke(@RequestParam(value = "topic", defaultValue = "cows") String topic) {
 
-        // Prompt template enables us to safely inject user input into the prompt
-        // text in {} is replaced by the value of the variable with the same name.
-        // PromptTemplate is a commonly used class with Spring AI
-        PromptTemplate promptTemplate = new PromptTemplate("Tell me a joke about {topic}");
-        promptTemplate.add("topic", topic);
-        Prompt prompt = promptTemplate.create();
+    // Prompt template enables us to safely inject user input into the prompt
+    // text in {} is replaced by the value of the variable with the same name.
+    // PromptTemplate is a commonly used class with Spring AI
+    PromptTemplate promptTemplate = new PromptTemplate("Tell me a joke about {topic}");
+    promptTemplate.add("topic", topic);
+    Prompt prompt = promptTemplate.create();
 
-        // call the AI model and get the respnose.
-        ChatResponse response = chatClient.call(prompt);
-        AssistantMessage assistantMessage = response.getResult().getOutput();
-        return assistantMessage.getContent();
-    }
+    // call the AI model and get the respnose.
+    ChatResponse response = chatClient.call(prompt);
+    AssistantMessage assistantMessage = response.getResult().getOutput();
+    return assistantMessage.getContent();
+  }
 
-    @GetMapping("/plays")
-    public String getPlays(@RequestParam(value = "author", defaultValue = "Shakespeare") String topic){
-        Resource plays = new ClassPathResource("prompts/plays.st");
-        PromptTemplate promptTemplate = new PromptTemplate(plays);
-        promptTemplate.add("author", topic);
+  @GetMapping("/plays")
+  public String getPlays(
+      @RequestParam(value = "author", defaultValue = "Shakespeare") String topic) {
+    Resource plays = new ClassPathResource("prompts/plays.st");
+    PromptTemplate promptTemplate = new PromptTemplate(plays);
+    promptTemplate.add("author", topic);
 
-        Prompt prompt = promptTemplate.create();
+    Prompt prompt = promptTemplate.create();
 
-        // call the AI model and get the response.
-        ChatResponse response = chatClient.call(prompt);
-        AssistantMessage assistantMessage = response.getResult().getOutput();
-        return assistantMessage.getContent();
-    }
+    // call the AI model and get the response.
+    ChatResponse response = chatClient.call(prompt);
+    AssistantMessage assistantMessage = response.getResult().getOutput();
+    return assistantMessage.getContent();
+  }
 }
