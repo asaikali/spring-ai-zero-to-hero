@@ -1,6 +1,6 @@
 package com.example.embed_01;
 
-import org.springframework.ai.chat.ChatClient;
+import java.util.Map;
 import org.springframework.ai.embedding.EmbeddingClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,5 +20,11 @@ public class BasicEmbeddingController {
     @GetMapping("joke")
     public List<Double> getJoke() {
         return embeddingClient.embed("Tell me a joke");
+    }
+
+    @GetMapping("dimension")
+    public Map<String,Object> getDimension() {
+
+        return Map.of("dimension", embeddingClient.dimensions(), "type", embeddingClient.getClass());
     }
 }
