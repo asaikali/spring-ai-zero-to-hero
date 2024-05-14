@@ -11,9 +11,12 @@ public class DebugController {
 
   @Value("${spring.ai.azure.openai.endpoint:notfound}")
   private String endpoint;
-  
+
   @GetMapping("/debug")
   public String getDebug() {
-    return "You are running Azure OpenAI Application with apiKey=" + apiKey + " and endpoint=" + endpoint;
+    return "You are running Azure OpenAI Application with apiKey="
+        + apiKey
+        + " and endpoint="
+        + endpoint;
   }
 }
