@@ -48,11 +48,22 @@ The examples are tested with three AI providers:
 * OpenAI
 * Ollama (local LLM)
 
+### Prepare the AI service credentials
+
+Please copy the credentials from the template files, e.g.
+
+```bash
+cp ./providers/azure/src/main/resources/creds-template.yaml ./providers/azure/src/main/resources/creds.yaml
+cp ./providers/openai/src/main/resources/creds-template.yaml ./providers/openai/src/main/resources/creds.yaml
+```
+
+Update the corresponding API keys, API endpoints and model names.
+
 ### Compile the code
 
 Your favourite IDE will probably compile code as you change it. If you prefer running things from the command line, we need to build JAR packages, e.g.
 
-```
+```bash
 ./mvnw clean package
 ```
 
@@ -65,23 +76,12 @@ This will build the following JAR files, e.g.
 ./embedding/target/embedding-0.0.1-SNAPSHOT.jar
 ```
 
-### Prepare the AI service credentials
-
-Please copy the credentials from the template files, e.g.
-
-```
-cp ./providers/azure/src/main/resources/creds-template.yaml ./providers/azure/src/main/resources/creds.yaml
-cp ./providers/openai/src/main/resources/creds-template.yaml ./providers/openai/src/main/resources/creds.yaml
-```
-
-Update the corresponding API keys, API endpoints and model names.
-
 ### Run the Azure OpenAI Application
 
 You can run the application from your favourite IDE, e.g. `providers/azure/src/main/java/com/example/AzureApplication.java`
 
 Also, you can run this from command line, e.g.
-```
+```bash
 java -jar ./providers/azure/target/azure-0.0.1-SNAPSHOT.jar
 ```
 
@@ -95,7 +95,7 @@ http localhost:8080/debug
 You can run the application from your favourite IDE, e.g. `providers/openai/src/main/java/com/example/OpenAiApplication.java`
 
 Also, you can run this from command line, e.g.
-```
+```bash
 java -jar ./providers/openai/target/openai-0.0.1-SNAPSHOT.jar
 ```
 
@@ -109,7 +109,7 @@ http localhost:8080/debug
 You can run the application from your favourite IDE, e.g. `providers/ollama/src/main/java/com/example/OllamaApplication.java`
 
 Also, you can run this from command line, e.g.
-```
+```bash
 java -jar ./providers/ollama/target/ollama-0.0.1-SNAPSHOT.jar
 ```
 
