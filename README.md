@@ -4,6 +4,15 @@ Example applications showing how to use Spring AI to build Generative
 AI projects. Each sample application contains a `readme.md` with instructions
 on how to run the application and areas of the code to pay attention to.
 
+## Learning Resources
+
+### Prompt Engineering
+Effective prompting is critical to writing apps that makes effective use of 
+AI models. There is a lot of content online about this topic of varing 
+quality. We found [ChatGPT Prompt Engineering for Developers](https://learn.deeplearning.ai/courses/chatgpt-prompt-eng) 
+to be excellent because it is delivered by the AI pioneer Andrew Ng's team 
+at deeplearning.ai.
+
 ## Software Prerequisites
 
 ### Java development tooling
@@ -32,8 +41,15 @@ takes at most 24h to process.
 * Create an Azure OpenAI deployment at https://oai.azure.com/portal
 
 ### Local AI Models
-* You need to install [ollama](https://ollama.com/) with `llama3` model to run locally.
-* You can download the `llama3` model with `ollama pull llama3`
+
+[ollama](https://ollama.com/)  makes running models on your laptop easy and 
+very educational. You can run the models locally and learn how they work. 
+
+* Install ollama by following the instructions on the [ollama website]
+  (https://ollama.com/) this [YouTube video](https://www.youtube.com/watch?
+  v=3Q6J6J7Q1Zo) shows the ollama install process.
+* Download the `llama3` model with `ollama pull llama3` 
+
 
 ## Save the conference wifi
 

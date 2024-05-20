@@ -129,4 +129,4 @@ public class OutputParserController {
   }
 }
 
-record Play(String author, String title, String year) {}
+record Play(String author, String title, Integer year) {}

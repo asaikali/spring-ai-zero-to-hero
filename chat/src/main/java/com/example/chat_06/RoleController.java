@@ -33,6 +33,7 @@ public class RoleController {
     UserMessage userMessage = new UserMessage("What is the color of a banana?");
     Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
 
+    System.out.println(prompt.getContents());
     ChatResponse response = chatClient.call(prompt);
     Generation generation = response.getResult();
     AssistantMessage assistantMessage = generation.getOutput();
@@ -46,6 +47,8 @@ public class RoleController {
     UserMessage userMessage = new UserMessage("What is the color of a carrot?");
     Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
 
+    System.out.println(prompt.getInstructions());
+    System.out.println("---");
     System.out.println(prompt.getContents());
 
     ChatResponse response = chatClient.call(prompt);

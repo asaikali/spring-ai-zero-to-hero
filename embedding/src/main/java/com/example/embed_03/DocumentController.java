@@ -166,6 +166,7 @@ public class DocumentController {
 
     List<Document> documents = pdfReader.get();
 
+    this.embeddingClient.embed(documents.getFirst());
     var pdfToDocsSummary =
         """
             Input pdf read from %s
