@@ -1,4 +1,4 @@
-package com.example.embed_02;
+package com.example.embed_03;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/embed/02")
+@RequestMapping("/embed/03")
 public class EmbeddingRequestController {
 
   private final EmbeddingClient embeddingClient;

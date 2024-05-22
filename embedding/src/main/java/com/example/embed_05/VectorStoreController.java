@@ -1,4 +1,4 @@
-package com.example.embed_04;
+package com.example.embed_05;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/embed/04")
+@RequestMapping("/embed/05")
 public class VectorStoreController {
   private final Logger logger = LoggerFactory.getLogger(VectorStoreController.class);
   private final EmbeddingClient embeddingClient;

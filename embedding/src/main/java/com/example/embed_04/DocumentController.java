@@ -1,4 +1,4 @@
-package com.example.embed_03;
+package com.example.embed_04;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/embed/03")
+@RequestMapping("/embed/04")
 public class DocumentController {
 
   private final Logger logger = LoggerFactory.getLogger(DocumentController.class);
