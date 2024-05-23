@@ -1,0 +1,25 @@
+spring:
+  threads:
+    virtual:
+      enabled: true
+  cloud.gateway.mvc:
+    routesMap:
+      configRoute1:
+        uri:  https://api.openai.com/v1/chat/completions
+        predicates:
+          - Path=/openai/**
+        filters:
+          - StripPrefix=1
+
+server:
+  port: 7777
+
+logging:
+  level:
+    org.springframework.cloud.gateway.server.mvc: TRACE
+    org.springframework.web: TRACE
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

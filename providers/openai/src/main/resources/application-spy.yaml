@@ -1,0 +1,7 @@
+spring:
+  ai:
+    openai:
+      chat:
+        base-url: "http://localhost:7777/openai"
+
+

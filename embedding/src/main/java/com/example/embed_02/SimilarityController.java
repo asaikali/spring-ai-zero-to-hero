@@ -1,21 +1,14 @@
 package com.example.embed_02;
 
-import org.springframework.ai.document.Document;
+import java.util.*;
+import java.util.List;
+import java.util.stream.Stream;
 import org.springframework.ai.embedding.EmbeddingClient;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.*;
-
-
-import java.util.List;
-import java.util.stream.Stream;
-
-
-
 
 @RestController
 @RequestMapping("/embed/02")
@@ -28,7 +21,8 @@ public class SimilarityController {
   }
 
   record Score(String a, String b, double similarity) {}
-  private Score similarity(String a, String b){
+
+  private Score similarity(String a, String b) {
     var embeddingA = embeddingClient.embed(a);
     var embeddingB = embeddingClient.embed(b);
     // 1.0  indicates perfect similarity
@@ -41,25 +35,25 @@ public class SimilarityController {
   @GetMapping("words")
   public List<Score> words() {
     return Stream.of(
-                    similarity("man", "man"),
-                    similarity("man", "woman"),
-                    similarity("man", "dirt"),
-                    similarity("king", "queen"),
-                    similarity("queen", "reine"),
-                    similarity("queen","ملكة" ),
-                    similarity("banana", "car"),
-                    similarity("happy", "joyful"),
-                    similarity("happy", "sad")
-            )
-            .sorted(Comparator.comparingDouble(Score::similarity).reversed())
-            .toList();
+            similarity("man", "man"),
+            similarity("man", "woman"),
+            similarity("man", "dirt"),
+            similarity("king", "queen"),
+            similarity("queen", "reine"),
+            similarity("queen", "ملكة"),
+            similarity("banana", "car"),
+            similarity("happy", "joyful"),
+            similarity("happy", "sad"))
+        .sorted(Comparator.comparingDouble(Score::similarity).reversed())
+        .toList();
   }
 
-
   @GetMapping("quotes")
-  public List<String> getDimension(@RequestParam(value = "topic", defaultValue = "getting over a losing a job") String topic) {
+  public List<String> getDimension(
+      @RequestParam(value = "topic", defaultValue = "getting over a losing a job") String topic) {
 
-    List<String> quotes = Arrays.asList(
+    List<String> quotes =
+        Arrays.asList(
             // Importance of Education
             "Education is the most powerful weapon which you can use to change the world. – Nelson Mandela",
             "The only person who is educated is the one who has learned how to learn and change. – Carl Rogers",
@@ -93,23 +87,21 @@ public class SimilarityController {
             "Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill",
             "Our greatest glory is not in never falling, but in rising every time we fall. – Confucius",
             "The only real mistake is the one from which we learn nothing. – Henry Ford",
-            "I have not failed. I've just found 10,000 ways that won't work. – Thomas Edison"
-    );
-
+            "I have not failed. I've just found 10,000 ways that won't work. – Thomas Edison");
 
     var embeddings = quotes.stream().map(quote -> embeddingClient.embed(quote)).toList();
     var topicEmbedding = embeddingClient.embed(topic);
 
-
     double topScore = 0;
     String topQuote = "cloud not find a quote that matches the topic";
-    for(int i=0; i < embeddings.size(); i++) {
-      var score = SimpleVectorStore.EmbeddingMath.cosineSimilarity(topicEmbedding,embeddings.get(i));
-      if(score > topScore) {
+    for (int i = 0; i < embeddings.size(); i++) {
+      var score =
+          SimpleVectorStore.EmbeddingMath.cosineSimilarity(topicEmbedding, embeddings.get(i));
+      if (score > topScore) {
         topScore = score;
         topQuote = quotes.get(i);
       }
     }
-      return List.of(topQuote);
+    return List.of(topQuote);
   }
 }
