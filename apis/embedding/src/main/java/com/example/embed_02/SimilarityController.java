@@ -1,6 +1,5 @@
 package com.example.embed_02;
 
-import jakarta.servlet.http.HttpSession;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Stream;
@@ -53,19 +52,18 @@ public class SimilarityController {
         .toList();
   }
 
-
   @GetMapping("quotes")
   public List<Score> quotes(
       @RequestParam(value = "topic", defaultValue = "getting over a losing a job") String topic) {
 
     /* Stuff to try out
 
-      http :8080/embed/02/quotes topic=="donate to the cancer foundation"
-      http :8080/embed/02/quotes topic=="my kid failed his math class"
-      http :8080/embed/02/quotes topic=="congratulations on getting a learning AI"
-      http :8080/embed/02/quotes topic=="Inspire angry customers to be patient"
+     http :8080/embed/02/quotes topic=="donate to the cancer foundation"
+     http :8080/embed/02/quotes topic=="my kid failed his math class"
+     http :8080/embed/02/quotes topic=="congratulations on getting a learning AI"
+     http :8080/embed/02/quotes topic=="Inspire angry customers to be patient"
 
-     */
+    */
     List<String> quotesTexts =
         Arrays.asList(
             // Importance of Education
@@ -102,7 +100,8 @@ public class SimilarityController {
             "The only real mistake is the one from which we learn nothing. – Henry Ford",
             "I have not failed. I've just found 10,000 ways that won't work. – Thomas Edison");
 
-    // compute the quote embeddings once, because it is time consuming/expensive to do it on every request
+    // compute the quote embeddings once, because it is time consuming/expensive to do it on every
+    // request
     synchronized (quotes) {
       if (this.quotes.isEmpty()) {
         quotes =

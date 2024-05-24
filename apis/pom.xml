@@ -8,18 +8,14 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>chat</artifactId>
+	<artifactId>apis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-core</artifactId>
-		</dependency>
-	</dependencies>
+	<packaging>pom</packaging>
+	<description>Example projects showing various aspects of spring ai</description>
+	<modules>
+		<module>audio</module>
+		<module>chat</module>
+		<module>embedding</module>
+		<module>image</module>
+	</modules>
 </project>
