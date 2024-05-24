@@ -1,5 +1,6 @@
 package com.example.embed_02;
 
+import jakarta.servlet.http.HttpSession;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Stream;
@@ -15,12 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class SimilarityController {
 
   private final EmbeddingClient embeddingClient;
+  private List<Quote> quotes = new ArrayList<>();
 
   public SimilarityController(EmbeddingClient embeddingClient) {
     this.embeddingClient = embeddingClient;
   }
 
   record Score(String a, String b, double similarity) {}
+
+  record Quote(String text, List<Double> embedding) {}
+  ;
 
   private Score similarity(String a, String b) {
     var embeddingA = embeddingClient.embed(a);
@@ -48,11 +53,20 @@ public class SimilarityController {
         .toList();
   }
 
+
   @GetMapping("quotes")
-  public List<String> getDimension(
+  public List<Score> quotes(
       @RequestParam(value = "topic", defaultValue = "getting over a losing a job") String topic) {
 
-    List<String> quotes =
+    /* Stuff to try out
+
+      http :8080/embed/02/quotes topic=="donate to the cancer foundation"
+      http :8080/embed/02/quotes topic=="my kid failed his math class"
+      http :8080/embed/02/quotes topic=="congratulations on getting a learning AI"
+      http :8080/embed/02/quotes topic=="Inspire angry customers to be patient"
+
+     */
+    List<String> quotesTexts =
         Arrays.asList(
             // Importance of Education
             "Education is the most powerful weapon which you can use to change the world. – Nelson Mandela",
@@ -66,7 +80,6 @@ public class SimilarityController {
             "Kindness is a language which the deaf can hear and the blind can see. – Mark Twain",
             "Carry out a random act of kindness, with no expectation of reward, safe in the knowledge that one day someone might do the same for you. – Princess Diana",
             "A single act of kindness throws out roots in all directions, and the roots spring up and make new trees. – Amelia Earhart",
-            "The best way to find yourself is to lose yourself in the service of others. – Mahatma Gandhi",
 
             // Contributing to Others
             "The best way to find yourself is to lose yourself in the service of others. – Mahatma Gandhi",
@@ -89,19 +102,26 @@ public class SimilarityController {
             "The only real mistake is the one from which we learn nothing. – Henry Ford",
             "I have not failed. I've just found 10,000 ways that won't work. – Thomas Edison");
 
-    var embeddings = quotes.stream().map(quote -> embeddingClient.embed(quote)).toList();
-    var topicEmbedding = embeddingClient.embed(topic);
-
-    double topScore = 0;
-    String topQuote = "cloud not find a quote that matches the topic";
-    for (int i = 0; i < embeddings.size(); i++) {
-      var score =
-          SimpleVectorStore.EmbeddingMath.cosineSimilarity(topicEmbedding, embeddings.get(i));
-      if (score > topScore) {
-        topScore = score;
-        topQuote = quotes.get(i);
+    synchronized (quotes) {
+      if (this.quotes.isEmpty()) {
+        quotes =
+            quotesTexts.stream().map(text -> new Quote(text, embeddingClient.embed(text))).toList();
       }
     }
-    return List.of(topQuote);
+
+    var topicEmbedding = embeddingClient.embed(topic);
+    var result =
+        quotes.stream()
+            .map(
+                quoteEmbedding ->
+                    new Score(
+                        topic,
+                        quoteEmbedding.text,
+                        SimpleVectorStore.EmbeddingMath.cosineSimilarity(
+                            topicEmbedding, quoteEmbedding.embedding)))
+            .sorted(Comparator.comparingDouble(Score::similarity).reversed())
+            .toList();
+
+    return result.subList(0, 3);
   }
 }
