@@ -17,5 +17,6 @@
 		<module>chat</module>
 		<module>embedding</module>
 		<module>image</module>
+		<module>vector-store</module>
 	</modules>
 </project>
