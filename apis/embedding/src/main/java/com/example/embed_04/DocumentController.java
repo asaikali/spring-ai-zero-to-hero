@@ -119,7 +119,7 @@ public class DocumentController {
             ---
             """
             .formatted(
-                bylawResource.getFilename(),
+                dataFiles.getBylawResource().getFilename(),
                 documents.getFirst().getId(),
                 documents.getFirst().getMetadata(),
                 documents.size(),

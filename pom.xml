@@ -25,6 +25,7 @@
   <modules>
     <module>data</module>
     <module>apis</module>
+    <module>patterns</module>
     <module>providers</module>
   </modules>
   <dependencyManagement>
