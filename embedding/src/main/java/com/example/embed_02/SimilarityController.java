@@ -102,6 +102,7 @@ public class SimilarityController {
             "The only real mistake is the one from which we learn nothing. – Henry Ford",
             "I have not failed. I've just found 10,000 ways that won't work. – Thomas Edison");
 
+    // compute the quote embeddings once, because it is time consuming/expensive to do it on every request
     synchronized (quotes) {
       if (this.quotes.isEmpty()) {
         quotes =
@@ -109,6 +110,7 @@ public class SimilarityController {
       }
     }
 
+    // compute the similarity between the topic and each quote by comparing their embeddings
     var topicEmbedding = embeddingClient.embed(topic);
     var result =
         quotes.stream()
@@ -122,6 +124,7 @@ public class SimilarityController {
             .sorted(Comparator.comparingDouble(Score::similarity).reversed())
             .toList();
 
+    // return the top similar matches
     return result.subList(0, 3);
   }
 }
