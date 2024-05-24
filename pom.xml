@@ -23,6 +23,7 @@
   </properties>
 
   <modules>
+    <module>data</module>
     <module>apis</module>
     <module>providers</module>
   </modules>

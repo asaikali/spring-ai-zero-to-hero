@@ -43,8 +43,8 @@ public class SimilarityController {
             similarity("man", "woman"),
             similarity("man", "dirt"),
             similarity("king", "queen"),
-            similarity("queen", "reine"),
-            similarity("queen", "ملكة"),
+            similarity("queen", "reine"), // queen in french
+            similarity("queen", "ملكة"), // queen in arabic
             similarity("banana", "car"),
             similarity("happy", "joyful"),
             similarity("happy", "sad"))

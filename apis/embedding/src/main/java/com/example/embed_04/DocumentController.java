@@ -1,5 +1,6 @@
 package com.example.embed_04;
 
+import com.example.data.DataFiles;
 import java.io.IOException;
 import java.util.List;
 import org.slf4j.Logger;
@@ -14,8 +15,6 @@ import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.pdf.ParagraphPdfDocumentReader;
 import org.springframework.ai.reader.pdf.config.PdfDocumentReaderConfig;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,24 +25,19 @@ public class DocumentController {
 
   private final Logger logger = LoggerFactory.getLogger(DocumentController.class);
   private final EmbeddingClient embeddingClient;
+  private final DataFiles dataFiles;
 
-  @Value("classpath:/data/books/Shakespeare.txt")
-  private Resource shakespeareWorksResource;
-
-  @Value("classpath:/data/bikes/bikes.json")
-  private Resource bikesResource;
-
-  @Value("classpath:/data/pdf/bylaw.pdf")
-  private Resource bylawResource;
-
-  public DocumentController(EmbeddingClient embeddingClient) throws IOException {
+  public DocumentController(EmbeddingClient embeddingClient, DataFiles dataFiles)
+      throws IOException {
     this.embeddingClient = embeddingClient;
+    this.dataFiles = dataFiles;
   }
 
   @GetMapping("bikes")
   public String bikeJsonToDocs() {
     DocumentReader reader =
-        new JsonReader(bikesResource, "name", "price", "shortDescription", "description");
+        new JsonReader(
+            this.dataFiles.getBikesResource(), "name", "price", "shortDescription", "description");
     List<Document> documents = reader.get();
     Document document = documents.getFirst();
     List<Double> embedding = this.embeddingClient.embed(document);
@@ -69,7 +63,7 @@ public class DocumentController {
 
   @GetMapping("works")
   public String getShakespeareWorks() {
-    DocumentReader reader = new TextReader(shakespeareWorksResource);
+    DocumentReader reader = new TextReader(this.dataFiles.getShakespeareWorksResource());
     List<Document> documents = reader.get();
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
@@ -101,7 +95,7 @@ public class DocumentController {
   public String getBylaw() {
     PagePdfDocumentReader pdfReader =
         new PagePdfDocumentReader(
-            bylawResource,
+            this.dataFiles.getBylawResource(),
             PdfDocumentReaderConfig.builder()
                 .withPageExtractedTextFormatter(
                     ExtractedTextFormatter.builder()
@@ -162,7 +156,8 @@ public class DocumentController {
   @GetMapping("para")
   public String paragraphs() {
     ParagraphPdfDocumentReader pdfReader =
-        new ParagraphPdfDocumentReader(bylawResource, PdfDocumentReaderConfig.builder().build());
+        new ParagraphPdfDocumentReader(
+            this.dataFiles.getBylawResource(), PdfDocumentReaderConfig.builder().build());
 
     List<Document> documents = pdfReader.get();
 
@@ -180,7 +175,7 @@ public class DocumentController {
             ---
             """
             .formatted(
-                bylawResource.getFilename(),
+                this.dataFiles.getBylawResource().getFilename(),
                 documents.getFirst().getId(),
                 documents.getFirst().getMetadata(),
                 documents.size(),
