@@ -55,7 +55,14 @@ public class OpenAiAuditor implements Auditor {
     //    }
 
     // print the response body
-    message.append("\nResponse Body\n\n").append(response.getBody()).append("\n");
+    try {
+      var body = objectMapper.readValue(response.getBody(), Object.class);
+      var pretty = this.objectWriter.writeValueAsString(body);
+      message.append("\nResponse Body\n\n").append(pretty).append("\n");
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+
 
     logger.info(message.toString());
   }
