@@ -63,7 +63,6 @@ public class OpenAiAuditor implements Auditor {
       throw new RuntimeException(e);
     }
 
-
     logger.info(message.toString());
   }
 }
