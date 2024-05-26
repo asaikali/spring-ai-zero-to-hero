@@ -1,3 +1,4 @@
+# See https://github.com/asaikali/docker-compose-postgres if you want to learn how this docker-compose.yml works.
 version: '3.8'
 
 volumes:
