@@ -29,9 +29,7 @@ conference wifi may be slow, so you might not be able to run the samples.**
 [ollama](https://ollama.com/)  makes running models on your laptop easy and 
 very educational. You can run the models locally and learn how they work. 
 
-* Install ollama by following the instructions on the [ollama website]
-  (https://ollama.com/) this [YouTube video](https://www.youtube.com/watch?
-  v=3Q6J6J7Q1Zo) shows the ollama install process.
+* Install ollama by following the instructions on the [ollama website](https://ollama.com/) this [YouTube video](https://www.youtube.com/watch?v=3Q6J6J7Q1Zo) shows the ollama install process.
 
 ## Save the conference Wi-Fi
 
