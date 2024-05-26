@@ -142,10 +142,13 @@ Azure OpenAI, and local AI models. The major directories in this repo are:
   AI API, within a project you will see that the package names end with 
   numbers indicating the order in which the code in each project should be 
   studied.
-- **/providers/** this directory contains the code that interacts with the 
-  specific AI providers. The configuration of each project in this directory 
-  is different, for example, setting API keys and configuring the AI service 
-  with the correct endpoint. 
+- **/providers/** this directory contains the spring boot applications  
+  that interact with the specific AI providers. The configuration of each 
+  project in this directory  is different, for example, setting API keys and 
+  configuring the AI service with the correct endpoint. To try out the samples
+  in this repo you will be launching the apps in this directory. Each 
+  subdirectory contains a readme.md file with instructions on how to run the 
+  application. 
 - **/patterns/** this directory contains the code that demonstrates how to 
   use the Spring AI API to implement common AI application patterns such as 
   retrieval augmented generation. The code in this directory is the same for 
@@ -156,3 +159,20 @@ Azure OpenAI, and local AI models. The major directories in this repo are:
 - **data/** this directory contains various types of example data sets used 
   by the examples in the repo.
 - **docs/** this directory contains the documentation for the repo.
+
+## Recommendations to get the most out of the repo
+
+1. Run the samples with the different AI providers to see how the same code 
+   works with different providers.
+2. Run the gateway application and inspect the API requests/responses to see 
+   what interaction with the AI projects looks like no the wire.
+3. Make sure to run ollama and download the llama3 model to see how easy it 
+   is to run local AI models. 
+4. The code in this repo is designed to be read in order, so start with the 
+   code in the api directory and work your way through the projects. Once 
+   you have looked at the code in the api directory move on to the code in 
+   the patterns' directory. 
+5. Spring AI project is evolving quickly, it is possible that the code in 
+   this repo will be using a snapshot release of the Spring AI project, or 
+   that it falls behind the latest version. If you run into problem with 
+   this repo, send a pull request or open an issue.
