@@ -1,12 +1,12 @@
 spring:
+  profiles:
+    active: spy
   config:
     import: "optional:classpath:/creds.yaml"
   ai:
     openai:
       chat:
-        # comment / uncomment the lines below to switch between direct and indirect calls
         base-url: "https://api.openai.com/v1/chat/completions"
-        # base-url: "http://localhost:7777/openai" # https://api.openai.com/v1/chat/completions
         options:
           functions:
             - weatherFunction
@@ -20,3 +20,12 @@ management:
       exposure:
         include: "*"
 
+---
+spring:
+  config:
+    activate:
+      on-profile: spy
+  ai:
+    openai:
+      chat:
+        base-url: "http://localhost:7777/openai"
