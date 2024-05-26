@@ -44,7 +44,7 @@ before the workshop starts. After install:
 2. Run the `check-deps.sh` script to check that the all the required 
    software is installed, the output of the script on my machine looks like.
 
-```shell
+```text
 ./check-deps.sh
 ============================
 Checking Java installation:
