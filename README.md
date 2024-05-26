@@ -105,8 +105,6 @@ recommend you get your own keys to continue experimenting after the workshop.
 
 # Outline
 
-## Generative AI Zero to Hero with Spring AI
-
 Generative AI is a transformational technology impacting our world in profound ways and creating unprecedented opportunities. This workshop is designed for Spring developers looking to add generative AI to existing applications or to implement brand new AI apps using the Spring AI project.
 
 We assume no previous AI experience. The workshop will teach you key AI concepts and how to apply them in your applications, using the Spring AI project.
