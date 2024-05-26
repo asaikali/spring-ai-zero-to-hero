@@ -7,7 +7,7 @@ AI projects.
 
 **You need the following software installed: Java 21, docker, ollama, httpie, 
 ard your favourite Java IDE. This is a lot of GBs to download so please make 
-user to have all this stuff installed before the conference workshop, as the 
+sure to have all this stuff installed before the conference workshop, as the 
 conference wifi may be slow, so you might not be able to run the samples.**
 
 ### Java development tooling
