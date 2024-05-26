@@ -102,3 +102,34 @@ recommend you get your own keys to continue experimenting after the workshop.
   takes at most 24h to process.
 * Create the service at https://portal.azure.com/#create/Microsoft.CognitiveServicesOpenAI
 * Create an Azure OpenAI deployment at https://oai.azure.com/portal
+
+# Outline
+
+## Generative AI Zero to Hero with Spring AI
+
+Generative AI is a transformational technology impacting our world in profound ways and creating unprecedented opportunities. This workshop is designed for Spring developers looking to add generative AI to existing applications or to implement brand new AI apps using the Spring AI project.
+
+We assume no previous AI experience. The workshop will teach you key AI concepts and how to apply them in your applications, using the Spring AI project.
+
+The workshop is hands-on. Bring your laptop and a willingness to learn. We will provide Spring AI based sample code and the API keys for the AI services. By the end of the day you will know how to add generative AI features to your Spring apps.
+
+### Key Concepts covered:
+- A Concise History of AI/ML
+- Introduction to Generative AI Models
+- Prompt Engineering Techniques & Best Practices
+- Vector Databases
+- RAG: Retrieval Augmented Generation
+- Extending LLMs with Function Calling
+- Evaluation: How to tell if the AI is doing what you think it should be doing
+- Architecture of AI powered applications
+- How to integrate AI into existing applications
+- The landscape of tools and libraries of building AI powered applications
+
+### Hands on Code Exercises with Spring AI:
+- Quickstart: Creating a “Hello World” application for Generative AI in just minutes
+- Prompt Engineering Techniques using Prompt Templating and Roles
+- Mapping AI output to POJOs
+- Implementing RAG (Retrieval Augmented Generation)
+- Exploring Function calling: Enable the AI to access APIs on demand
+- Evaluation Driven Development
+- Using Spring AI with GraalVM
