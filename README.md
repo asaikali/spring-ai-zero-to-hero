@@ -19,10 +19,7 @@ conference wifi may be slow, so you might not be able to run the samples.**
     * [Eclipse Spring Tool Suite](https://spring.io/tools)
 
 ### Http Client
-*  Command line http client  [httpie](https://httpie.
-  io/) is recommend, the instructions use it, if you don't have it please 
-   install it. If you are handy with [curl](https://curl.se/) you can use 
-   that too. 
+*  Command line http client  [httpie](https://httpie.io/) is recommended, the instructions use it, if you don't have it please install it. If you are handy with [curl](https://curl.se/) you can use that too. 
 
 ### Containerization tools
 * [Docker](https://www.docker.com/products/docker-desktop) so we can use test containers & for local dependencies  
