@@ -129,3 +129,30 @@ The workshop is hands-on. Bring your laptop and a willingness to learn. We will 
 - Exploring Function calling: Enable the AI to access APIs on demand
 - Evaluation Driven Development
 - Using Spring AI with GraalVM
+
+## Repo Organization 
+
+Spring AI provides a consistent API to work with many different types of AI 
+providers. For example, the same code wil work with OpenAI, Google Vertex AI,
+Azure OpenAI, and local AI models. The major directories in this repo are:
+
+- **/api/** this directory contains the code that interacts with the AI 
+  providers. The code in this directory is the same for all the AI providers.
+  Each project in this directory focuses on a different aspect of the Spring 
+  AI API, within a project you will see that the package names end with 
+  numbers indicating the order in which the code in each project should be 
+  studied.
+- **/providers/** this directory contains the code that interacts with the 
+  specific AI providers. The configuration of each project in this directory 
+  is different, for example, setting API keys and configuring the AI service 
+  with the correct endpoint. 
+- **/patterns/** this directory contains the code that demonstrates how to 
+  use the Spring AI API to implement common AI application patterns such as 
+  retrieval augmented generation. The code in this directory is the same for 
+  all the AI providers.- 
+-**/pgvector/** this directory contains a docker compose file to launch 
+  postgres with the pgvector extension. This is used to demonstrate how to 
+  use vector databases with Spring AI.
+- **data/** this directory contains various types of example data sets used 
+  by the examples in the repo.
+- **docs/** this directory contains the documentation for the repo.
