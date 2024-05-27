@@ -1,27 +1,29 @@
 package com.example.image_01;
 
 import org.springframework.ai.image.Image;
-import org.springframework.ai.image.ImageClient;
+import org.springframework.ai.image.ImageModel;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.image.ImageResponse;
 import org.springframework.ai.openai.OpenAiImageOptions;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/image/01")
 public class ImageController {
 
-  private final ImageClient imageClient;
+  private final ImageModel imageModel;
 
-  public ImageController(ImageClient imageClient) {
-    this.imageClient = imageClient;
+  public ImageController(ImageModel imageModel) {
+    this.imageModel = imageModel;
   }
 
   @GetMapping("make")
   public Image transcribe() {
 
     ImageResponse response =
-        imageClient.call(
+        imageModel.call(
             new ImagePrompt(
                 "A light cream colored mini golden doodle",
                 OpenAiImageOptions.builder()

@@ -2,10 +2,10 @@ package com.example.chat_02;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.chat.ChatResponse;
-import org.springframework.ai.chat.Generation;
 import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chat/02")
 public class PromptController {
-  private final ChatClient chatClient;
+  private final ChatModel chatModel;
 
-  public PromptController(ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public PromptController(ChatModel chatModel) {
+    this.chatModel = chatModel;
   }
 
   @GetMapping("/joke")
@@ -29,8 +29,8 @@ public class PromptController {
     // with the AI service. We will see more options later.
     Prompt prompt = new Prompt("Tell me a joke about " + topic);
 
-    // chat client takes a prompt and returns a chat response
-    ChatResponse response = chatClient.call(prompt);
+    // chat model takes a prompt and returns a chat response
+    ChatResponse response = chatModel.call(prompt);
 
     // The response object contains a result object called a generation
     // containing the text from the AI LLM
@@ -60,8 +60,8 @@ public class PromptController {
     // with the AI service. We will see more options later.
     Prompt prompt = new Prompt("Tell me a joke");
 
-    // chat client takes a prompt and returns a chat response
-    ChatResponse response = chatClient.call(prompt);
+    // chat model takes a prompt and returns a chat response
+    ChatResponse response = chatModel.call(prompt);
 
     // The response object contains a result object called a generation
     // containing the text from the AI LLM

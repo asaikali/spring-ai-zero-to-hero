@@ -1,8 +1,8 @@
 package com.example.chat_03;
 
-import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.core.io.ClassPathResource;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController()
 @RequestMapping("/chat/03")
 public class PromptTemplateController {
-  private final ChatClient chatClient;
+  private final ChatModel chatModel;
 
-  public PromptTemplateController(ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public PromptTemplateController(ChatModel chatModel) {
+    this.chatModel = chatModel;
   }
 
   @GetMapping("/joke")
@@ -32,7 +32,7 @@ public class PromptTemplateController {
     Prompt prompt = promptTemplate.create();
 
     // call the AI model and get the respnose.
-    ChatResponse response = chatClient.call(prompt);
+    ChatResponse response = chatModel.call(prompt);
     AssistantMessage assistantMessage = response.getResult().getOutput();
     return assistantMessage.getContent();
   }
@@ -47,7 +47,7 @@ public class PromptTemplateController {
     Prompt prompt = promptTemplate.create();
 
     // call the AI model and get the response.
-    ChatResponse response = chatClient.call(prompt);
+    ChatResponse response = chatModel.call(prompt);
     AssistantMessage assistantMessage = response.getResult().getOutput();
     return assistantMessage.getContent();
   }

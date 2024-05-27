@@ -1,24 +1,24 @@
 package com.example.chat_01;
 
-import org.springframework.ai.chat.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/chat/01")
 public class BasicPromptController {
 
-  // ChatClient is the primary interfaces for interacting with an LLM
-  // it is a request/response interface that implements the ModelClient
-  // interface. Make suer to visit the source code of the ChatClient and
+  // ChatModel is the primary interfaces for interacting with an LLM
+  // it is a request/response interface that implements the ModelModel
+  // interface. Make suer to visit the source code of the ChatModel and
   // checkout the interfaces in the core spring ai package.
-  private final ChatClient chatClient;
+  private final ChatModel chatModel;
 
-  public BasicPromptController(ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public BasicPromptController(ChatModel chatModel) {
+    this.chatModel = chatModel;
   }
 
   @GetMapping("joke")
   public String getJoke() {
-    return chatClient.call("Tell me a joke");
+    return this.chatModel.call("Tell me a joke");
   }
 }

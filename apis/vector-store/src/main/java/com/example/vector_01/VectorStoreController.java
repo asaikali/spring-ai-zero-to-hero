@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -25,9 +25,9 @@ public class VectorStoreController {
   private final DataFiles dataFiles;
   private final VectorStore bikeVectorStore;
 
-  public VectorStoreController(EmbeddingClient embeddingClient, DataFiles dataFiles)
+  public VectorStoreController(EmbeddingModel embeddingModel, DataFiles dataFiles)
       throws IOException {
-    this.bikeVectorStore = new SimpleVectorStore(embeddingClient);
+    this.bikeVectorStore = new SimpleVectorStore(embeddingModel);
     this.dataFiles = dataFiles;
   }
 

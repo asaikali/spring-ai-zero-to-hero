@@ -12,7 +12,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>shared datasets used in the demos</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-azure-vector-store</artifactId>
+			<artifactId>spring-ai-azure-store</artifactId>
 		</dependency>
 	</dependencies>
 </project>

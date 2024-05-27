@@ -3,7 +3,7 @@ package com.example.embed_02;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Stream;
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/embed/02")
 public class SimilarityController {
 
-  private final EmbeddingClient embeddingClient;
+  private final EmbeddingModel embeddingModel;
   private List<Quote> quotes = new ArrayList<>();
 
-  public SimilarityController(EmbeddingClient embeddingClient) {
-    this.embeddingClient = embeddingClient;
+  public SimilarityController(EmbeddingModel embeddingModel) {
+    this.embeddingModel = embeddingModel;
   }
 
   record Score(String a, String b, double similarity) {}
@@ -27,8 +27,8 @@ public class SimilarityController {
   ;
 
   private Score similarity(String a, String b) {
-    var embeddingA = embeddingClient.embed(a);
-    var embeddingB = embeddingClient.embed(b);
+    var embeddingA = embeddingModel.embed(a);
+    var embeddingB = embeddingModel.embed(b);
     // 1.0  indicates perfect similarity
     // 0.0  indicates no similarity
     var similarity = SimpleVectorStore.EmbeddingMath.cosineSimilarity(embeddingA, embeddingB);
@@ -105,12 +105,12 @@ public class SimilarityController {
     synchronized (quotes) {
       if (this.quotes.isEmpty()) {
         quotes =
-            quotesTexts.stream().map(text -> new Quote(text, embeddingClient.embed(text))).toList();
+            quotesTexts.stream().map(text -> new Quote(text, embeddingModel.embed(text))).toList();
       }
     }
 
     // compute the similarity between the topic and each quote by comparing their embeddings
-    var topicEmbedding = embeddingClient.embed(topic);
+    var topicEmbedding = embeddingModel.embed(topic);
     var result =
         quotes.stream()
             .map(
