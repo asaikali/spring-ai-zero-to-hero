@@ -165,7 +165,7 @@ Azure OpenAI, and local AI models. The major directories in this repo are:
 1. Run the samples with the different AI providers to see how the same code 
    works with different providers.
 2. Run the gateway application and inspect the API requests/responses to see 
-   what interaction with the AI projects looks like no the wire.
+   what interaction with the AI projects looks like on the wire.
 3. Make sure to run ollama and download the llama3 model to see how easy it 
    is to run local AI models. 
 4. The code in this repo is designed to be read in order, so start with the 
