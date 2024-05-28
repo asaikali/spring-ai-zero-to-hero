@@ -79,6 +79,7 @@ Weight limit This bike has a maximum total weight limit (combined weight of bicy
 
 All measurements provided in cm unless otherwise noted.
 Sizing table
+
 | Frame size letter         | S     | M     | L     | XL    |
 |---------------------------|-------|-------|-------|-------|
 | Actual frame size         | 15.8  | 17.8  | 19.8  | 21.8  |
@@ -97,3 +98,4 @@ Sizing table
 | L — Standover             | 77.0  | 77.0  | 77.0  | 77.0  |
 | M — Frame reach           | 41.0  | 44.5  | 47.5  | 50.0  |
 | N — Frame stack           | 61.0  | 62.0  | 62.5  | 63.0  |
+
