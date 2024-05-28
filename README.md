@@ -175,4 +175,4 @@ Azure OpenAI, and local AI models. The major directories in this repo are:
 5. Spring AI project is evolving quickly, it is possible that the code in 
    this repo will be using a snapshot release of the Spring AI project, or 
    that it falls behind the latest version. If you run into problem with 
-   this repo, send a pull request or open an issue.
+   this repo, send a pull request or open an issue. 
