@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: spy,pgvector
+    active: # spy,pgvector
   config:
     import: "optional:classpath:/creds.yaml"
   ai:
@@ -11,6 +11,7 @@ spring:
           functions:
             - weatherFunction
           n: 3
+          model: "gpt-3.5-turbo"
 management:
   endpoint:
     health:
