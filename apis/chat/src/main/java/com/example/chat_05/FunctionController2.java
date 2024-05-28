@@ -1,6 +1,7 @@
 package com.example.chat_05;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 class FunctionController2 {
   private final ChatClient chatClient;
 
-  public FunctionController2(ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public FunctionController2(ChatModel chatModel) {
+    this.chatClient = ChatClient.create(chatModel);
   }
 
   @GetMapping("/weather")
