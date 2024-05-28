@@ -17,5 +17,6 @@
 		<module>openai</module>
 		<module>azure</module>
 		<module>gateway</module>
+		<module>config</module>
 	</modules>
 </project>

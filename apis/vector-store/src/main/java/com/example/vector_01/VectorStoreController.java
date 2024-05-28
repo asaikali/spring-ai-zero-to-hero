@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
-import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -23,12 +22,12 @@ public class VectorStoreController {
   private final Logger logger = LoggerFactory.getLogger(VectorStoreController.class);
 
   private final DataFiles dataFiles;
-  private final VectorStore bikeVectorStore;
+  private final VectorStore vectorStore;
 
-  public VectorStoreController(EmbeddingModel embeddingModel, DataFiles dataFiles)
+  public VectorStoreController(VectorStore vectorStore, DataFiles dataFiles)
       throws IOException {
-    this.bikeVectorStore = new SimpleVectorStore(embeddingModel);
     this.dataFiles = dataFiles;
+    this.vectorStore = vectorStore;
   }
 
   @GetMapping("/load")
@@ -40,14 +39,19 @@ public class VectorStoreController {
     List<Document> documents = reader.get();
 
     // add the documents to the vector store
-    this.bikeVectorStore.add(documents);
+    this.vectorStore.add(documents);
 
-    var file = File.createTempFile("bike_vector_store", ".json");
-    ((SimpleVectorStore) this.bikeVectorStore).save(file);
-    logger.info("vector store contents written to {}", file.getAbsolutePath());
 
-    return "vector store loaded with %s documents, file saved to %s "
-        .formatted(documents.size(), file.getAbsolutePath());
+    var fileLocationMessage = "";
+    if( vectorStore instanceof SimpleVectorStore) {
+      var file = File.createTempFile("bike_vector_store", ".json");
+      ((SimpleVectorStore) this.vectorStore).save(file);
+      fileLocationMessage =  "vector store file written to %s".formatted(file.getAbsolutePath());;
+      logger.info("vector store contents written to {}", file.getAbsolutePath());
+    }
+
+    return "vector store loaded with %s documents".formatted(documents.size());
+
   }
 
   @GetMapping("query")
@@ -56,7 +60,7 @@ public class VectorStoreController {
           String topic) {
 
     // search the vector store for the top 4 bikes that match the query
-    List<Document> topMatches = this.bikeVectorStore.similaritySearch(topic);
+    List<Document> topMatches = this.vectorStore.similaritySearch(topic);
 
     return topMatches.stream().map(document -> document.getContent()).toList();
   }

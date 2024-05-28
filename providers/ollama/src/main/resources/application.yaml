@@ -1,11 +1,11 @@
 spring:
   profiles:
-    active: spy
+    active: spy,pgvector
   ai:
     ollama:
       base-url: "http://localhost:11434/"
       embedding:
-        model: llama3
+        model: mxbai-embed-large
       chat:
         model: llama3
 
@@ -17,3 +17,19 @@ spring:
   ai:
     ollama:
       base-url: "http://localhost:7777/ollama"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: pgvector
+  datasource:
+    url: jdbc:postgresql://localhost:15432/ollama
+    username: postgres
+    password: password
+  ai:
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimension: 1024

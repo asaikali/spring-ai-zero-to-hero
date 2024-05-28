@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: spy
+    active: spy,pgvector
   config:
     import: "optional:classpath:/creds.yaml"
   ai:
@@ -29,3 +29,19 @@ spring:
     openai:
       chat:
         base-url: "http://localhost:7777/openai"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: pgvector
+  datasource:
+    url: jdbc:postgresql://localhost:15432/openai
+    username: postgres
+    password: password
+  ai:
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimension: 1536

@@ -15,6 +15,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.example</groupId>
+			<artifactId>config</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
 			<artifactId>chat</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

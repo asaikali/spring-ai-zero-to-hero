@@ -2,6 +2,8 @@
 spring:
   config:
     import: "optional:classpath:/creds.yaml"
+  profiles:
+    active: pgvector
   ai:
     azure:
       openai:
@@ -25,3 +27,28 @@ logging:
     org:
       springframework:
         ai: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: spy
+  ai:
+    azure:
+      openai:
+        endpoint: "http://localhost:7777/azure"
+---
+spring:
+  config:
+    activate:
+      on-profile: pgvector
+  datasource:
+    url: jdbc:postgresql://localhost:15432/azure
+    username: postgres
+    password: password
+  ai:
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimension: 1536
