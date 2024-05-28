@@ -24,8 +24,7 @@ public class VectorStoreController {
   private final DataFiles dataFiles;
   private final VectorStore vectorStore;
 
-  public VectorStoreController(VectorStore vectorStore, DataFiles dataFiles)
-      throws IOException {
+  public VectorStoreController(VectorStore vectorStore, DataFiles dataFiles) throws IOException {
     this.dataFiles = dataFiles;
     this.vectorStore = vectorStore;
   }
@@ -41,17 +40,16 @@ public class VectorStoreController {
     // add the documents to the vector store
     this.vectorStore.add(documents);
 
-
     var fileLocationMessage = "";
-    if( vectorStore instanceof SimpleVectorStore) {
+    if (vectorStore instanceof SimpleVectorStore) {
       var file = File.createTempFile("bike_vector_store", ".json");
       ((SimpleVectorStore) this.vectorStore).save(file);
-      fileLocationMessage =  "vector store file written to %s".formatted(file.getAbsolutePath());;
+      fileLocationMessage = "vector store file written to %s".formatted(file.getAbsolutePath());
+      ;
       logger.info("vector store contents written to {}", file.getAbsolutePath());
     }
 
     return "vector store loaded with %s documents".formatted(documents.size());
-
   }
 
   @GetMapping("query")

@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Profile;
 @Profile("!pgvector")
 @EnableAutoConfiguration(exclude = {PgVectorStoreAutoConfiguration.class})
 public class SimpleVectorStoreConfig {
-    @Bean
-    VectorStore vectorStore(EmbeddingModel embeddingModel) {
-        return new SimpleVectorStore(embeddingModel);
-    }
+  @Bean
+  VectorStore vectorStore(EmbeddingModel embeddingModel) {
+    return new SimpleVectorStore(embeddingModel);
+  }
 }
