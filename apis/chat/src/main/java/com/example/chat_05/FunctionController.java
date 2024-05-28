@@ -1,8 +1,8 @@
 package com.example.chat_05;
 
-import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chat/05")
 class FunctionController {
-  private final ChatClient chatClient;
+  private final ChatModel chatModel;
 
-  public FunctionController(ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public FunctionController(ChatModel chatModel) {
+    this.chatModel = chatModel;
   }
 
   @GetMapping("/weather")
@@ -31,7 +31,7 @@ class FunctionController {
     Prompt prompt = promptTemplate.create();
 
     // call the AI model and get the respnose.
-    ChatResponse response = chatClient.call(prompt);
+    ChatResponse response = chatModel.call(prompt);
     AssistantMessage assistantMessage = response.getResult().getOutput();
     return assistantMessage.getContent();
   }
@@ -49,7 +49,7 @@ class FunctionController {
     Prompt prompt = promptTemplate.create();
 
     // call the AI model and get the respnose.
-    ChatResponse response = chatClient.call(prompt);
+    ChatResponse response = chatModel.call(prompt);
     AssistantMessage assistantMessage = response.getResult().getOutput();
     return assistantMessage.getContent();
   }

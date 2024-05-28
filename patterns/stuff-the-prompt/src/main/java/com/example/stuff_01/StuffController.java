@@ -2,7 +2,7 @@ package com.example.stuff_01;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.ai.chat.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/stuffit/01")
 public class StuffController {
 
-  private final ChatClient chatClient;
+  private final ChatModel chatModel;
 
   @Value("classpath:/docs/wikipedia-curling.md")
   private Resource docsToStuffResource;
@@ -26,8 +26,8 @@ public class StuffController {
   private Resource qaPromptResource;
 
   @Autowired
-  public StuffController(ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public StuffController(ChatModel chatModel) {
+    this.chatModel = chatModel;
   }
 
   @GetMapping("/query")
@@ -44,6 +44,6 @@ public class StuffController {
     map.put("context", docsToStuffResource);
 
     Prompt prompt = promptTemplate.create(map);
-    return chatClient.call(prompt).getResult().getOutput().getContent();
+    return chatModel.call(prompt).getResult().getOutput().getContent();
   }
 }

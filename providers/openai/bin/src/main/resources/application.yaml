@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: spy
+  config:
+    import: "optional:classpath:/creds.yaml"
+  ai:
+    openai:
+      chat:
+        base-url: "https://api.openai.com/v1/chat/completions"
+        options:
+          functions:
+            - weatherFunction
+          n: 3
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: spy
+  ai:
+    openai:
+      chat:
+        base-url: "http://localhost:7777/openai"

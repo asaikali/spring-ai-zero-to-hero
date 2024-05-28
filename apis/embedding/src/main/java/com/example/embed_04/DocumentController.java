@@ -3,11 +3,9 @@ package com.example.embed_04;
 import com.example.data.DataFiles;
 import java.io.IOException;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.ExtractedTextFormatter;
 import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.reader.TextReader;
@@ -23,13 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/embed/04")
 public class DocumentController {
 
-  private final Logger logger = LoggerFactory.getLogger(DocumentController.class);
-  private final EmbeddingClient embeddingClient;
+  private final EmbeddingModel embeddingModel;
   private final DataFiles dataFiles;
 
-  public DocumentController(EmbeddingClient embeddingClient, DataFiles dataFiles)
-      throws IOException {
-    this.embeddingClient = embeddingClient;
+  public DocumentController(EmbeddingModel embeddingModel, DataFiles dataFiles) throws IOException {
+    this.embeddingModel = embeddingModel;
     this.dataFiles = dataFiles;
   }
 
@@ -40,7 +36,7 @@ public class DocumentController {
             this.dataFiles.getBikesResource(), "name", "price", "shortDescription", "description");
     List<Document> documents = reader.get();
     Document document = documents.getFirst();
-    List<Double> embedding = this.embeddingClient.embed(document);
+    List<Double> embedding = this.embeddingModel.embed(document);
 
     return """
                 Input file was parsed into %s documents
@@ -68,7 +64,7 @@ public class DocumentController {
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
     Document document = chunks.getFirst();
-    List<Double> embedding = this.embeddingClient.embed(document);
+    List<Double> embedding = this.embeddingModel.embed(document);
 
     return """
                 Input file was parsed into %s documents
@@ -128,7 +124,7 @@ public class DocumentController {
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
     Document document = documents.getFirst();
-    List<Double> embedding = this.embeddingClient.embed(document);
+    List<Double> embedding = this.embeddingModel.embed(document);
 
     var chuckSummary =
         """
@@ -161,7 +157,7 @@ public class DocumentController {
 
     List<Document> documents = pdfReader.get();
 
-    this.embeddingClient.embed(documents.getFirst());
+    this.embeddingModel.embed(documents.getFirst());
     var pdfToDocsSummary =
         """
             Input pdf read from %s
