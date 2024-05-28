@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 class FunctionController2 {
   private final ChatClient chatClient;
 
-  public FunctionController2(ChatModel chatModel) {
-    this.chatClient = ChatClient.create(chatModel);
+  public FunctionController2(ChatClient.Builder builder) {
+    this.chatClient = builder.build();
   }
 
   @GetMapping("/weather")
