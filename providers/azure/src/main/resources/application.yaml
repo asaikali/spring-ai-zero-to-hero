@@ -3,7 +3,7 @@ spring:
   config:
     import: "optional:classpath:/creds.yaml"
   profiles:
-    active: pgvector
+    active: #pgvector
   ai:
     azure:
       openai:

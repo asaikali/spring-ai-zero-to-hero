@@ -1,17 +1,16 @@
 spring:
   profiles:
-    active: # spy,pgvector
+    active:  spy # spy,pgvector
   config:
     import: "optional:classpath:/creds.yaml"
   ai:
     openai:
       chat:
-        base-url: "https://api.openai.com/v1/chat/completions"
         options:
           functions:
             - weatherFunction
           n: 3
-          model: "gpt-3.5-turbo"
+          model: "gpt-4o"
 management:
   endpoint:
     health:
