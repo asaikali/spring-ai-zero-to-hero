@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active:  spy # spy,pgvector
+    active:  pgvector,spy # spy,pgvector
   config:
     import: "optional:classpath:/creds.yaml"
   ai:
