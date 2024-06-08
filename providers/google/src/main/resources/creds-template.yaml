@@ -1,0 +1,16 @@
+#
+#  You need to run these commands to make sure that google libraries can find
+# the credentials to access the Google cloud services:
+#
+# gcloud config set project PROJECT_ID &&
+# gcloud auth application-default set-quota-project POJECT_ID
+# gcloud auth application-default login ACCOUNT
+#
+#
+spring:
+  ai:
+    vertex:
+      ai:
+        gemini:
+          project-id:
+          location:
