@@ -23,6 +23,8 @@ public class BasicEmbeddingController {
   @GetMapping("dimension")
   public Map<String, Object> getDimension() {
 
-    return Map.of("dimension", embeddingModel.dimensions(), "type", embeddingModel.getClass());
+    return Map.of(
+        "dimension", embeddingModel.dimensions(),
+        "type", embeddingModel.getClass());
   }
 }

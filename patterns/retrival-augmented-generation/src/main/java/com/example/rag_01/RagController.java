@@ -61,9 +61,9 @@ public class RagController {
             """
                     You are a helpful assistant at an e-bike store. Your job is to answer
                     customer questions about e-bikes that we are selling. The questions should
-                    be answered base on the provide bike specifications. If you don't know
+                    be answered based on the provided bike specifications. If you don't know
                     the answer politely tell the customer you don't know the answer, then ask
-                    the customer a followup qusetion to try and clarify the question they are
+                    the customer a followup question to try and clarify the question they are
                     asking.
                     """)
         .user(

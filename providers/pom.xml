@@ -16,6 +16,7 @@
 		<module>ollama</module>
 		<module>openai</module>
 		<module>azure</module>
+		<module>anthropic</module>
 		<module>gateway</module>
 		<module>config</module>
 	</modules>
