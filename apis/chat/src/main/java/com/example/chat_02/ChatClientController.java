@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/chat2/02")
-public class PromptController2 {
+@RequestMapping("/chat/02/client")
+public class ChatClientController {
 
   private final ChatClient chatClient;
 
-  public PromptController2(ChatClient.Builder chatClientBuilder) {
+  public ChatClientController(ChatClient.Builder chatClientBuilder) {
     this.chatClient = chatClientBuilder.build();
   }
 

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/chat/02")
-public class PromptController {
+@RequestMapping("/chat/02/model")
+public class ChatModelController {
   private final ChatModel chatModel;
 
-  public PromptController(ChatModel chatModel) {
+  public ChatModelController(ChatModel chatModel) {
     this.chatModel = chatModel;
   }
 

@@ -1,10 +1,6 @@
 package com.example.chat_05;
 
-import org.springframework.ai.chat.messages.AssistantMessage;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,44 +9,44 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chat/05")
 class FunctionController {
-  private final ChatModel chatModel;
+  private final ChatClient chatClient;
 
-  public FunctionController(ChatModel chatModel) {
-    this.chatModel = chatModel;
+  public FunctionController(ChatClient.Builder builder) {
+    this.chatClient = builder.build();
   }
 
   @GetMapping("/weather")
   public String getWeather(@RequestParam(value = "city", defaultValue = "Toronto") String city) {
 
-    PromptTemplate promptTemplate =
-        new PromptTemplate(
-            """
+    return chatClient
+        .prompt()
+        .functions("weatherFunction")
+        .user(
+            u ->
+                u.text(
+                        """
                 What is the current weather in {city}?
-                """);
-    promptTemplate.add("city", city);
-    Prompt prompt = promptTemplate.create();
-
-    // call the AI model and get the respnose.
-    ChatResponse response = chatModel.call(prompt);
-    AssistantMessage assistantMessage = response.getResult().getOutput();
-    return assistantMessage.getContent();
+                """)
+                    .param("city", city))
+        .call()
+        .content();
   }
 
   @GetMapping("/pack")
   public String getClothingRecommendation(
       @RequestParam(value = "city", defaultValue = "Toronto") String city) {
 
-    PromptTemplate promptTemplate =
-        new PromptTemplate(
-            """
-                I am travelling to {city} what kind of cloths should I pack?
-                """);
-    promptTemplate.add("city", city);
-    Prompt prompt = promptTemplate.create();
-
-    // call the AI model and get the respnose.
-    ChatResponse response = chatModel.call(prompt);
-    AssistantMessage assistantMessage = response.getResult().getOutput();
-    return assistantMessage.getContent();
+    return chatClient
+        .prompt()
+        .functions("weatherFunction")
+        .user(
+            u ->
+                u.text(
+                        """
+                I am traveling to {city} what kind of cloths should I pack?
+                  """)
+                    .param("city", city))
+        .call()
+        .content();
   }
 }

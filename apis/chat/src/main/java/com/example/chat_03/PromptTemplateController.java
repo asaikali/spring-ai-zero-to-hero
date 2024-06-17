@@ -1,12 +1,7 @@
 package com.example.chat_03;
 
-import org.springframework.ai.chat.messages.AssistantMessage;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController()
 @RequestMapping("/chat/03")
 public class PromptTemplateController {
-  private final ChatModel chatModel;
+  private final ChatClient chatClient;
 
-  public PromptTemplateController(ChatModel chatModel) {
-    this.chatModel = chatModel;
+  public PromptTemplateController(ChatClient.Builder builder) {
+    this.chatClient = builder.build();
   }
 
   @GetMapping("/joke")
@@ -27,28 +22,21 @@ public class PromptTemplateController {
     // Prompt template enables us to safely inject user input into the prompt
     // text in {} is replaced by the value of the variable with the same name.
     // PromptTemplate is a commonly used class with Spring AI
-    PromptTemplate promptTemplate = new PromptTemplate("Tell me a joke about {topic}");
-    promptTemplate.add("topic", topic);
-    Prompt prompt = promptTemplate.create();
-
-    // call the AI model and get the respnose.
-    ChatResponse response = chatModel.call(prompt);
-    AssistantMessage assistantMessage = response.getResult().getOutput();
-    return assistantMessage.getContent();
+    return chatClient
+        .prompt()
+        .user(u -> u.text("Tell me a joke about {topic}").param("topic", topic))
+        .call()
+        .content();
   }
 
   @GetMapping("/plays")
   public String getPlays(
       @RequestParam(value = "author", defaultValue = "Shakespeare") String topic) {
-    Resource plays = new ClassPathResource("prompts/plays.st");
-    PromptTemplate promptTemplate = new PromptTemplate(plays);
-    promptTemplate.add("author", topic);
 
-    Prompt prompt = promptTemplate.create();
-
-    // call the AI model and get the response.
-    ChatResponse response = chatModel.call(prompt);
-    AssistantMessage assistantMessage = response.getResult().getOutput();
-    return assistantMessage.getContent();
+    return chatClient
+        .prompt()
+        .user(u -> u.text(new ClassPathResource("prompts/plays.st")).param("author", topic))
+        .call()
+        .content();
   }
 }
