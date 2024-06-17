@@ -11,11 +11,15 @@ public class RoleController {
   private final ChatClient chatClient;
 
   public RoleController(ChatClient.Builder builder) {
-    this.chatClient = builder.defaultSystem("""
+    this.chatClient =
+        builder
+            .defaultSystem(
+                """
     You are a helpful experts on plants, however you are not allowed
     to answers any question about vegetables you can only
     answer questions about fruits.
-    """).build();
+    """)
+            .build();
   }
 
   @GetMapping("/fruit")

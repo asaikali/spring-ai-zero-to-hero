@@ -4,17 +4,22 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>spring-ai-zero-to-hero</artifactId>
+		<artifactId>patterns</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>patterns</artifactId>
+	<artifactId>chat-memory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<description>Example Patterns when building AI applications</description>
-	<modules>
-		<module>stuff-the-prompt</module>
-		<module>retrieval-augmented-generation</module>
-		<module>chat-memory</module>
-	</modules>
+	<packaging>jar</packaging>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-core</artifactId>
+		</dependency>
+	</dependencies>
 </project>

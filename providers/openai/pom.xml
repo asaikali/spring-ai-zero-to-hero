@@ -45,7 +45,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>retrival-augmented-generation</artifactId>
+			<artifactId>chat-memory</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>retrieval-augmented-generation</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
