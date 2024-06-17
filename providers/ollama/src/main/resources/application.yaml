@@ -5,8 +5,8 @@ spring:
     ollama:
       base-url: "http://localhost:11434/"
       embedding:
-        model: llama3
-       # model: mxbai-embed-large
+        # model: llama3
+        model: mxbai-embed-large
       chat:
         model: llama3
 
