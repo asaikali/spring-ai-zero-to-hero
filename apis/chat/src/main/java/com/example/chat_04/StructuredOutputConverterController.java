@@ -78,7 +78,7 @@ public class StructuredOutputConverterController {
   }
 
   @GetMapping("/plays/object")
-  public Play2[] getPlaysObject(
+  public Play[] getPlaysObject(
       @RequestParam(value = "author", defaultValue = "Shakespeare") String topic) {
 
     return chatClient
@@ -92,8 +92,8 @@ public class StructuredOutputConverterController {
                 """)
                     .param("author", topic))
         .call()
-        .entity(Play2[].class);
+        .entity(Play[].class);
   }
 }
 
-record Play2(String author, String title, Integer year) {}
+record Play(String author, String title) {}
