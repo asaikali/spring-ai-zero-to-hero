@@ -105,7 +105,7 @@ http://localhost:8080/chat/03/plays
 
 ## Chat Example 04
 
-Open the `OutputParserController.java` and explore the contents.
+Open the `StructuredOutputConverterController.java` and explore the contents.
 
 Test The Endpoint:
 <table>
