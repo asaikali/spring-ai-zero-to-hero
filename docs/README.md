@@ -154,11 +154,11 @@ You can inspect each of the controller and infer the example URL, e.g.
 http://localhost:8080/chat/01/joke
 ```
 
-See [Chat Examples](docs/examples_chat.md)
+See [Chat Examples](./examples_chat.md)
 
-See [Embedding Examples](docs/examples_embedding.md)
+See [Embedding Examples](./examples_embedding.md)
 
-See [Image Examples](docs/examples_image.md)
+See [Image Examples](./examples_image.md)
 
-See [Audio Examples](docs/examples_audio.md)
+See [Audio Examples](./examples_audio.md)
 
