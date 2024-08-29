@@ -36,7 +36,7 @@ public class DocumentController {
             this.dataFiles.getBikesResource(), "name", "price", "shortDescription", "description");
     List<Document> documents = reader.get();
     Document document = documents.getFirst();
-    List<Double> embedding = this.embeddingModel.embed(document);
+    float[] embedding = this.embeddingModel.embed(document);
 
     return """
                 Input file was parsed into %s documents
@@ -50,7 +50,7 @@ public class DocumentController {
                 """
         .formatted(
             documents.size(),
-            embedding.size(),
+            Integer.valueOf(embedding.length),
             document.getId(),
             document.getMetadata(),
             document.getEmbedding(),
@@ -64,7 +64,7 @@ public class DocumentController {
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
     Document document = chunks.getFirst();
-    List<Double> embedding = this.embeddingModel.embed(document);
+    float[] embedding = this.embeddingModel.embed(document);
 
     return """
                 Input file was parsed into %s documents
@@ -80,7 +80,7 @@ public class DocumentController {
         .formatted(
             documents.size(),
             chunks.size(),
-            embedding.size(),
+            Integer.valueOf(embedding.length),
             document.getId(),
             document.getMetadata(),
             document.getEmbedding(),
@@ -124,7 +124,7 @@ public class DocumentController {
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
     Document document = documents.getFirst();
-    List<Double> embedding = this.embeddingModel.embed(document);
+    float[] embedding = this.embeddingModel.embed(document);
 
     var chuckSummary =
         """
@@ -140,7 +140,7 @@ public class DocumentController {
                 """
             .formatted(
                 chunks.size(),
-                embedding.size(),
+                Integer.valueOf(embedding.length),
                 document.getId(),
                 document.getMetadata(),
                 document.getEmbedding(),

@@ -8,7 +8,7 @@ spring:
         # model: llama3
         model: mxbai-embed-large
       chat:
-        model: llama3
+        model: llama3.1
 
 ---
 spring:

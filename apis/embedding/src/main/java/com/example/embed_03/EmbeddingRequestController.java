@@ -30,12 +30,12 @@ public class EmbeddingRequestController {
   @GetMapping("big")
   public String bigFile() {
     try {
-      List<Double> embedding = embeddingModel.embed(shakespeareWorks);
+      float[] embedding = embeddingModel.embed(shakespeareWorks);
       return """
            Success document of length %s characters, was embedded into
            1 vector with dimension %s
           """
-          .formatted(shakespeareWorks.length(), embedding.size());
+          .formatted(shakespeareWorks.length(), embedding.length);
     } catch (Exception e) {
       return """
           Error: document of length %s could not be embedded
@@ -55,7 +55,7 @@ public class EmbeddingRequestController {
     // for demo purposes we will only compute the
     // embeddings of the first 3 chunks, since we have to pay
     // per token when we call the LLM
-    List<List<Double>> embeddings = this.embeddingModel.embed(chunks.subList(0, 3));
+    List<float[]> embeddings = this.embeddingModel.embed(chunks.subList(0, 3));
 
     return """
            file split into %s chunks %s embeddings created

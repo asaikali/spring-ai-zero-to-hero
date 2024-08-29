@@ -1,6 +1,5 @@
 package com.example.embed_01;
 
-import java.util.List;
 import java.util.Map;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class BasicEmbeddingController {
   }
 
   @GetMapping("joke")
-  public List<Double> getJoke() {
+  public float[] getJoke() {
     return embeddingModel.embed("Tell me a joke");
   }
 

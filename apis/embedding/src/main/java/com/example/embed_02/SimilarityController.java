@@ -23,7 +23,7 @@ public class SimilarityController {
 
   record Score(String a, String b, double similarity) {}
 
-  record Quote(String text, List<Double> embedding) {}
+  record Quote(String text, float[] embedding) {}
   ;
 
   private Score similarity(String a, String b) {
