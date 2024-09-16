@@ -48,7 +48,7 @@ very educational. You can run the models locally and learn how they work.
 * Install ollama by following the instructions on the [ollama website]
   (https://ollama.com/) this [YouTube video](https://www.youtube.com/watch?
   v=3Q6J6J7Q1Zo) shows the ollama install process.
-* Download the `llama3` model with `ollama pull llama3` 
+* Download the `llama3.1` model with `ollama pull llama3.1` 
 
 
 ## Save the conference wifi

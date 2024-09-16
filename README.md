@@ -48,26 +48,26 @@ before the workshop starts. After install:
 Checking Java installation:
 ============================
 Java is installed. Version details:
-openjdk version "21.0.1" 2023-10-17 LTS
-OpenJDK Runtime Environment Temurin-21.0.1+12 (build 21.0.1+12-LTS)
-OpenJDK 64-Bit Server VM Temurin-21.0.1+12 (build 21.0.1+12-LTS, mixed mode)
+openjdk version "21.0.4" 2024-07-16 LTS
+OpenJDK Runtime Environment (build 21.0.4+9-LTS)
+OpenJDK 64-Bit Server VM (build 21.0.4+9-LTS, mixed mode, sharing)
 
 ===============================
 Checking Ollama installation:
 ===============================
 Ollama is installed. Version details:
-ollama version is 0.1.38
+ollama version is 0.3.10
 
 ========================================
-Checking if llama3 model is pulled:
+Checking if llama3.1 model is pulled:
 ========================================
-llama3 model is pulled and available.
+llama3.1 model is pulled and available.
 
 ==============================
 Checking Docker installation:
 ==============================
 Docker is installed. Version details:
-Docker version 26.1.1, build 4cf5afa
+Docker version 27.1.1, build 6312585
 
 Checking Docker image: pgvector/pgvector:pg16
 Docker image pgvector/pgvector:pg16 is pulled.
@@ -79,7 +79,7 @@ Docker image dpage/pgadmin4:8.6 is pulled.
 Checking HTTPie installation:
 ===============================
 HTTPie is installed. Version details:
-3.2.2
+3.2.3
 ```
 
 if you run into issues try running the commands in the `check-deps.sh` 
