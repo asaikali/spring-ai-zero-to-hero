@@ -2,8 +2,8 @@ spring:
   ai:
     azure:
       openai:
-        api-key:
-        endpoint:
+        api-key: INSERT_KEY_HERE
+        endpoint: INSERT_ENDPOINT_HERE # e.g. https://ENDPOINT_NAME.openai.azure.com
         chat:
           options:
             deployment-name: "gpt-35-turbo-16k"
