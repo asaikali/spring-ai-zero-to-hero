@@ -36,7 +36,7 @@ public class ChatModelController {
     // containing the text from the AI LLM
     Generation generation = response.getResult();
 
-    // The actual data from an LLM is stroed in a Message object, there
+    // The actual data from an LLM is stored in a Message object, there
     // are different types of messages. AssistantMessage indicates that the
     // contents came from the AI service.
     AssistantMessage assistantMessage = generation.getOutput();
@@ -44,11 +44,11 @@ public class ChatModelController {
     // All these layers of objects might seem to be overkills. However,
     // keep in mind that the same interfaces are used for dealing with
     // text, audio, video, images, and raw numbers. As such the underlying
-    // low level inerfaces need to be factored out in way, that enables
+    // low level interfaces need to be factored out in way, that enables
     // higher level interfaces to be built. The API you are see in this
     // controller is more like JDBC API as apposed to a higher level Spring
     // data jpa. Spring AI will be adding higher level interfaces on top
-    // the low level intefaces you have seen so far.
+    // the low level interfaces you have seen so far.
     return assistantMessage.getContent();
   }
 

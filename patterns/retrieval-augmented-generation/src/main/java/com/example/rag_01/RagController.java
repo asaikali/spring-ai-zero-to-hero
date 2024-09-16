@@ -1,5 +1,6 @@
 package com.example.rag_01;
 
+import com.example.JsonReader2;
 import com.example.data.DataFiles;
 import java.io.IOException;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
-import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +32,7 @@ public class RagController {
   public String load() throws IOException {
     // turn the json specs file into a document per bike
     DocumentReader reader =
-        new JsonReader(
+        new JsonReader2(
             this.dataFiles.getBikesResource(), "name", "price", "shortDescription", "description");
     List<Document> documents = reader.get();
 
