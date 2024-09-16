@@ -2,8 +2,7 @@ spring:
   application:
     name: ollama-provider
   profiles:
-    active: # spy,pgvector
-    # active: pgvector
+    active: # spy,pgvector,observation
   ai:
     ollama:
       base-url: "http://localhost:11434/"
@@ -12,7 +11,9 @@ spring:
       chat:
         model: llama3.1
         # model: llava
-
+  threads:
+    virtual:
+      enabled: true
 ---
 spring:
   config:
@@ -38,3 +39,41 @@ spring:
         index-type: HNSW
         distance-type: COSINE_DISTANCE
         dimension: 1024
+---
+spring:
+  config:
+    activate:
+      on-profile: observation
+  ai:
+    chat:
+      client:
+        observation:
+          include-input: true
+      observations:
+        include-error-logging: true
+    vector:
+      store:
+        observations:
+          include-query-response: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    distribution.percentiles-histogram.http.server.requests: true
+  observations:
+    key-values:
+      application: ollama-provider
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
