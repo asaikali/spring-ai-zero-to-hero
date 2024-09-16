@@ -49,6 +49,45 @@ check_llama3_model() {
     echo ""
 }
 
+# Function to check if the mxbai-embed-large model is pulled for Ollama
+check_mxbai_embed_large_model() {
+    echo "========================================"
+    echo "Checking if mxbai-embed-large model is pulled:"
+    echo "========================================"
+    if command -v ollama &> /dev/null
+    then
+        if ollama list | grep -q "mxbai-embed-large"
+        then
+            echo "mxbai-embed-large model is pulled and available."
+        else
+            echo "mxbai-embed-large model is not pulled. Please pull it using 'ollama pull mxbai-embed-large'."
+        fi
+    else
+        echo "Ollama is not installed, so the mxbai-embed-large model cannot be checked."
+    fi
+    echo ""
+}
+
+# Function to check if the llava model is pulled for Ollama
+check_llava_model() {
+    echo "========================================"
+    echo "Checking if llava model is pulled:"
+    echo "========================================"
+    if command -v ollama &> /dev/null
+    then
+        if ollama list | grep -q "llava"
+        then
+            echo "llava model is pulled and available."
+        else
+            echo "llava model is not pulled. Please pull it using 'ollama pull llava'."
+        fi
+    else
+        echo "Ollama is not installed, so the llava model cannot be checked."
+    fi
+    echo ""
+}
+
+
 # Function to check if Docker is installed and print its version
 check_docker() {
     echo "=============================="
@@ -96,6 +135,8 @@ check_httpie() {
 check_java
 check_ollama
 check_llama3_model
+check_mxbai_embed_large_model
+check_llava_model
 check_docker
 check_docker_image "pgvector/pgvector:pg16"
 check_docker_image "dpage/pgadmin4:8.6"
