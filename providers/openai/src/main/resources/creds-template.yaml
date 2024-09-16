@@ -2,4 +2,4 @@
 spring:
   ai:
     openai:
-      api-key:
+      api-key: INSERT_KEY_HERE
