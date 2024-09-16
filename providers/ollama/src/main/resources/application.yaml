@@ -2,7 +2,7 @@ spring:
   application:
     name: ollama-provider
   profiles:
-    # active: # spy,pgvector
+    active: # spy,pgvector
     # active: pgvector
   ai:
     ollama:
