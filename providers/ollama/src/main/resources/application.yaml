@@ -1,6 +1,9 @@
 spring:
+  application:
+    name: ollama-provider
   profiles:
-    active: # spy,pgvector
+    # active: # spy,pgvector
+    # active: pgvector
   ai:
     ollama:
       base-url: "http://localhost:11434/"
@@ -31,6 +34,7 @@ spring:
   ai:
     vectorstore:
       pgvector:
+        initialize-schema: true
         index-type: HNSW
         distance-type: COSINE_DISTANCE
         dimension: 1024
