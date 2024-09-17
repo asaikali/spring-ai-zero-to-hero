@@ -35,7 +35,7 @@ public class DocumentController {
         new JsonReader(
             this.dataFiles.getBikesResource(), "name", "price", "shortDescription", "description");
     List<Document> documents = reader.get();
-    Document document = documents.getFirst();
+    Document document = documents.get(0);
     float[] embedding = this.embeddingModel.embed(document);
 
     return """
@@ -63,7 +63,7 @@ public class DocumentController {
     List<Document> documents = reader.get();
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
-    Document document = chunks.getFirst();
+    Document document = chunks.get(0);
     float[] embedding = this.embeddingModel.embed(document);
 
     return """
@@ -116,14 +116,14 @@ public class DocumentController {
             """
             .formatted(
                 dataFiles.getBylawResource().getFilename(),
-                documents.getFirst().getId(),
-                documents.getFirst().getMetadata(),
+                documents.get(0).getId(),
+                documents.get(0).getMetadata(),
                 documents.size(),
-                documents.getFirst().getContent());
+                documents.get(0).getContent());
 
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
-    Document document = documents.getFirst();
+    Document document = documents.get(0);
     float[] embedding = this.embeddingModel.embed(document);
 
     var chuckSummary =
@@ -157,7 +157,7 @@ public class DocumentController {
 
     List<Document> documents = pdfReader.get();
 
-    this.embeddingModel.embed(documents.getFirst());
+    this.embeddingModel.embed(documents.get(0));
     var pdfToDocsSummary =
         """
             Input pdf read from %s
@@ -172,10 +172,10 @@ public class DocumentController {
             """
             .formatted(
                 this.dataFiles.getBylawResource().getFilename(),
-                documents.getFirst().getId(),
-                documents.getFirst().getMetadata(),
+                documents.get(0).getId(),
+                documents.get(0).getMetadata(),
                 documents.size(),
-                documents.getFirst().getContent());
+                documents.get(0).getContent());
 
     return pdfToDocsSummary;
   }
