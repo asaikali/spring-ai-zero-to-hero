@@ -1,0 +1,8 @@
+### Load the bike specs into the vector store
+GET localhost:8080/rag/01/load
+
+### Query the bike specs using hand rolled RAG algo
+GET localhost:8080/rag/01/query
+
+### Query the bike specs using RAG advisor
+GET localhost:8080/rag/02/query

@@ -14,9 +14,9 @@ public class BasicEmbeddingController {
     this.embeddingModel = embeddingModel;
   }
 
-  @GetMapping("joke")
-  public float[] getJoke() {
-    return embeddingModel.embed("Tell me a joke");
+  @GetMapping("text")
+  public float[] getEmbedding() {
+    return embeddingModel.embed("Hello World");
   }
 
   @GetMapping("dimension")

@@ -1,0 +1,5 @@
+###  Load the vector store with documents
+GET localhost:8080/vector/01/load
+
+### query the vector store
+GET localhost:8080/vector/01/query

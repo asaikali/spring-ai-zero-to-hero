@@ -29,7 +29,7 @@ public class DocumentController {
     this.dataFiles = dataFiles;
   }
 
-  @GetMapping("bikes")
+  @GetMapping("json/bikes")
   public String bikeJsonToDocs() {
     DocumentReader reader =
         new JsonReader(
@@ -57,7 +57,7 @@ public class DocumentController {
             document.getContent());
   }
 
-  @GetMapping("works")
+  @GetMapping("text/works")
   public String getShakespeareWorks() {
     DocumentReader reader = new TextReader(this.dataFiles.getShakespeareWorksResource());
     List<Document> documents = reader.get();
@@ -87,7 +87,7 @@ public class DocumentController {
             document.getContent());
   }
 
-  @GetMapping("bylaw")
+  @GetMapping("pdf/pages")
   public String getBylaw() {
     PagePdfDocumentReader pdfReader =
         new PagePdfDocumentReader(
@@ -149,7 +149,7 @@ public class DocumentController {
     return pdfToDocsSummary + chuckSummary;
   }
 
-  @GetMapping("para")
+  @GetMapping("/pdf/para")
   public String paragraphs() {
     ParagraphPdfDocumentReader pdfReader =
         new ParagraphPdfDocumentReader(

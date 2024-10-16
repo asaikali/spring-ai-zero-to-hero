@@ -1,0 +1,2 @@
+### Query a question based on a specific context stuffed into the prompt
+GET http://localhost:8080/stuffit/01/query

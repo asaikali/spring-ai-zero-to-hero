@@ -1,0 +1,11 @@
+###  tell the AI your name
+GET localhost:8080/mem/01/hello
+
+### ask the AI what your name is it will tell you it does not know who you are
+GET localhost:8080/mem/01/name
+
+### tell the ai your name with chat memory turned on
+GET localhost:8080/mem/02/hello
+
+### ask the ai your name, it will know it because of chat history
+GET localhost:8080/mem/02/name

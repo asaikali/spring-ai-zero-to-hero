@@ -1,0 +1,26 @@
+### Embed a basic string
+GET http://localhost:8080/embed/01/text
+
+### Get the dimesion of the embedding
+GET http://localhost:8080/embed/01/dimension
+
+### Compute embbedding for a bunch of words
+GET http://localhost:8080/embed/02/words
+
+### Compute embbedding for a bunch of quotes
+GET http://localhost:8080/embed/02/quotes
+
+### Compute the embedding for a big file and exceed the context window
+GET http://localhost:8080/embed/03/big
+
+### Chunck the big file so that embbeding will work
+GET http://localhost:8080/embed/03/chunk
+
+### Take a json file and convert it into a documents based on specific json fields
+GET http://localhost:8080/embed/04/json/bikes
+
+### Take a pdf file and turn into one document per page
+GET http://localhost:8080/embed/04/pdf/pages
+
+### Take a pdf ifle and turn each paragraph into a document
+GET http://localhost:8080/embed/04/pdf/para

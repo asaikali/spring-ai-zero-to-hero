@@ -1,0 +1,33 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### GET joke
+GET http://localhost:8080/chat/01/joke
+
+### GET three jokes in one call
+GET http://localhost:8080/chat/02/client/threeJokes
+
+### Get a list of shakespere plays
+GET http://localhost:8080/chat/04/plays/list
+
+### Get a list of objects of the plays of shakesphere
+GET http://localhost:8080/chat/04/plays/object
+
+### Get the Weather in Toronto
+GET http://localhost:8080/chat/05/weather
+
+### Get a packing list for a trip to Toronto
+GET http://localhost:8080/chat/05/pack
+
+### Get a packing list for a trip to Paris
+GET http://localhost:8080/chat/05/pack?city="paris and Toronto"
+
+### Ask a question about fruits
+GET http://localhost:8080/chat/06/fruit
+
+### Ask a question about vegtables
+GET http://localhost:8080/chat/06/veg
+
+### Ask a question about an image
+GET http://localhost:8080/chat/07/explain
