@@ -59,11 +59,6 @@ public class ChatClientController {
   @GetMapping("/threeJokes")
   public List<String> getThreeJokes() {
 
-    // Prompt is the primary class that represents a request to an LLM.
-    // it can be configured with more options to enable more complex interactions
-    // with the AI service. We will see more options later.
-    Prompt prompt = new Prompt("Tell me a joke");
-
     // chat model takes a prompt and returns a chat response
     ChatResponse response = chatClient.prompt().user("Tell me a joke").call().chatResponse();
 
