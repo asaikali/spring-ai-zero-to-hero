@@ -20,6 +20,7 @@
     <spring-ai.version>1.0.0-M3</spring-ai.version>
     <!-- <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version> -->
     <spring-cloud.version>2023.0.2</spring-cloud.version>
+    <spring-cloud-azure.version>5.17.1</spring-cloud-azure.version>
     <spotless.version>2.43.0</spotless.version>
   </properties>
 
@@ -42,6 +43,13 @@
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
         <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.azure.spring</groupId>
+        <artifactId>spring-cloud-azure-dependencies</artifactId>
+        <version>${spring-cloud-azure.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
