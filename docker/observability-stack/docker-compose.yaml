@@ -1,41 +1,4 @@
 services:
-  postgres:
-    container_name: ai_postgres
-    labels:
-      # see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.docker-compose.custom-images for details
-      org.springframework.boot.service-connection: postgres
-    image: "pgvector/pgvector:pg16"
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "password"
-      PGDATA: "/data/postgres"
-    volumes:
-      - postgres:/data/postgres
-      - ./docker/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-    ports:
-      - "15432:5432"
-    restart: unless-stopped
-
-  pgadmin:
-    container_name: ai_pgadmin
-    labels:
-      org.springframework.boot.ignore: true
-    image: "dpage/pgadmin4:latest"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_CONFIG_SERVER_MODE: "False"
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-      - ./docker/docker_pgadmin_servers.json:/pgadmin4/servers.json
-    ports:
-      - "15433:80"
-    entrypoint:
-      - "/bin/sh"
-      - "-c"
-      - "/bin/echo 'postgres:5432:*:postgres:password' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
-    restart: unless-stopped
   prometheus:
         container_name: prometheus
         image: prom/prometheus:v2.54.0 # https://hub.docker.com/r/prom/prometheus
@@ -46,7 +9,7 @@ services:
             - --config.file=/etc/prometheus/prometheus.yml
         volumes:
             - prometheus:/prometheus
-            - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+            - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
         ports:
             - "9090:9090"
   grafana:
@@ -58,10 +21,10 @@ services:
           - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
           - GF_AUTH_DISABLE_LOGIN_FORM=true
       volumes:
-          - ./docker/grafana/grafana.ini:/etc/grafana/grafana.ini:ro
-          - ./docker/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
-          - ./docker/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
-          - ./docker/grafana/provisioning/alerting:/etc/grafana/provisioning/alerting:ro
+          - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+          - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+          - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+          - ./grafana/provisioning/alerting:/etc/grafana/provisioning/alerting:ro
       ports:
           - "3000:3000"
   tempo-init:
@@ -86,7 +49,7 @@ services:
       depends_on: ['tempo-init']
       volumes:
           - tempo:/var/tempo
-          - ./docker/grafana/tempo.yml:/etc/tempo.yml:ro
+          - ./grafana/tempo.yml:/etc/tempo.yml:ro
       ports:
           - "3200:3200"    # tempo
           - "9411:9411"    # zipkin
@@ -105,8 +68,6 @@ services:
           - "3001:1080"
           - "25:1025"
 volumes:
-  postgres:
-  pgadmin:
   mysql:
   prometheus:
   tempo:
