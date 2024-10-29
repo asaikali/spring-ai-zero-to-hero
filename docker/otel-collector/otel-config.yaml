@@ -1,5 +1,6 @@
 receivers:
   zipkin:
+    endpoint: "0.0.0.0:9411"
   prometheus:
     config:
       scrape_configs:
@@ -24,7 +25,6 @@ service:
       receivers: [zipkin]
       processors: [batch]
       exporters: [azuremonitor]
-
     metrics:
       receivers: [prometheus]
       processors: [batch]
