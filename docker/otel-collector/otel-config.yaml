@@ -29,21 +29,3 @@ service:
       receivers: [prometheus]
       processors: [batch]
       exporters: [azuremonitor]
-
-#receivers:
-#  otlp:
-#    protocols:
-#      http:
-#
-#processors:
-#  batch:
-#
-#exporters:
-#  azuremonitor: {}
-#
-#service:
-#  pipelines:
-#    metrics:
-#      receivers: [otlp]
-#      processors: [batch]
-#      exporters: [azuremonitor]
