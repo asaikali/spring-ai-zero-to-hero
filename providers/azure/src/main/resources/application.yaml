@@ -12,9 +12,10 @@ spring:
             functions:
               - weatherFunction
             temperature: 0.7
-
-
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   endpoint:
     health:
       show-details: always
