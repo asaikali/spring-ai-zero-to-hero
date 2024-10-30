@@ -13,11 +13,11 @@
 	<packaging>jar</packaging>
 	
 	<dependencies>
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>config</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.example</groupId>-->
+<!--			<artifactId>config-pgvector</artifactId>-->
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>chat</artifactId>
@@ -61,6 +61,10 @@
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-azure-openai-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-azure-store</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

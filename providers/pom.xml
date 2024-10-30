@@ -19,6 +19,6 @@
 		<module>google</module>
 		<module>anthropic</module>
 		<module>gateway</module>
-		<module>config</module>
+		<module>config-pgvector</module>
 	</modules>
 </project>

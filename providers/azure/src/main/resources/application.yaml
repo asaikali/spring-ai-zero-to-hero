@@ -5,6 +5,10 @@ spring:
   profiles:
     active: #pgvector
   ai:
+    vectorstore:
+      azure:
+        initialize-schema: true
+        index-name: spring-ai-document-index
     azure:
       openai:
         chat:

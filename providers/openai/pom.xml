@@ -63,7 +63,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>config</artifactId>
+			<artifactId>config-pgvector</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
