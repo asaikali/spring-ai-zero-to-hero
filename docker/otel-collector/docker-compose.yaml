@@ -1,5 +1,6 @@
 services:
   otel-collector:
+    container_name: otel-collector
     image: otel/opentelemetry-collector-contrib:latest
     ports:
       - "4317:4317"   # OTLP gRPC receiver port

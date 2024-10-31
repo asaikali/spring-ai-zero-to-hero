@@ -19,6 +19,9 @@ GET http://localhost:8080/embed/03/chunk
 ### Take a json file and convert it into a documents based on specific json fields
 GET http://localhost:8080/embed/04/json/bikes
 
+###
+GET http://localhost:8080/embed/04/text/works
+
 ### Take a pdf file and turn into one document per page
 GET http://localhost:8080/embed/04/pdf/pages
 

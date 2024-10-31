@@ -25,6 +25,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
+			<artifactId>chat-memory</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
 			<artifactId>embedding</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -36,6 +41,11 @@
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>stuff-the-prompt</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>retrieval-augmented-generation</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

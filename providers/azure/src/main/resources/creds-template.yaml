@@ -6,4 +6,5 @@ spring:
         endpoint: INSERT_ENDPOINT_HERE # e.g. https://ENDPOINT_NAME.openai.azure.com
         chat:
           options:
-            deployment-name: "gpt-35-turbo-16k"
+            deployment-name: "gpt-4o"
+            #deployment-name: "gpt-35-turbo-16k"
