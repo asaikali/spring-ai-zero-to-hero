@@ -39,6 +39,7 @@ public class RouteConfig {
       HttpServletRequest httpServletRequest, OpenAiAuditor openAiAuditor) {
     return route("openai")
         .route(path("/openai/**"), http("https://api.openai.com/v1/chat/completions"))
+        .route(path("/anthropic/**"), http("https://api.anthropic.com"))
         .route(path("/ollama/**"), http("http://localhost:11434/"))
         .before(stripPrefix(1))
         .before(

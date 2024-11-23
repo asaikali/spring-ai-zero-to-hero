@@ -1,8 +1,11 @@
 spring:
   profiles:
-    active:  # pgvector,spy # spy,pgvector
+    active:  spy
   config:
     import: "optional:classpath:/creds.yaml"
+  ai:
+    anthropic:
+      base-url: https://api.anthropic.com
 
 management:
   endpoint:
@@ -14,27 +17,12 @@ management:
         include: "*"
 
 ---
+# Activate the spy profile and run the gateway app if you want to
+# observe the network traffic between the client app and anthropic
 spring:
   config:
     activate:
       on-profile: spy
   ai:
-    openai:
-      chat:
-        base-url: "http://localhost:7777/openai"
-
----
-spring:
-  config:
-    activate:
-      on-profile: pgvector
-  datasource:
-    url: jdbc:postgresql://localhost:15432/openai
-    username: postgres
-    password: password
-  ai:
-    vectorstore:
-      pgvector:
-        index-type: HNSW
-        distance-type: COSINE_DISTANCE
-        dimension: 1536
+    anthropic:
+      base-url: "http://localhost:7777/anthropic"
