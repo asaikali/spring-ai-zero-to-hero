@@ -25,10 +25,8 @@
   </properties>
 
   <modules>
-    <module>data</module>
-    <module>apis</module>
-    <module>patterns</module>
-    <module>providers</module>
+    <module>applications</module>
+    <module>components</module>
   </modules>
   <dependencyManagement>
     <dependencies>
