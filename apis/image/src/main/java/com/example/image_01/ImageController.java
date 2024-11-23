@@ -2,7 +2,6 @@ package com.example.image_01;
 
 import org.springframework.ai.image.Image;
 import org.springframework.ai.image.ImageModel;
-import org.springframework.ai.image.ImageOptions;
 import org.springframework.ai.image.ImageOptionsBuilder;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.image.ImageResponse;
@@ -27,11 +26,7 @@ public class ImageController {
         imageModel.call(
             new ImagePrompt(
                 "A light cream colored mini golden doodle",
-                ImageOptionsBuilder.builder()
-                    .withN(1)
-                    .withHeight(1024)
-                    .withWidth(1024)
-                    .build()));
+                ImageOptionsBuilder.builder().withN(1).withHeight(1024).withWidth(1024).build()));
 
     Image image = response.getResult().getOutput();
     return image;
