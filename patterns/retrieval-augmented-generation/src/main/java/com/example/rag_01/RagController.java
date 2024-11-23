@@ -70,15 +70,19 @@ public class RagController {
             u ->
                 u.text(
                         """
-                  Please answer the question below the question is stored between the marker --- for
-                   the start of the question and +++ for the end of the question. Answer the
-                   question based on bike specifications below. each bike specification starts with
-                   ==== and ends with **** \n
-                   --- {question} +++ \n
-                   {specs}
+                   Answer the question in <question></question> second based on the 
+                   context in the <context></context> section
+                   
+                   <question>
+                   {question}
+                   </question>
+                   
+                   <context>
+                   {context}
+                   </context>
                     """)
                     .param("question", topic)
-                    .param("specs", specs))
+                    .param("context", specs))
         .call()
         .content();
   }
