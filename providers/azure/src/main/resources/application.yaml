@@ -37,15 +37,6 @@ logging:
 spring:
   config:
     activate:
-      on-profile: spy
-  ai:
-    azure:
-      openai:
-        endpoint: "http://localhost:7777/azure"
----
-spring:
-  config:
-    activate:
       on-profile: pgvector
   datasource:
     url: jdbc:postgresql://localhost:15432/azure
