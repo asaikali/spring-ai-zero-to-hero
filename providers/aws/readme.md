@@ -1,17 +1,14 @@
-# Google Vertex  
+# AWS
 
-To run the sample application you will to configure your machine using the 
-gcloud cli so that apps can access gemini. This is a one time setup, done with
-the gcloud cli. run the three commands below.
+To run the sample application you will need an Anthropic API key. The key
+needs to be stored `src/main/resources/creds.yaml` file.
 
-```shell
-gcloud config set project ${PROJECT_ID} 
-gcloud auth application-default set-quota-project ${PROJECT_ID}
-gcloud auth application-default login
-``` 
-Copy the `src/main/resources/creds-template.
-yaml` to `src/main/resources/creds.yaml` and add project id and location.
+If you have your own api key, copy the `src/main/resources/creds-template.
+yaml` to `src/main/resources/creds.yaml` and add your key.
 
-Run the application, it is better to run the app from the IDE so that you can 
+If you don't have your own key the instructor will provide you with `creds.yaml`
+file you will need to put this file in `src/main/resources/creds.yaml`.
+
+Run the application, it is better to run the app from the IDE so that you can
 put breakpoints.
 
