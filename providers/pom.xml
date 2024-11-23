@@ -16,9 +16,11 @@
 		<module>ollama</module>
 		<module>openai</module>
 		<module>azure</module>
+		<module>aws</module>
 		<module>google</module>
 		<module>anthropic</module>
 		<module>gateway</module>
 		<module>config-pgvector</module>
+
 	</modules>
 </project>

@@ -1,0 +1,25 @@
+spring:
+  config:
+    import: "optional:classpath:/creds.yaml"
+  profiles:
+    active: #pgvector
+  ai:
+    bedrock:
+#      titan:
+#        chat:
+#          enabled: true
+#        embedding:
+#          enabled: true
+      cohere:
+        chat:
+          enabled: true
+        embedding:
+          enabled: true
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

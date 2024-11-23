@@ -1,0 +1,14 @@
+#
+# put your keys here
+#
+spring:
+  ai:
+    bedrock:
+      aws:
+        region: "us-east-1"
+        access-key:
+        secret-key:
+        session-token:
+        timeout: 10m
+
+
