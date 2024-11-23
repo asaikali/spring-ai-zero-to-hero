@@ -20,7 +20,5 @@
 		<module>provider-google</module>
 		<module>provider-anthropic</module>
 		<module>gateway</module>
-		<module>config-pgvector</module>
-
 	</modules>
 </project>

@@ -15,5 +15,6 @@
 		<module>data</module>
 		<module>apis</module>
 		<module>patterns</module>
+		<module>config-pgvector</module>
 	</modules>
 </project>
