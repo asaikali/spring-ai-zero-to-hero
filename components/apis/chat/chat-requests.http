@@ -29,5 +29,8 @@ GET http://localhost:8080/chat/06/veg
 GET http://localhost:8080/chat/07/explain
 
 ### Write an essay in streaming mode
+# curl -N GET http://localhost:8080/chat/08/essay
+# http --stream :8080/chat/08/essay
+# without streaming http :8080/chat/08/essay
 GET http://localhost:8080/chat/08/essay
 Accept: text/event-stream
