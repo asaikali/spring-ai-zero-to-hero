@@ -27,3 +27,7 @@ GET http://localhost:8080/chat/06/veg
 
 ### Ask a question about an image
 GET http://localhost:8080/chat/07/explain
+
+### Write an essay in streaming mode
+GET http://localhost:8080/chat/08/essay
+Accept: text/event-stream
