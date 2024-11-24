@@ -1,0 +1,2 @@
+###  ask the ai to write your bio
+GET localhost:8080/agent/reflection/write

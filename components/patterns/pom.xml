@@ -16,5 +16,6 @@
 		<module>stuff-the-prompt</module>
 		<module>retrieval-augmented-generation</module>
 		<module>chat-memory</module>
+		<module>agent-reflection-bio-writer</module>
 	</modules>
 </project>
