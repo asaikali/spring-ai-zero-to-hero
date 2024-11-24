@@ -9,7 +9,7 @@ spring:
       embedding:        
         model: mxbai-embed-large
       chat:
-        model: llama3.1
+        model: llama3.2
         # model: llava
   threads:
     virtual:
