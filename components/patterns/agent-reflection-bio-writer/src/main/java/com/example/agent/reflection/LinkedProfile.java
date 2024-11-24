@@ -18,5 +18,4 @@ public class LinkedProfile {
     return this.documents.stream().map(Document::getContent).reduce("", String::concat);
   }
 
-
 }
