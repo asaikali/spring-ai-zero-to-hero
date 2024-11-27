@@ -16,7 +16,7 @@ public class ReflectionAgentController {
   private final ChatClient chatClient;
   private final SelfReflectionAgent selfReflectionAgent;
 
-  @Value("classpath:/info/profile.pdf")
+  @Value("classpath:/info/Profile.pdf")
   private Resource profile;
 
   @Autowired

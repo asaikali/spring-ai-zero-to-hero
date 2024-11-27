@@ -17,7 +17,7 @@ public class ChainOfThoughtController {
 
   private final ChatClient chatClient;
 
-  @Value("classpath:/info/profile.pdf")
+  @Value("classpath:/info/Profile.pdf")
   private Resource profile;
 
   private ChainOfThoughtBioWriterAgent bioWriterAgent;
