@@ -1,8 +1,6 @@
-package com.example.agent.reflection;
+package com.example.agent.cot;
 
 import java.util.List;
-import java.util.Map;
-import org.apache.pdfbox.pdfparser.BruteForceParser;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +12,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/agent/reflection/bio/")
-public class ReflectionAgentController {
+@RequestMapping("/cot/bio/")
+public class ChainOfThoughtController {
 
   private final ChatClient chatClient;
 
   @Value("classpath:/info/profile.pdf")
   private Resource profile;
 
-  private BioWriterAgent bioWriterAgent;
+  private ChainOfThoughtBioWriterAgent bioWriterAgent;
 
   @Autowired
-  public ReflectionAgentController(ChatModel chatModel, ChatClient.Builder builder, BioWriterAgent bioWriterAgent) {
+  public ChainOfThoughtController(
+      ChatModel chatModel,
+      ChatClient.Builder builder,
+      ChainOfThoughtBioWriterAgent bioWriterAgent) {
     this.chatClient = builder.build();
     this.bioWriterAgent = bioWriterAgent;
   }
@@ -38,15 +39,27 @@ public class ReflectionAgentController {
           String message) {
 
     LinkedProfile profile = new LinkedProfile(this.profile);
-    String bio = this.chatClient.prompt().user( userSpec ->  userSpec.text( """
+    String bio =
+        this.chatClient
+            .prompt()
+            .user(
+                userSpec ->
+                    userSpec
+                        .text(
+                            """
       Write a one paragraph professional biography suitable for conference presentation based on the content below
-      
-      {profile}
-       """).param("profile", profile.getProfileAsString())).call().content();
 
-    String result = bio + "\n\n-------\n\n" +
-        "Characters: %s ".formatted(bio.length()) +
-        "Words: %s".formatted(bio.split("\\s+").length);
+      {profile}
+       """)
+                        .param("profile", profile.getProfileAsString()))
+            .call()
+            .content();
+
+    String result =
+        bio
+            + "\n\n-------\n\n"
+            + "Characters: %s ".formatted(bio.length())
+            + "Words: %s".formatted(bio.split("\\s+").length);
 
     return result;
   }
@@ -54,15 +67,14 @@ public class ReflectionAgentController {
   @GetMapping("/flow")
   public String agenticFlow() {
     LinkedProfile profile = new LinkedProfile(this.profile);
-    List<String> stepResults =  this.bioWriterAgent.writeBio(profile.getProfileAsString());
-    String result =  stepResults.stream().map( i -> "\n\n-------\n\n" + i).reduce("", String::concat);
+    List<String> stepResults = this.bioWriterAgent.writeBio(profile.getProfileAsString());
+    String result = stepResults.stream().map(i -> "\n\n-------\n\n" + i).reduce("", String::concat);
 
     String bio = stepResults.get(stepResults.size() - 1);
-    result += "\n\n-------\n\n" +
-        "Characters: %s ".formatted(bio.length()) +
-        "Words: %s".formatted(bio.split("\\s+").length);
+    result +=
+        "\n\n-------\n\n"
+            + "Characters: %s ".formatted(bio.length())
+            + "Words: %s".formatted(bio.split("\\s+").length);
     return result;
-
   }
-
 }

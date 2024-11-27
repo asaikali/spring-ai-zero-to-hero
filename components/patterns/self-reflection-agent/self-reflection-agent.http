@@ -1,0 +1,8 @@
+###  ask the ai to write your bio one shot without using an agentic workflow
+# make sure to download a pdf of your likendIn profile and put it in the
+# src/main/resources/info/profile.pdf
+GET localhost:8080/reflection/bio/oneshot
+
+
+### Use an self reflection agentic workflow
+GET localhost:8080/reflection/bio/agent

@@ -1,9 +1,8 @@
 package com.example.chat_05;
 
-import java.util.function.Function;
+import org.springframework.ai.model.function.FunctionCallback;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Description;
 
 @Configuration
 class FunctionConfiguration {
@@ -25,9 +24,21 @@ class FunctionConfiguration {
    *
    *
    */
+  //  @Bean
+  //  @Description("Get the weather in location")
+  //  public Function<WeatherRequest, WeatherResponse> weatherFunction(WeatherService
+  // weatherService) {
+  //    return request -> weatherService.getCurrentWeather(request.city());
+  //  }
+
   @Bean
-  @Description("Get the weather in location")
-  public Function<WeatherRequest, WeatherResponse> weatherFunction(WeatherService weatherService) {
-    return request -> weatherService.getCurrentWeather(request.city());
+  public FunctionCallback weatherFunctionCallback(WeatherService weatherService) {
+    return FunctionCallback.builder()
+        .description("Get the weather in location")
+        .function(
+            "weatherFunction",
+            (WeatherRequest request) -> weatherService.getCurrentWeather(request.city()))
+        .inputType(WeatherRequest.class)
+        .build();
   }
 }
