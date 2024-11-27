@@ -70,7 +70,7 @@ public class RagController {
             u ->
                 u.text(
                         """
-                   Answer the question in <question></question> second based on the
+                   Answer the question in <question></question> section based on the
                    context in the <context></context> section
 
                    <question>
