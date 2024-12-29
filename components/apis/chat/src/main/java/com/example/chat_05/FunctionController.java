@@ -43,7 +43,7 @@ class FunctionController {
             u ->
                 u.text(
                         """
-                I am traveling to {city} what kind of cloths should I pack?
+                I am traveling to {city} what kind of clothes should I pack?
                   """)
                     .param("city", city))
         .call()
