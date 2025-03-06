@@ -20,7 +20,7 @@ class FunctionController {
 
     return chatClient
         .prompt()
-        .functions("weatherFunction")
+        .tools("weatherFunction")
         .user(
             u ->
                 u.text(
@@ -38,7 +38,7 @@ class FunctionController {
 
     return chatClient
         .prompt()
-        .functions("weatherFunction")
+        .tools("weatherFunction")
         .user(
             u ->
                 u.text(

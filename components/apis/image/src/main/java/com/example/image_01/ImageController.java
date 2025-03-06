@@ -26,7 +26,7 @@ public class ImageController {
         imageModel.call(
             new ImagePrompt(
                 "A light cream colored mini golden doodle",
-                ImageOptionsBuilder.builder().withN(1).withHeight(1024).withWidth(1024).build()));
+                ImageOptionsBuilder.builder().N(1).height(1024).width(1024).build()));
 
     Image image = response.getResult().getOutput();
     return image;

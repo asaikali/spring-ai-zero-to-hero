@@ -52,7 +52,7 @@ public class ChatClientController {
     // controller is more like JDBC API as apposed to a higher level Spring
     // data jpa. Spring AI will be adding higher level interfaces on top
     // the low level interfaces you have seen so far.
-    return assistantMessage.getContent();
+    return assistantMessage.getText();
   }
 
   @GetMapping("/threeJokes")
@@ -67,7 +67,7 @@ public class ChatClientController {
     List<String> jokes = new ArrayList<>();
     for (var generation : generations) {
       AssistantMessage assistantMessage = generation.getOutput();
-      jokes.add(assistantMessage.getContent());
+      jokes.add(assistantMessage.getText());
     }
 
     return jokes;

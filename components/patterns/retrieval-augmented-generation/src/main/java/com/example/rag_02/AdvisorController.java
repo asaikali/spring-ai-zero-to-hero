@@ -76,7 +76,8 @@ public class AdvisorController {
     return this.chatClient
         .prompt()
         .advisors(
-            new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults(), USER_TEXT_ADVISE))
+            new QuestionAnswerAdvisor(
+                vectorStore, SearchRequest.builder().build(), USER_TEXT_ADVISE))
         .user(topic)
         .call()
         .content();

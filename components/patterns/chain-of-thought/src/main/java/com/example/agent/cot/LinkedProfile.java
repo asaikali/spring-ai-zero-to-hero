@@ -14,6 +14,6 @@ public class LinkedProfile {
   }
 
   String getProfileAsString() {
-    return this.documents.stream().map(Document::getContent).reduce("", String::concat);
+    return this.documents.stream().map(Document::getText).reduce("", String::concat);
   }
 }

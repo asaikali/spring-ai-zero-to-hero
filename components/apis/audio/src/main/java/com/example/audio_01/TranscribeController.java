@@ -27,8 +27,8 @@ public class TranscribeController {
 
     var transcriptionOptions =
         OpenAiAudioTranscriptionOptions.builder()
-            .withResponseFormat(OpenAiAudioApi.TranscriptResponseFormat.TEXT)
-            .withTemperature(0f)
+            .responseFormat(OpenAiAudioApi.TranscriptResponseFormat.TEXT)
+            .temperature(0f)
             .build();
 
     AudioTranscriptionPrompt transcriptionRequest =

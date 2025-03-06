@@ -60,6 +60,6 @@ public class VectorStoreController {
     // search the vector store for the top 4 bikes that match the query
     List<Document> topMatches = this.vectorStore.similaritySearch(topic);
 
-    return topMatches.stream().map(document -> document.getContent()).toList();
+    return topMatches.stream().map(document -> document.getText()).toList();
   }
 }

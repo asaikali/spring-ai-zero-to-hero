@@ -50,7 +50,7 @@ public class EmbeddingRequestController {
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<String> chunks =
         tokenTextSplitter.split(new Document(shakespeareWorks)).stream()
-            .map(d -> d.getContent())
+            .map(d -> d.getText())
             .toList();
     // for demo purposes we will only compute the
     // embeddings of the first 3 chunks, since we have to pay

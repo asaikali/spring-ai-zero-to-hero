@@ -53,8 +53,8 @@ public class DocumentController {
             Integer.valueOf(embedding.length),
             document.getId(),
             document.getMetadata(),
-            document.getEmbedding(),
-            document.getContent());
+            embedding,
+            document.getText());
   }
 
   @GetMapping("text/works")
@@ -83,8 +83,9 @@ public class DocumentController {
             Integer.valueOf(embedding.length),
             document.getId(),
             document.getMetadata(),
-            document.getEmbedding(),
-            document.getContent());
+            document.getMetadata(),
+            embedding,
+            document.getText());
   }
 
   @GetMapping("pdf/pages")
@@ -119,7 +120,7 @@ public class DocumentController {
                 documents.get(0).getId(),
                 documents.get(0).getMetadata(),
                 documents.size(),
-                documents.get(0).getContent());
+                documents.get(0).getText());
 
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
     List<Document> chunks = tokenTextSplitter.apply(documents);
@@ -143,8 +144,8 @@ public class DocumentController {
                 Integer.valueOf(embedding.length),
                 document.getId(),
                 document.getMetadata(),
-                document.getEmbedding(),
-                document.getContent());
+                embedding,
+                document.getText());
 
     return pdfToDocsSummary + chuckSummary;
   }
@@ -175,7 +176,7 @@ public class DocumentController {
                 documents.get(0).getId(),
                 documents.get(0).getMetadata(),
                 documents.size(),
-                documents.get(0).getContent());
+                documents.get(0).getText());
 
     return pdfToDocsSummary;
   }

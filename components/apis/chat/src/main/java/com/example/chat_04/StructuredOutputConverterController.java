@@ -96,4 +96,4 @@ public class StructuredOutputConverterController {
   }
 }
 
-record Play(String author, String title) {}
+record Play(String author, String title, Integer publicatonYear) {}

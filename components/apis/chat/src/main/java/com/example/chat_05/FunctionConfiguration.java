@@ -1,6 +1,6 @@
 package com.example.chat_05;
 
-import org.springframework.ai.model.function.FunctionCallback;
+import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,13 +32,13 @@ class FunctionConfiguration {
   //  }
 
   @Bean
-  public FunctionCallback weatherFunctionCallback(WeatherService weatherService) {
-    return FunctionCallback.builder()
-        .description("Get the weather in location")
-        .function(
+  public FunctionToolCallback weatherFunctionCallback(WeatherService weatherService) {
+
+    return FunctionToolCallback.builder(
             "weatherFunction",
             (WeatherRequest request) -> weatherService.getCurrentWeather(request.city()))
         .inputType(WeatherRequest.class)
+        .description("Get the weather in location")
         .build();
   }
 }

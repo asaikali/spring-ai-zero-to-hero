@@ -22,6 +22,6 @@ import org.springframework.context.annotation.Profile;
 public class SimpleVectorStoreConfig {
   @Bean
   VectorStore vectorStore(EmbeddingModel embeddingModel) {
-    return new SimpleVectorStore(embeddingModel);
+    return SimpleVectorStore.builder(embeddingModel).build();
   }
 }

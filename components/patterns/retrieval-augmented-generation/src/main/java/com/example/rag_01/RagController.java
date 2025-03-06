@@ -52,7 +52,7 @@ public class RagController {
     // generate a response to the user's question based on the top matches
     String specs =
         topMatches.stream()
-            .map(document -> "\n===\n" + document.getContent() + "\n===\n")
+            .map(document -> "\n===\n" + document.getText() + "\n===\n")
             .collect(Collectors.joining());
 
     return chatClient

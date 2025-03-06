@@ -44,6 +44,6 @@ public class StuffController {
     map.put("context", docsToStuffResource);
 
     Prompt prompt = promptTemplate.create(map);
-    return chatModel.call(prompt).getResult().getOutput().getContent();
+    return chatModel.call(prompt).getResult().getOutput().getText();
   }
 }
