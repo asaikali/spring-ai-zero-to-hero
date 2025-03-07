@@ -54,7 +54,7 @@ public class SimilarityController {
 
   @GetMapping("quotes")
   public List<Score> quotes(
-      @RequestParam(value = "topic", defaultValue = "getting over a losing a job") String topic) {
+      @RequestParam(value = "topic", defaultValue = "getting over losing a job") String topic) {
 
     /* Stuff to try out
 
