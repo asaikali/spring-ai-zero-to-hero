@@ -83,7 +83,6 @@ public class DocumentController {
             Integer.valueOf(embedding.length),
             document.getId(),
             document.getMetadata(),
-            document.getMetadata(),
             embedding,
             document.getText());
   }
@@ -117,9 +116,9 @@ public class DocumentController {
             """
             .formatted(
                 dataFiles.getBylawResource().getFilename(),
+                documents.size(),
                 documents.get(0).getId(),
                 documents.get(0).getMetadata(),
-                documents.size(),
                 documents.get(0).getText());
 
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
@@ -173,9 +172,9 @@ public class DocumentController {
             """
             .formatted(
                 this.dataFiles.getBylawResource().getFilename(),
+                documents.size(),
                 documents.get(0).getId(),
                 documents.get(0).getMetadata(),
-                documents.size(),
                 documents.get(0).getText());
 
     return pdfToDocsSummary;
