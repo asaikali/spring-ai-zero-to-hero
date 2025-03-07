@@ -46,7 +46,7 @@ public class AdvisorController {
   private static final String USER_TEXT_ADVISE =
       """
 
-      Given the context information bellow , surrounded ---------------------, and provided
+      Given the context information below , surrounded ---------------------, and provided
       history information and not prior knowledge, reply to the user comment.
       If the answer is not in the context, inform the user that you can't answer the question.
 
