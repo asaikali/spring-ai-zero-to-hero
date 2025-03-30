@@ -39,7 +39,7 @@ public class SelfReflectionAgent {
                   """
           You are a friendly expert writer, who helps professionals create
           impactful biographies, that is easy to understand, exciting,
-          nd show the brilliance of the professional. Your take pride
+          and show the brilliance of the professional. Your take pride
           in the short memorable biographies you come up with.
 
           The biography is written based on the professionals
