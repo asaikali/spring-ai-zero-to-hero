@@ -27,6 +27,7 @@
   <modules>
     <module>applications</module>
     <module>components</module>
+    <module>mcp</module>
   </modules>
   <dependencyManagement>
     <dependencies>
