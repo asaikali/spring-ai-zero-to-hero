@@ -12,7 +12,7 @@ spring:
     mcp:
       server:
         stdio: true
-        name: stdio-mcp-server
+        name: basic-stdio-mcp-server
         version: 1.0.0
         type: SYNC
 

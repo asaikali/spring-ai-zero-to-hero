@@ -12,6 +12,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>basic-mcp-server-stdio</module>
+		<module>basic-stdio-mcp-server</module>
 	</modules>
 </project>

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class BasicMcpServerStdioApplication {
+public class BasicStdioMcpServerApplication {
 
   @Bean
   public ToolCallbackProvider weatherTools(WeatherService weatherService) {
@@ -15,6 +15,6 @@ public class BasicMcpServerStdioApplication {
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(BasicMcpServerStdioApplication.class, args);
+    SpringApplication.run(BasicStdioMcpServerApplication.class, args);
   }
 }
