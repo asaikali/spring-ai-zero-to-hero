@@ -11,7 +11,7 @@ spring:
         options:
           functions:
             - weatherFunction
-          n: 3
+          n: 1
           model: "gpt-4o"
 management:
   endpoint:
