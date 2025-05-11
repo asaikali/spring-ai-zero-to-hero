@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Get the directory of the current script
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+
+# Get the parent directory of the script
+PARENT_DIR=$(dirname "$SCRIPT_DIR")
+
+# Navigate to the parent directory
+cd "$PARENT_DIR" || exit
+
+# Execute the Maven command
+$PARENT_DIR/mvnw spotless:apply
+

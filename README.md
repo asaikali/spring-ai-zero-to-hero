@@ -51,43 +51,53 @@ before the workshop starts. After install:
    software is installed, the output of the script on my machine looks like.
 
 ```text
-./check-deps.sh
+./check-deps.sh 
 ============================
 Checking Java installation:
 ============================
 Java is installed. Version details:
-openjdk version "21.0.4" 2024-07-16 LTS
-OpenJDK Runtime Environment (build 21.0.4+9-LTS)
-OpenJDK 64-Bit Server VM (build 21.0.4+9-LTS, mixed mode, sharing)
+openjdk version "21.0.7" 2025-04-15 LTS
+OpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)
 
 ===============================
 Checking Ollama installation:
 ===============================
 Ollama is installed. Version details:
-ollama version is 0.3.10
+ollama version is 0.6.5
 
 ========================================
-Checking if llama3.1 model is pulled:
+Checking if llama4 model is pulled:
 ========================================
-llama3.1 model is pulled and available.
+llama4 model is not pulled. Please pull it using 'ollama pull llama4'.
+
+========================================
+Checking if mxbai-embed-large model is pulled:
+========================================
+mxbai-embed-large model is pulled and available.
+
+========================================
+Checking if llava model is pulled:
+========================================
+llava model is pulled and available.
 
 ==============================
 Checking Docker installation:
 ==============================
 Docker is installed. Version details:
-Docker version 27.1.1, build 6312585
+Docker version 28.1.1, build 4eba377
 
-Checking Docker image: pgvector/pgvector:pg16
-Docker image pgvector/pgvector:pg16 is pulled.
+Checking Docker image: pgvector/pgvector:pg17
+Docker image pgvector/pgvector:pg17 is pulled.
 
-Checking Docker image: dpage/pgadmin4:8.6
-Docker image dpage/pgadmin4:8.6 is pulled.
+Checking Docker image: dpage/pgadmin4:9.3
+Docker image dpage/pgadmin4:9.3 is pulled.
 
 ===============================
 Checking HTTPie installation:
 ===============================
 HTTPie is installed. Version details:
-3.2.3
+3.2.4
 ```
 
 if you run into issues try running the commands in the `check-deps.sh`
