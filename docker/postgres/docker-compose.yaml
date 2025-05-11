@@ -1,42 +1,40 @@
+volumes:
+  postgres:
+  pgadmin:
+
 services:
   postgres:
-    container_name: ai_postgres
     labels:
       # see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.docker-compose.custom-images for details
       org.springframework.boot.service-connection: postgres
-    image: "pgvector/pgvector:pg16"
+    image: "pgvector/pgvector:17"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
       PGDATA: "/data/postgres"
     volumes:
       - postgres:/data/postgres
-      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+      - ./db/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     ports:
-      - "15432:5432"
+      - "${PG_PORT:-15432}:5432"
     restart: unless-stopped
 
   pgadmin:
-    container_name: ai_pgadmin
     labels:
       org.springframework.boot.ignore: true
-    image: "dpage/pgadmin4:latest"
+    image: "dpage/pgadmin4:9.3"
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: "admin@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
       PGADMIN_CONFIG_SERVER_MODE: "False"
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
     volumes:
       - pgadmin:/var/lib/pgadmin
-      - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
+      - ./db/docker_pgadmin_servers.json:/pgadmin4/servers.json
     ports:
-      - "15433:80"
+      - "${PGADMIN_PORT:-15433}:80"
     entrypoint:
       - "/bin/sh"
       - "-c"
       - "/bin/echo 'postgres:5432:*:postgres:password' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
     restart: unless-stopped
-
-volumes:
-  postgres:
-  pgadmin:

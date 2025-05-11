@@ -5,7 +5,7 @@ datasources:
       type: prometheus
       uid: prometheus
       access: proxy
-      url: http://host.docker.internal:9090
+      url: http://prometheus:9090
       editable: true
       jsonData:
         httpMethod: POST
@@ -18,7 +18,7 @@ datasources:
       type: tempo
       uid: tempo
       access: proxy
-      url: http://host.docker.internal:3200
+      url: http://tempo:3200
       isDefault: true
       editable: true
       jsonData:
@@ -51,12 +51,12 @@ datasources:
       type: loki
       uid: loki
       access: proxy
-      url: http://host.docker.internal:3100
+      url: http://loki:3100
       editable: true
       jsonData:
         maxLines: 50
         derivedFields:
           - datasourceUid: tempo
-            matcherRegex: '.+ --- \[.+\] \[.+\] \[(\w*)-\w*\] .+'
+            matcherRegex: '\w+ \[.+,(\w*),\w*\] \d+'
             name: traceId
             url: $${__value.raw}

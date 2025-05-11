@@ -1,0 +1,51 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: "0.0.0.0:4317"
+      http:
+        endpoint: "0.0.0.0:4318"
+
+processors:
+  batch:
+#  transform:
+#    log_statements:
+#      - context: log
+#        statements:
+#          - parse_json(body)
+#          - set(attributes["service.name"], body["service.name"])
+#          - set(attributes["log.level"], body["log.level"])
+#          - set(attributes["trace_id"], body["trace.id"])
+
+
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889" # Prometheus will scrape here
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    tls:
+      insecure: true
+  otlp:
+    endpoint: tempo:4317 #gRPC endpoint
+    tls:
+      insecure: true
+  # azuremonitor: {}
+
+service:
+#  telemetry:
+#    logs:
+#      level: "debug"
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [loki]
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]

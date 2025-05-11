@@ -1,73 +1,165 @@
+# Docker Compose File Overview:
+# -----------------------------
+# This Docker Compose file defines a multi-service stack focused on local on
+# laptop development with observability and email testing using Prometheus,
+# Grafana, Tempo, Loki, and MailDev. These services work together to provide
+# an environment to explore Micrometer and Spring observability capabilities.
+#
+# Key Concepts and Advanced Docker Compose Features Used:
+#
+# 1. **Container Name**: We explicitly set container names to make it easier to
+#    reference and identify each container. This also avoids Docker's default
+#    behavior of adding auto-generated suffixes, making it clearer which
+#    services are running.
+#
+# 2. **Extra Hosts**: We use the 'extra_hosts' key to add custom entries to the
+#    container's /etc/hosts file. In this case, we map 'host.docker.internal'
+#    to 'host-gateway', which allows containers to access the Docker host's
+#    network interfaces. This is particularly useful in development
+#    environments where services running on the host need to be accessed from
+#    within the containers.
+#
+# 4. **Volumes**: This configuration uses both bind mounts and named volumes:
+#    - Bind mounts (e.g.,
+#      './docker/grafana/grafana.ini:/etc/grafana/grafana.ini:ro') are used to
+#      provide custom configurations to each container from the host machine.
+#    - Named volumes (e.g., 'prometheus:/prometheus') are used for persisting
+#      container data. This ensures that data remains even if the container is
+#      removed and recreated.
+#
+# This setup is designed for a developer-friendly observability stack where
+# services can be easily accessed and customized for development and testing
+# scenarios.
+
 services:
-  prometheus:
-        container_name: prometheus
-        image: prom/prometheus:v2.54.0 # https://hub.docker.com/r/prom/prometheus
-        extra_hosts: ['host.docker.internal:host-gateway']
-        command:
-            - --enable-feature=exemplar-storage
-            - --web.enable-remote-write-receiver
-            - --config.file=/etc/prometheus/prometheus.yml
-        volumes:
-            - prometheus:/prometheus
-            - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-        ports:
-            - "9090:9090"
-  grafana:
-      container_name: grafana
-      image: grafana/grafana:11.1.4 # https://hub.docker.com/r/grafana/grafana/tags and https://github.com/grafana/grafana/releases
-      extra_hosts: ['host.docker.internal:host-gateway']
-      environment:
-          - GF_AUTH_ANONYMOUS_ENABLED=true
-          - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-          - GF_AUTH_DISABLE_LOGIN_FORM=true
-      volumes:
-          - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
-          - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
-          - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
-          - ./grafana/provisioning/alerting:/etc/grafana/provisioning/alerting:ro
-      ports:
-          - "3000:3000"
-  tempo-init:
-      # Tempo runs as user 10001, and docker compose creates the volume as root.
-      # As such, we need to chown the volume in order for Tempo to start correctly.
-      # This should not be needed but this is the official solution recommended by Tempo maintainers
-      # See: https://github.com/grafana/tempo/blob/a21001a72a5865bfcfc1b0d2dfa30160c5a26103/example/docker-compose/local/docker-compose.yaml
-      # See: https://github.com/grafana/tempo/issues/1657
-      image: &tempoImage grafana/tempo:2.5.0 # https://hub.docker.com/r/grafana/tempo/tags and https://github.com/grafana/tempo/releases
-      user: root
-      entrypoint:
-          - "chown"
-          - "10001:10001"
-          - "/var/tempo"
-      volumes:
-          - tempo:/var/tempo
-  tempo:
-      container_name: tempo
-      image: *tempoImage
-      extra_hosts: ['host.docker.internal:host-gateway']
-      command: ['-config.file=/etc/tempo.yml']
-      depends_on: ['tempo-init']
-      volumes:
-          - tempo:/var/tempo
-          - ./grafana/tempo.yml:/etc/tempo.yml:ro
-      ports:
-          - "3200:3200"    # tempo
-          - "9411:9411"    # zipkin
-  loki:
-      container_name: loki
-      image: grafana/loki:3.0.1 # https://hub.docker.com/r/grafana/loki/tags and https://github.com/grafana/loki/releases
-      extra_hosts: ['host.docker.internal:host-gateway']
-      command: ['-config.file=/etc/loki/local-config.yaml']
-      ports:
-          - "3100:3100"
+  # ------------------------------------------------------------------------------
+  # MailDev is a simple email testing tool that provides a fake SMTP server
+  # and a web-based UI for viewing and debugging outgoing emails.
+  # It includes a built-in web UI at http://localhost:1080.
+  # Docs: https://github.com/maildev/maildev
+  # ------------------------------------------------------------------------------
   maildev:
-      container_name: maildev
-      image: maildev/maildev:2.1.0 # https://hub.docker.com/r/maildev/maildev/tags
-      extra_hosts: [ 'host.docker.internal:host-gateway' ]
-      ports:
-          - "3001:1080"
-          - "25:1025"
-volumes:
-  mysql:
-  prometheus:
+    image: maildev/maildev:2.2.1
+    environment:
+      - MAILDEV_SMTP_PORT=1025
+      - MAILDEV_WEB_PORT=1080
+    ports:
+      - "1080:1080"    # MailDev Web UI
+      - "1025:1025"    # SMTP port
+
+  # ------------------------------------------------------------------------------
+  # Loki is a log aggregation system by Grafana Labs that indexes log metadata only,
+  # enabling efficient, cost-effective log storage and search. It pairs well with Grafana.
+  # Loki is API-only (no built-in UI); use Grafana to explore logs.
+  # Docs: https://grafana.com/oss/loki/
+  # ------------------------------------------------------------------------------
+  loki:
+    image: grafana/loki:3.5.0
+    command:
+      - -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki:/loki
+    ports:
+      # Loki HTTP API — http://localhost:3100
+      # Accepts logs in Loki's native JSON push format
+      # Push logs to: POST http://localhost:3100/loki/api/v1/push
+      # Format reference: https://grafana.com/docs/loki/latest/api/#post-lokiapiv1push
+      - "3100:3100"
+
+  # ------------------------------------------------------------------------------
+  # Tempo is an open source, high-scale distributed tracing backend by Grafana Labs.
+  # It supports OTLP, Zipkin, and Jaeger protocols for ingesting traces.
+  # Tempo is API-only (no built-in UI); use Grafana to view traces.
+  # Docs: https://grafana.com/oss/tempo/
+  # ------------------------------------------------------------------------------
   tempo:
+    image: grafana/tempo:2.7.2
+    command:
+      - -config.file=/etc/tempo.yaml
+    volumes:
+      - ./config/tempo.yaml:/etc/tempo.yaml:ro
+    ports:
+      # Push OTLP traces to: POST http://localhost:3200/v1/traces
+      - "3200:3200"
+
+      # Push Zipkin traces — POST http://localhost:9411/api/v2/spans
+      - "9411:9411"  #
+
+  # ------------------------------------------------------------------------------
+  # OpenTelemetry Collector receives, processes, and exports telemetry data
+  # (traces, metrics, logs) from applications and infrastructure.
+  # This setup uses the "contrib" distribution, which includes the core features
+  # plus a wide set of community-supported receivers/exporters (e.g., Loki, AWS, Kafka).
+  # The "core" distribution is slimmer but limited to officially maintained components.
+  # The Collector does not have a UI — it functions entirely through API endpoints.
+  # Docs: https://opentelemetry.io/docs/collector/
+  # ------------------------------------------------------------------------------
+  otel-collector:
+    container_name: otel-collector
+    # The contrib collector is a superset of the core collector useful for
+    # exporting to cloud provider services.
+    image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.125.0
+    volumes:
+      - ./config/otel-collector.yaml:/etc/otel/config.yaml
+    command:
+      - "--config=/etc/otel/config.yaml"
+    ports:
+      # OTLP gRPC receiver — http://localhost:4317
+      # Accepts: spans, metrics, and logs
+      - "4317:4317"
+
+      # OTLP HTTP receiver — http://localhost:4318
+      # Accepts:
+      #   - Traces:  POST http://localhost:4318/v1/traces
+      #   - Metrics: POST http://localhost:4318/v1/metrics
+      #   - Logs:    POST http://localhost:4318/v1/logs
+      - "4318:4318"
+
+      # Zipkin receiver — http://localhost:9411/api/v2/spans
+      # Accepts: spans only
+      # - "9411:9411"
+
+  # ------------------------------------------------------------------------------
+  # Prometheus is an open source systems monitoring and alerting toolkit.
+  # It scrapes metrics from instrumented services and stores them in a time-series database.
+  # It includes a built-in web UI at http://localhost:9090 for query and debugging.
+  # Docs: https://prometheus.io
+  # ------------------------------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v3.3.1
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    command:
+      - --enable-feature=exemplar-storage
+      - --web.enable-remote-write-receiver
+      - --config.file=/etc/prometheus/prometheus.yaml
+    volumes:
+      - prometheus:/prometheus
+      - ./config/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
+    ports:
+      - "9090:9090" # Prometheus Web UI
+
+  # ------------------------------------------------------------------------------
+  # Grafana is an open source analytics and monitoring platform.
+  # It connects to data sources like Prometheus, Tempo, and Loki to visualize
+  # metrics, traces, and logs. It includes a rich web UI at http://localhost:3000.
+  # Docs: https://grafana.com/oss/grafana/
+  # ------------------------------------------------------------------------------
+  grafana:
+    image: grafana/grafana:12.0.0
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./grafana/provisioning/alerting:/etc/grafana/provisioning/alerting:ro
+    ports:
+      - "3000:3000"  # Grafana Web UI
+
+volumes:
+  loki:
+  prometheus:
+

@@ -1,0 +1,347 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034,SC1090
+#==============================================================================
+# Observability Stack Container Manager
+#==============================================================================
+#
+# This script provides a simple interface to manage the observability stack
+# containers using Docker Compose. It supports the following commands:
+#
+# - start: Start the observability stack containers in detached mode
+# - status: Display container status and connection information
+# - stop: Stop the running containers
+# - clean: Stop containers and remove all associated volumes
+#
+# The script handles port conflicts by detecting if the configured ports
+# are already in use by other containers, and provides options to resolve
+# these conflicts.
+#
+#==============================================================================
+
+# Enable strict error handling:
+# -e: Exit immediately if a command exits with non-zero status
+# -E: Inherit ERR trap for functions
+# -u: Treat unset variables as errors
+# -o pipefail: Return value of a pipeline is the value of the last command to exit with non-zero status
+set -Eeuo pipefail
+
+# Set Internal Field Separator to newline and tab for safer iteration over outputs
+IFS=$'\n\t'
+
+#------------------------------------------------------------------------------
+# Constants
+#------------------------------------------------------------------------------
+# ANSI color codes for formatted output
+# These are used to make the script output more readable and visually appealing
+readonly GREEN=$'\e[0;32m'   # Used for success messages and start command
+readonly RED=$'\e[0;31m'     # Used for error messages and clean command
+readonly YELLOW=$'\e[0;33m'  # Used for warnings, section headers, and stop/fix commands
+readonly BLUE=$'\e[0;34m'    # Used for info messages, main headers, and status command
+readonly BOLD=$'\e[1m'       # Used for emphasizing text like command names and labels
+readonly NC=$'\e[0m'         # No Color - used to reset formatting
+
+#------------------------------------------------------------------------------
+# Logging helpers
+#------------------------------------------------------------------------------
+# Function: log
+# Description: Prints a formatted message with color and a prefix based on the log level
+# Parameters:
+#   $1 - Log level: info, success, warn, error, header, or section
+#   $2+ - The message to display
+# Usage examples:
+#   log info "Starting containers"
+#   log error "Failed to start containers"
+#   log success "Containers started successfully"
+log() { # (level, msg)
+  local clr pre
+  # Set color and prefix based on log level
+  case $1 in
+    info)    clr=$BLUE  ; pre="> ";;    # Blue arrow for information
+    success) clr=$GREEN ; pre="✓ ";;    # Green checkmark for success
+    warn)    clr=$YELLOW; pre="! ";;    # Yellow exclamation for warnings
+    error)   clr=$RED   ; pre="✗ ";;    # Red X for errors
+    header)  clr=$BLUE  ; pre="== ";;   # Blue double equals for main headers
+    section) clr=$YELLOW; pre="-- ";;   # Yellow double dash for section headers
+  esac
+  shift  # Remove the level parameter, leaving only the message
+  # Print the message with color and prefix
+  printf "%b%s%b\n" "$clr" "$pre$*" "$NC"
+}
+
+# Function: require_cmd
+# Description: Checks if a command exists, exits with error if not found
+# Parameters:
+#   $1 - The command to check for
+# Returns:
+#   0 if command exists, exits with error code 1 if not
+# Usage example:
+#   require_cmd docker
+require_cmd() { command -v "$1" &>/dev/null || { log error "Command '$1' not found"; exit 1; }; }
+
+#------------------------------------------------------------------------------
+# Compose helpers
+#------------------------------------------------------------------------------
+# Function: find_compose_file
+# Description: Searches for Docker Compose files with different naming conventions in a directory
+# Parameters:
+#   $1 - Directory to search in
+# Returns:
+#   Path to the first found Docker Compose file, or nothing if none found
+# Usage example:
+#   compose_file=$(find_compose_file "/path/to/dir")
+find_compose_file() { # (dir)
+  # Check for different Docker Compose file naming conventions
+  local v; for v in docker-compose.yaml docker-compose.yml compose.yaml compose.yml; do
+    # If file exists, output its path and exit the function
+    [[ -f "$1/$v" ]] && { echo "$1/$v"; return; }
+  done
+  # No Docker Compose file found (implicit return)
+}
+
+# Function: docker_compose
+# Description: Wrapper for docker compose command that uses the project's compose file
+# Parameters:
+#   $@ - Arguments to pass to docker compose
+# Usage example:
+#   docker_compose up -d
+docker_compose() { docker compose -f "$COMPOSE_FILE" "$@"; }
+
+# Function: detect_conflict
+# Description: Detects if a port is already in use by another container
+# Parameters:
+#   $1 - Port number to check
+# Returns:
+#   Name of the container using the port, or nothing if port is free
+# Usage example:
+#   container=$(detect_conflict "3000")
+detect_conflict() { docker ps --filter "publish=$1" --format "{{.Names}}"; }
+
+# Function: shutdown_conflict
+# Description: Shuts down a conflicting container, using Docker Compose if possible
+# Parameters:
+#   $1 - Name of the container to shut down
+# Usage example:
+#   shutdown_conflict "grafana-container"
+shutdown_conflict() { # (container)
+  local cnt=$1 dir file
+  # Try to get the Docker Compose project directory from container labels
+  dir=$(docker inspect "$cnt" -f '{{index .Config.Labels "com.docker.compose.project.working_dir"}}' 2>/dev/null || true)
+  # If directory found, try to find a Docker Compose file in it
+  file="${dir:+$(find_compose_file "$dir" || true)}"
+
+  # If Docker Compose file found, use docker compose down
+  if [[ -n $file ]]; then
+    log info "Stopping $cnt via docker compose -f $file down"
+    docker compose -f "$file" down
+  # Otherwise, use docker stop for the individual container
+  else
+    log info "Stopping $cnt via docker stop"
+    docker stop "$cnt"
+  fi
+}
+
+# Function: show_port_conflicts
+# Description: Displays information about port conflicts and how to resolve them
+# Usage example:
+#   show_port_conflicts
+show_port_conflicts() {
+  local port cnt dir file
+  # Check ports for conflicts
+  for port in "${PORTS[@]}"; do
+    # If port is in use by another container
+    if cnt=$(detect_conflict "$port"); [[ -n $cnt ]]; then
+      log warn "Port $port is already used by container: $cnt"
+      # Try to get the Docker Compose project directory
+      dir=$(docker inspect "$cnt" -f '{{index .Config.Labels "com.docker.compose.project.working_dir"}}' 2>/dev/null || true)
+      # If directory found, try to find a Docker Compose file in it
+      file="${dir:+$(find_compose_file "$dir" || true)}"
+
+      # Show appropriate command to stop the conflicting container
+      if [[ -n $file ]]; then
+        log info "→ Stop it with: docker compose -f $file down"
+      else
+        log info "→ Stop it with: docker stop $cnt"
+      fi
+    fi
+  done
+  # Show quick fix options
+  log info "Quick fix: ostack fix"
+}
+
+#------------------------------------------------------------------------------
+# Connection info display
+#------------------------------------------------------------------------------
+# Function: show_connections
+# Description: Displays connection information for the observability stack services
+# Usage example:
+#   show_connections
+show_connections() {
+  # Display section header
+  log section "Connection Info"
+  local lbl pad="%-15s"
+
+  # Check if Grafana container is running
+  if docker_compose ps --services --filter status=running | grep -q grafana; then
+    # Display Grafana URL with a green checkmark
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "Grafana" "http://localhost:3000"
+  else
+    # Display warning if Grafana is not running
+    log warn "Grafana not running"
+  fi
+
+  # Check if Prometheus container is running
+  if docker_compose ps --services --filter status=running | grep -q prometheus; then
+    # Display Prometheus URL with a green checkmark
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "Prometheus" "http://localhost:9090"
+  else
+    # Display warning if Prometheus is not running
+    log warn "Prometheus not running"
+  fi
+
+  # Check if Loki container is running
+  if docker_compose ps --services --filter status=running | grep -q loki; then
+    # Display Loki URL with a green checkmark
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "Loki API" "http://localhost:3100"
+  else
+    # Display warning if Loki is not running
+    log warn "Loki not running"
+  fi
+
+  # Check if Tempo container is running
+  if docker_compose ps --services --filter status=running | grep -q tempo; then
+    # Display Tempo URL with a green checkmark
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "Tempo API" "http://localhost:3200"
+  else
+    # Display warning if Tempo is not running
+    log warn "Tempo not running"
+  fi
+
+  # Check if OpenTelemetry Collector container is running
+  if docker_compose ps --services --filter status=running | grep -q otel-collector; then
+    # Display OpenTelemetry Collector URL with a green checkmark
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "OTel HTTP API" "http://localhost:4318"
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "OTel gRPC API" "http://localhost:4317"
+  else
+    # Display warning if OpenTelemetry Collector is not running
+    log warn "OpenTelemetry Collector not running"
+  fi
+
+  # Check if MailDev container is running
+  if docker_compose ps --services --filter status=running | grep -q maildev; then
+    # Display MailDev URL with a green checkmark
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "MailDev UI" "http://localhost:1080"
+    printf "${GREEN}✓ ${BOLD}${pad}${NC}: %s\n" "SMTP Server" "localhost:1025"
+  else
+    # Display warning if MailDev is not running
+    log warn "MailDev not running"
+  fi
+}
+
+#------------------------------------------------------------------------------
+# Usage
+#------------------------------------------------------------------------------
+# Function: usage
+# Description: Displays usage information for the script
+# Usage example:
+#   usage
+usage() {
+  # Display the main usage header with bold formatting
+  printf "${BOLD}Usage:${NC} ostack <command>\n\n"
+  printf "Commands:\n"
+  # List all available commands with color coding matching their function
+  printf "  ${GREEN}start${NC}         Start observability stack containers\n"
+  printf "  ${BLUE}status${NC}        Show status & connection info\n"
+  printf "  ${YELLOW}stop${NC}          Stop containers\n"
+  printf "  ${RED}clean${NC}         Stop containers & remove volumes\n"
+  printf "  ${YELLOW}fix${NC}           Detect & fix port conflicts\n"
+}
+
+#------------------------------------------------------------------------------
+# Environment setup
+#------------------------------------------------------------------------------
+# Check if Docker is installed
+require_cmd docker
+
+# Get the absolute path to the directory containing this script
+# This ensures the script works correctly regardless of where it's called from
+readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# Find the Docker Compose file in the script directory
+# Exit with error if no compose file is found
+COMPOSE_FILE="$(find_compose_file "$SCRIPT_DIR")" || { log error "No compose file in $SCRIPT_DIR"; exit 1; }
+
+# Define ports used by the observability stack services
+readonly PORTS=(
+  "3000"  # Grafana
+  "9090"  # Prometheus
+  "3100"  # Loki
+  "3200"  # Tempo
+  "4317"  # OpenTelemetry Collector gRPC
+  "4318"  # OpenTelemetry Collector HTTP
+  "9411"  # Zipkin
+  "1080"  # MailDev UI
+  "1025"  # MailDev SMTP
+)
+
+#------------------------------------------------------------------------------
+# Main command handler
+#------------------------------------------------------------------------------
+# Get the command from the first argument, or empty string if no argument provided
+cmd=${1-}
+
+# Process the command using a case statement
+case $cmd in
+  # Start command: Start observability stack containers
+  start)
+    log header "Starting containers"
+    # Try to start the containers in detached mode
+    if docker_compose up -d; then
+      # If successful, show success message and container status
+      log success "Containers started"
+      docker_compose ps
+      show_connections
+    else
+      # If failed (likely due to port conflict), show error and port conflict info
+      log error "Failed to start – port conflict detected"
+      show_port_conflicts
+      exit 1  # Exit with error code
+    fi
+    ;;
+
+  # Stop command: Stop the running containers
+  stop)
+    log header "Stopping containers"
+    docker_compose down  # Stop containers and remove networks
+    ;;
+
+  # Clean command: Stop containers and remove volumes (data cleanup)
+  clean)
+    log header "Cleaning containers & volumes"
+    docker_compose down -v  # -v flag removes volumes
+    ;;
+
+  # Status command: Show container status and connection information
+  status)
+    log header "Container Status"
+    docker_compose ps       # Show container status
+    show_connections        # Show connection information
+    ;;
+
+  # Fix command: Automatically resolve port conflicts
+  fix)
+    log header "Resolving Port Conflicts"
+    # For each port in the observability stack
+    for p in "${PORTS[@]}"; do
+      # If port is in use by a container, shut it down
+      if c=$(detect_conflict "$p"); [[ -n $c ]]; then
+        shutdown_conflict "$c"
+      fi
+    done
+    ;;
+
+  # Unknown command or no command: Show usage information
+  *)
+    usage  # Display usage information
+    exit 1  # Exit with error code
+    ;;
+esac
