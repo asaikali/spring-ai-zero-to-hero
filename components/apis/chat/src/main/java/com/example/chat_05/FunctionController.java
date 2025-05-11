@@ -44,7 +44,7 @@ class FunctionController {
                 u.text(
                         """
                 I am traveling to {city} what kind of clothes should I pack?
-                  """)
+                """)
                     .param("city", city))
         .call()
         .content();
