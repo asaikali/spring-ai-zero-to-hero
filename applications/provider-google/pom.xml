@@ -48,7 +48,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-vertex-ai-gemini-spring-boot-starter</artifactId>
+			<artifactId>spring-ai-starter-model-vertex-ai-gemini</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

@@ -43,7 +43,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-bedrock-ai-spring-boot-starter</artifactId>
+			<artifactId>spring-ai-starter-model-bedrock-converse</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
