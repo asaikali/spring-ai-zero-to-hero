@@ -111,18 +111,10 @@ recommend you get your own keys to continue experimenting after the workshop.
 
 ### OpenAI
 
-* You need OpenAI API key to run the examples with OpenAI.
+* You need an OpenAI API key to run the examples with OpenAI.
 * Refer
   to [this page](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key) to
   get an API key.
-
-### Azure OpenAI
-
-* You need Azure OpenAI service instance in the Azure portal. This requires to fill out a form at
-  the moment, which usually
-  takes at most 24h to process.
-* Create the service at https://portal.azure.com/#create/Microsoft.CognitiveServicesOpenAI
-* Create an Azure OpenAI deployment at https://oai.azure.com/portal
 
 # Outline
 
