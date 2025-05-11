@@ -7,7 +7,6 @@
 		<artifactId>patterns</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.example</groupId>
 	<artifactId>self-reflection-agent</artifactId>
 	<description>Agent that writes professional biographies</description>
 	<version>0.0.1-SNAPSHOT</version>

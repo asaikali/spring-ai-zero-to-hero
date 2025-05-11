@@ -7,7 +7,6 @@
 		<artifactId>patterns</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.example</groupId>
 	<artifactId>chain-of-thought</artifactId>
 	<description>Chain of Thought Agent that Write bios</description>
 	<version>0.0.1-SNAPSHOT</version>
