@@ -9,7 +9,6 @@ import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvi
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
-import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,7 +76,9 @@ public class AdvisorController {
     return this.chatClient
         .prompt()
         .advisors(
-            QuestionAnswerAdvisor.builder(vectorStore).promptTemplate(new PromptTemplate(USER_TEXT_ADVISE)).build())
+            QuestionAnswerAdvisor.builder(vectorStore)
+                .promptTemplate(new PromptTemplate(USER_TEXT_ADVISE))
+                .build())
         .user(topic)
         .call()
         .content();
