@@ -7,7 +7,7 @@ services:
     labels:
       # see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.docker-compose.custom-images for details
       org.springframework.boot.service-connection: postgres
-    image: "pgvector/pgvector:17"
+    image: "pgvector/pgvector:pg17"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
