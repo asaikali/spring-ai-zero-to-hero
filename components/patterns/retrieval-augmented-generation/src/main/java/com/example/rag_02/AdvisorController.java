@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
 import org.springframework.ai.vectorstore.SearchRequest;
@@ -76,8 +77,7 @@ public class AdvisorController {
     return this.chatClient
         .prompt()
         .advisors(
-            new QuestionAnswerAdvisor(
-                vectorStore, SearchRequest.builder().build(), USER_TEXT_ADVISE))
+            QuestionAnswerAdvisor.builder(vectorStore).promptTemplate(new PromptTemplate(USER_TEXT_ADVISE)).build())
         .user(topic)
         .call()
         .content();
