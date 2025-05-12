@@ -2,7 +2,8 @@ package com.example.mem_02;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,11 @@ public class ChatHistoryController {
   @Autowired
   public ChatHistoryController(ChatClient.Builder builder) {
     this.chatClient = builder.build();
-    this.promptChatMemoryAdvisor = new PromptChatMemoryAdvisor(new InMemoryChatMemory());
+    this.promptChatMemoryAdvisor =
+        new PromptChatMemoryAdvisor(
+            MessageWindowChatMemory.builder()
+                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .build());
   }
 
   @GetMapping("/hello")
