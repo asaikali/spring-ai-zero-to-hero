@@ -14,13 +14,13 @@ spring:
           n: 1
           model: "gpt-4o"
 management:
-  endpoint:
-    health:
-      show-details: always
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 ---
 spring:

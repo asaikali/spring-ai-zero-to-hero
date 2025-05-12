@@ -83,6 +83,32 @@
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-starter-model-openai</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- observability dependencies -->
+		<!--
+      Enables Spring Boot Actuator endpoints like:
+      - /actuator/health
+      Required to activate observability auto-configuration.
+      Without this, observability features like metrics and tracing will not activate.
+    -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<!--
+      Registers Prometheus as the Micrometer backend.
+      Exposes all metrics in Prometheus-compatible format at:
+      - GET /actuator/prometheus
+      Prometheus scrapes this endpoint at regular intervals.
+    -->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
