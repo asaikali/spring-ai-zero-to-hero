@@ -17,8 +17,8 @@
   <description>spring-ai-zero-to-hero</description>
   <properties>
     <java.version>21</java.version>
-    <spring-ai.version>1.0.0-M8</spring-ai.version>
-    <!-- <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version> -->
+<!--    <spring-ai.version>1.0.0-M8</spring-ai.version>-->
+    <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
     <spring-cloud.version>2024.0.1</spring-cloud.version>
     <spring-cloud-azure.version>5.17.1</spring-cloud-azure.version>
     <spotless.version>2.44.4</spotless.version>
