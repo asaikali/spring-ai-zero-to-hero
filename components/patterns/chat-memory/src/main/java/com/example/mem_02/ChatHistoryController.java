@@ -20,11 +20,12 @@ public class ChatHistoryController {
   @Autowired
   public ChatHistoryController(ChatClient.Builder builder) {
     this.chatClient = builder.build();
-    this.promptChatMemoryAdvisor =
-        new PromptChatMemoryAdvisor(
-            MessageWindowChatMemory.builder()
-                .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .build());
+
+    var memory =
+        MessageWindowChatMemory.builder()
+            .chatMemoryRepository(new InMemoryChatMemoryRepository())
+            .build();
+    this.promptChatMemoryAdvisor = PromptChatMemoryAdvisor.builder(memory).build();
   }
 
   @GetMapping("/hello")

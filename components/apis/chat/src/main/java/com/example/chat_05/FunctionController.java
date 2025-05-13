@@ -20,7 +20,7 @@ class FunctionController {
 
     return chatClient
         .prompt()
-        .tools( new TimeTools())
+        .tools(new TimeTools())
         .user(
             u ->
                 u.text(
