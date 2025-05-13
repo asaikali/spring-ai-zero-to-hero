@@ -45,7 +45,7 @@ management:
       endpoint: http://localhost:9411/api/v2/spans
       encoding: json
       export:
-        enabled: true
+        enabled: false
 
 ---
 spring:
