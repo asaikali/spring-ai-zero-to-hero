@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- ========================================================================= -->
+  <!-- 1. Import Spring Boot Defaults                                           -->
+  <!-- ========================================================================= -->
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+  <!-- ========================================================================= -->
+  <!-- 2. Resolve Spring Properties from application.yaml                       -->
+  <!-- ========================================================================= -->
+  <!-- Spring Application Info -->
+  <springProperty scope="context" name="appName" source="spring.application.name"/>
+  <springProperty scope="context" name="appGroup" source="spring.application.group"/>
+  <springProperty scope="context" name="appVersion" source="spring.application.version"/>
+
+  <!-- Loki URL -->
+  <springProperty name="LOKI_URL" source="loki.url" defaultValue="http://localhost:3100"/>
+
+  <!-- ========================================================================= -->
+  <!-- 3. Configure Batching Behavior for Loki Logs                             -->
+  <!-- ========================================================================= -->
+  <batch>
+    <maxSize>500</maxSize>      <!-- Max log events per batch -->
+    <timeoutMs>1000</timeoutMs> <!-- Max delay before flushing -->
+  </batch>
+
+  <!-- ========================================================================= -->
+  <!-- 4. Loki4j Appender Configuration                                         -->
+  <!-- ========================================================================= -->
+  <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+    <http>
+      <url>${LOKI_URL}/loki/api/v1/push</url>
+    </http>
+    <format>
+      <label>
+        <!-- Labels for fast filtering in Loki/Grafana -->
+        <pattern>
+          app=${appName},
+          group=${appGroup},
+          version=${appVersion},
+          host=${HOSTNAME},
+          level=%level
+        </pattern>
+      </label>
+      <message>
+        <!-- Reuse Spring Boot's default FILE_LOG_PATTERN -->
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </message>
+      <sortByTime>true</sortByTime>
+    </format>
+  </appender>
+
+  <!-- ========================================================================= -->
+  <!-- 5. Root Logger                                                           -->
+  <!-- ========================================================================= -->
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="LOKI"/>
+  </root>
+
+</configuration>

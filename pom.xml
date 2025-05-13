@@ -22,6 +22,7 @@
     <spring-cloud.version>2024.0.1</spring-cloud.version>
     <spring-cloud-azure.version>5.17.1</spring-cloud-azure.version>
     <spotless.version>2.44.4</spotless.version>
+    <loki-logback-appender.version>1.6.0</loki-logback-appender.version>
   </properties>
 
   <modules>
@@ -31,6 +32,11 @@
   </modules>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.github.loki4j</groupId>
+        <artifactId>loki-logback-appender</artifactId>
+        <version>${loki-logback-appender.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.springframework.ai</groupId>
         <artifactId>spring-ai-bom</artifactId>

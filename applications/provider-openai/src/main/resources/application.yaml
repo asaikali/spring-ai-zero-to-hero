@@ -2,17 +2,32 @@ spring:
   application:
     name: openai
   profiles:
-    active:  spy #, pgvector
+    active:  # spy #, pgvector
   config:
     import: "optional:classpath:/creds.yaml"
   ai:
+    chat:
+      observations:
+        log-prompt: true
+        log-completion: true
     openai:
       chat:
         options:
           functions:
             - weatherFunction
           n: 1
-          model: "gpt-4o"
+          model: "gpt-4o-mini"
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            observation: DEBUG
+            client:
+              observation: DEBUG
+
 management:
   endpoints:
     web:
@@ -21,6 +36,16 @@ management:
   endpoint:
     health:
       show-details: always
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+      encoding: json
+      export:
+        enabled: true
 
 ---
 spring:

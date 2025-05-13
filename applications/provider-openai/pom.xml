@@ -109,6 +109,39 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
+
+		<!--
+    Micrometer Tracing bridge for Brave (Zipkin).
+    This provides the integration layer between Micrometer's tracing API
+    and Brave's implementation of span creation, context propagation, etc.
+  -->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-tracing-bridge-brave</artifactId>
+		</dependency>
+
+		<!--
+      Required by Brave to send spans to a Zipkin-compatible backend (e.g., Tempo).
+      Sends spans via HTTP to:
+      - POST http://localhost:9411/api/v2/spans
+      Tempo must be running with Zipkin compatibility enabled.
+    -->
+		<dependency>
+			<groupId>io.zipkin.reporter2</groupId>
+			<artifactId>zipkin-reporter-brave</artifactId>
+		</dependency>
+
+		<!--
+   Loki Logback Appender for structured log shipping.
+   - Formats logs into Loki's expected JSON push format
+   - Sends via HTTP POST to /loki/api/v1/push
+   Used with Spring Boot’s default Logback setup.
+ -->
+		<dependency>
+			<groupId>com.github.loki4j</groupId>
+			<artifactId>loki-logback-appender</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
