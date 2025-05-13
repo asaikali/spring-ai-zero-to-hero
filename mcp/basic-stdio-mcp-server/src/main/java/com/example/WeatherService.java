@@ -8,6 +8,6 @@ public class WeatherService {
 
   @Tool(description = "Get weather information by city name")
   public String getWeather(String cityName) {
-    return "It is currently sunny and a pleasent 25 degrees in " + cityName;
+    return "It is currently sunny, 25 degrees in " + cityName;
   }
 }
