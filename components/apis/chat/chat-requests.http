@@ -10,6 +10,9 @@ GET http://localhost:8080/chat/04/plays/list
 ### Get a list of objects of the plays of shakesphere
 GET http://localhost:8080/chat/04/plays/object
 
+### Get a packing list for a trip to Toronto
+GET http://localhost:8080/chat/05/time?city="Bareclona and Toronto"
+
 ### Get the Weather in Toronto
 GET http://localhost:8080/chat/05/weather
 

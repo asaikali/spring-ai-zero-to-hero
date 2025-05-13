@@ -15,6 +15,23 @@ class FunctionController {
     this.chatClient = builder.build();
   }
 
+  @GetMapping("/time")
+  public String time(@RequestParam(value = "city", defaultValue = "Toronto") String city) {
+
+    return chatClient
+        .prompt()
+        .tools( new TimeTools())
+        .user(
+            u ->
+                u.text(
+                        """
+                What is the current time in {city}?
+                """)
+                    .param("city", city))
+        .call()
+        .content();
+  }
+
   @GetMapping("/weather")
   public String getWeather(@RequestParam(value = "city", defaultValue = "Toronto") String city) {
 
