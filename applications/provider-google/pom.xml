@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>stuff-the-prompt</artifactId>
+			<artifactId>01-stuff-the-prompt</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

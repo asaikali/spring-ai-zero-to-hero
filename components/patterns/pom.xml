@@ -12,9 +12,9 @@
 	<packaging>pom</packaging>
 	<description>Example Patterns when building AI applications</description>
 	<modules>
-		<module>stuff-the-prompt</module>
-		<module>retrieval-augmented-generation</module>
-		<module>chat-memory</module>
+		<module>01-stuff-the-prompt</module>
+		<module>02-retrieval-augmented-generation</module>
+		<module>03-chat-memory</module>
 		<module>self-reflection-agent</module>
 		<module>chain-of-thought</module>
 	</modules>

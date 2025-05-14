@@ -45,17 +45,17 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>stuff-the-prompt</artifactId>
+			<artifactId>01-stuff-the-prompt</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>retrieval-augmented-generation</artifactId>
+			<artifactId>02-retrieval-augmented-generation</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>chat-memory</artifactId>
+			<artifactId>03-chat-memory</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
