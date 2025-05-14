@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/chat/05")
-class FunctionController {
+class ToolController {
   private final ChatClient chatClient;
 
-  public FunctionController(ChatClient.Builder builder) {
+  public ToolController(ChatClient.Builder builder) {
     this.chatClient = builder.build();
   }
 
@@ -26,6 +26,23 @@ class FunctionController {
                 u.text(
                         """
                 What is the current time in {city}?
+                """)
+                    .param("city", city))
+        .call()
+        .content();
+  }
+
+  @GetMapping("/dayOfWeek")
+  public String tomorrow(@RequestParam(value = "city", defaultValue = "Toronto") String city) {
+
+    return chatClient
+        .prompt()
+        .tools(new TimeTools())
+        .user(
+            u ->
+                u.text(
+                        """
+                What day of the week is tomorrow in {city}?
                 """)
                     .param("city", city))
         .call()

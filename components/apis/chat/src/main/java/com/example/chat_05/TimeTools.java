@@ -14,6 +14,6 @@ public class TimeTools {
       @ToolParam(required = false, description = "IANA time zone identifiers") String timeZone) {
     ZoneId zoneId = ZoneId.of(timeZone);
     ZonedDateTime now = ZonedDateTime.now(zoneId);
-    return now.format(DateTimeFormatter.ISO_LOCAL_TIME);
+    return now.format(DateTimeFormatter.ISO_DATE_TIME);
   }
 }
