@@ -2,7 +2,6 @@ package com.example.agentic.loop_01;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.ChatClient.CallResponseSpec;
-import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +25,8 @@ public class SelfEditingMemoryController {
             problems you have the ability think private thoughts these thoughts
             are yours only they will not be show to the user. Anything you want
             to send to the user you can do so using the sendMessage tools.
-            
-                    
+
+
             Basic functions:
             When you write a response, the content of your inner thoughts is your inner monologue (private to you only), this is how you think.
             You should use your inner monologue to plan actions or think privately.

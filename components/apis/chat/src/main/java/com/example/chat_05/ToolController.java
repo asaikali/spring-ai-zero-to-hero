@@ -1,6 +1,9 @@
 package com.example.chat_05;
 
+import ch.qos.logback.core.pattern.util.RestrictedEscapeUtil;
+import java.util.List;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.ChatClient.CallResponseSpec;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,5 +85,24 @@ class ToolController {
                     .param("city", city))
         .call()
         .content();
+  }
+
+  @GetMapping("/search")
+  public Restaurant[] search(
+      @RequestParam(
+              value = "query",
+              defaultValue = "find me an italian restaurant for lunch for 4 people today")
+          String query) {
+
+    CallResponseSpec callResponseSpec = this.chatClient
+        .prompt()
+        .tools( new RestaurantSearch())
+        .user(query)
+        .call();
+
+    Restaurant[] result = callResponseSpec.entity(Restaurant[].class);
+
+    return result;
+
   }
 }
