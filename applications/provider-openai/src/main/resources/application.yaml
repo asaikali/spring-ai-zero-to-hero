@@ -2,7 +2,7 @@ spring:
   application:
     name: openai
   profiles:
-    active:  # spy #, pgvector
+    active:  spy #, pgvector
   config:
     import: "optional:classpath:/creds.yaml"
   ai:

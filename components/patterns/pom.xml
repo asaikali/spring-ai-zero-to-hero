@@ -15,6 +15,7 @@
 		<module>01-stuff-the-prompt</module>
 		<module>02-retrieval-augmented-generation</module>
 		<module>03-chat-memory</module>
+		<module>04-agentic-loop</module>
 		<module>self-reflection-agent</module>
 		<module>chain-of-thought</module>
 	</modules>

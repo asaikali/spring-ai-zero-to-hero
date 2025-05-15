@@ -54,6 +54,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
+			<artifactId>04-agentic-loop</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
 			<artifactId>self-reflection-agent</artifactId>
 			<version>${project.version}</version>
 		</dependency>
