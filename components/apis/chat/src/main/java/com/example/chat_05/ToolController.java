@@ -94,13 +94,12 @@ class ToolController {
               defaultValue = "find me an italian restaurant for lunch for 4 people today")
           String query) {
 
-    CallResponseSpec callResponseSpec = this.chatClient
+    Restaurant[] result = this.chatClient
         .prompt()
-        .tools( new RestaurantSearch())
+        .tools( new RestaurantSearch(), new TimeTools())
         .user(query)
-        .call();
-
-    Restaurant[] result = callResponseSpec.entity(Restaurant[].class);
+        .call()
+        .entity(Restaurant[].class);
 
     return result;
 

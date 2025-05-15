@@ -1,5 +1,6 @@
 package com.example.chat_05;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +14,9 @@ public class TimeTools {
       returnDirect = false)
   public String currentTimeIn(
       @ToolParam(required = false, description = "IANA time zone identifiers") String timeZone) {
+    if( timeZone == null) {
+      return LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
+    }
     ZoneId zoneId = ZoneId.of(timeZone);
     ZonedDateTime now = ZonedDateTime.now(zoneId);
     return now.format(DateTimeFormatter.ISO_DATE_TIME);

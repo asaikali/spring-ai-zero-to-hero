@@ -29,7 +29,11 @@ GET http://localhost:8080/chat/05/pack?city="paris and Toronto"
 GET http://localhost:8080/chat/05/search
 
 ### find an indian resturant
-GET http://localhost:8080/chat/05/search?query="I am looking for Indian dinner tonight"
+GET http://localhost:8080/chat/05/search?query="I am looking for Indian dinner tonight in Toronto"
+
+### find an indian resturant
+GET http://localhost:8080/chat/05/search?query="I am looking for italian lunch  next Tuesday for 2"
+
 
 ### Ask a question about fruits
 GET http://localhost:8080/chat/06/fruit
