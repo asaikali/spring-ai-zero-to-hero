@@ -1,4 +1,4 @@
-package com.example.chat_05;
+package com.example.chat_05.tool.return_direct;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 
-class RestaurantSearch {
+public class RestaurantSearch {
 
 
   private static final List<Restaurant> FAKE_DATABASE =

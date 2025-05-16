@@ -1,4 +1,4 @@
-package com.example.chat_05;
+package com.example.chat_05.tool.annotations;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

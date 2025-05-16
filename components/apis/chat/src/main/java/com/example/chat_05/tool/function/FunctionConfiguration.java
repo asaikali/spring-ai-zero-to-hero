@@ -1,4 +1,4 @@
-package com.example.chat_05;
+package com.example.chat_05.tool.function;
 
 import org.springframework.ai.tool.function.FunctionToolCallback;
 import org.springframework.context.annotation.Bean;

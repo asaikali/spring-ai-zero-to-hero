@@ -1,4 +1,4 @@
-package com.example.chat_05;
+package com.example.chat_05.tool.function;
 
 import java.time.LocalDateTime;
 import java.util.Random;
