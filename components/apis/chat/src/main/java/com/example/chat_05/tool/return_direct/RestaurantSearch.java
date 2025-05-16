@@ -9,7 +9,6 @@ import org.springframework.ai.tool.annotation.ToolParam;
 
 public class RestaurantSearch {
 
-
   private static final List<Restaurant> FAKE_DATABASE =
       List.of(
           new Restaurant(
@@ -28,7 +27,9 @@ public class RestaurantSearch {
           new Restaurant(
               "Bombay Flame", "Indian", 12, "Modern Indian cuisine with traditional spice."));
 
-  @Tool(description = "Search for restaurants that match the cuisine and party size", returnDirect = true)
+  @Tool(
+      description = "Search for restaurants that match the cuisine and party size",
+      returnDirect = true)
   public List<Restaurant> searchForRestaurantsIn(
       @ToolParam(description = "The date for the desired restaurant reservation in ISO format")
           LocalDate date,

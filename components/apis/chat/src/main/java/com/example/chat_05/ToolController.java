@@ -94,14 +94,14 @@ class ToolController {
               defaultValue = "find me an italian restaurant for lunch for 4 people today")
           String query) {
 
-    Restaurant[] result = this.chatClient
-        .prompt()
-        .tools( new RestaurantSearch(), new TimeTools())
-        .user(query)
-        .call()
-        .entity(Restaurant[].class);
+    Restaurant[] result =
+        this.chatClient
+            .prompt()
+            .tools(new RestaurantSearch(), new TimeTools())
+            .user(query)
+            .call()
+            .entity(Restaurant[].class);
 
     return result;
-
   }
 }
