@@ -8,7 +8,7 @@ import org.springframework.shell.command.annotation.Option;
 @Command(command = "agent", description = "Agentic Chat Commands")
 public class AgentCommands {
 
-  private final List<String> defaultAgentNames =
+  private static final List<String> MATRIX_AGENT_NAMES =
       List.of(
           "neo",
           "trinity",
@@ -22,9 +22,11 @@ public class AgentCommands {
           "dozer");
 
   private final AgentContext ctx;
+  private final TargetContext targetCtx;
 
-  public AgentCommands(AgentContext ctx) {
+  public AgentCommands(AgentContext ctx, TargetContext targetCtx) {
     this.ctx = ctx;
+    this.targetCtx = targetCtx;
   }
 
   @Command(command = "create", description = "Create a new agent")
@@ -43,7 +45,7 @@ public class AgentCommands {
   private String generateUniqueAgentId() {
     for (int i = 0; i < 100; i++) {
       String candidate =
-          defaultAgentNames.get(ThreadLocalRandom.current().nextInt(defaultAgentNames.size()));
+          MATRIX_AGENT_NAMES.get(ThreadLocalRandom.current().nextInt(MATRIX_AGENT_NAMES.size()));
       if (!ctx.getAgents().contains(candidate)) {
         return candidate;
       }
@@ -112,7 +114,10 @@ public class AgentCommands {
   }
 
   private void printChat() {
-    System.out.println("\n=== Agentic Chat [" + ctx.getCurrentAgentId() + "] ===");
+    String targetName = targetCtx.getCurrentTargetName();
+    String agentId = ctx.getCurrentAgentId();
+    System.out.println(
+        "\n=== Agentic Chat [" + "targetName:" + targetName + ":" + agentId + "] ===");
     ctx.getMessages().forEach(System.out::println);
     System.out.println("===============================\n");
   }

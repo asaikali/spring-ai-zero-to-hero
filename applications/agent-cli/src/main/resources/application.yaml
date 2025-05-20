@@ -6,3 +6,13 @@ spring:
   shell:
     interactive:
       enabled: true  # Keep app running interactively in terminal
+
+target:
+  host: localhost
+  port: 8080
+  systems:
+    inner-monologue: /mono/01
+    model-directed-loop: /loop/02
+    knowledge-capture: /memory/03
+    structured-memory: /memory/04
+    agent-runtime: /runtime/05
