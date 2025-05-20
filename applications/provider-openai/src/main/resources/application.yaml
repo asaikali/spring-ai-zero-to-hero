@@ -13,7 +13,9 @@ spring:
             - weatherFunction
           n: 1
           model: "gpt-4o-mini"
-
+management:
+  tracing:
+    enabled: false
 ---
 spring:
   config:
