@@ -91,7 +91,7 @@ public class AgentCommands {
   }
 
   @Command(command = "send", description = "Send a message to the current agent")
-  public void send(@Option(longNames = "text", required = true) String text) {
+  public void send(String text) {
     String agentId = ctx.getCurrentAgentId();
     if (agentId == null) {
       System.out.println("[ERROR] No active agent. Use `agent create` or `agent switch` first.");
