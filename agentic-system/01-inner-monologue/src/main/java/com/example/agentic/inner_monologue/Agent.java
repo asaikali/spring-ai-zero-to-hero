@@ -1,7 +1,9 @@
 package com.example.agentic.inner_monologue;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.util.json.JsonParser;
 
@@ -23,26 +25,32 @@ public class Agent {
 
   private final String id;
   private final ChatClient chatClient;
+  private final PromptChatMemoryAdvisor promptChatMemoryAdvisor;
 
   public Agent(ChatClient.Builder builder, String id) {
     this.id = id;
+
+    var memory =
+        MessageWindowChatMemory.builder()
+            .chatMemoryRepository(new InMemoryChatMemoryRepository())
+            .build();
+    this.promptChatMemoryAdvisor = PromptChatMemoryAdvisor.builder(memory).build();
+
     this.chatClient =
         builder
             .clone()
             .defaultOptions(OpenAiChatOptions.builder().toolChoice("required").build())
             .defaultTools(new AgentTools())
             .defaultSystem(SYSTEM_PROMPT)
+            .defaultAdvisors(promptChatMemoryAdvisor)
             .build();
   }
 
   public ChatResponse userMessage(ChatRequest request) {
-    String json =
-        this.chatClient.prompt().user(request.text()).call().content();
-    ChatResponse result = JsonParser.fromJson(json,ChatResponse.class);
+    String json = this.chatClient.prompt().user(request.text()).call().content();
+    ChatResponse result = JsonParser.fromJson(json, ChatResponse.class);
     return result;
   }
-
-
 
   public String getId() {
     return id;
