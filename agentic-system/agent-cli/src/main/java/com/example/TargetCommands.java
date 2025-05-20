@@ -1,10 +1,11 @@
 package com.example;
 
-import org.springframework.shell.command.annotation.Command;
-import org.springframework.shell.command.annotation.Option;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
 
-@Command(command = "target", description = "Target system commands")
-class TargetCommands {
+@ShellComponent
+public class TargetCommands {
 
   private final TargetContext targetCtx;
 
@@ -12,8 +13,8 @@ class TargetCommands {
     this.targetCtx = targetCtx;
   }
 
-  @Command(command = "list", description = "List all available targets")
-  public void list() {
+  @ShellMethod(value = "List all available targets", key = "target list")
+  public void listTargets() {
     var systems = targetCtx.getTargets();
     if (systems.isEmpty()) {
       System.out.println("No targets available.");
@@ -24,8 +25,12 @@ class TargetCommands {
     }
   }
 
-  @Command(command = "use", description = "Set the current target")
-  public void use(@Option(longNames = "name", required = true) String name) {
+  @ShellMethod(value = "Set the current target", key = "target use")
+  public void useTarget(
+      @ShellOption(
+              value = {"--name"},
+              valueProvider = TargetNameValueProvider.class)
+          String name) {
     var systems = targetCtx.getTargets();
     if (!systems.containsKey(name)) {
       System.out.println("[ERROR] No target with name: " + name);
@@ -35,8 +40,8 @@ class TargetCommands {
     System.out.println("Switched to target: " + name);
   }
 
-  @Command(command = "status", description = "Show the currently active target")
-  public void status() {
+  @ShellMethod(value = "Show the currently active target", key = "target status")
+  public void targetStatus() {
     String current = targetCtx.getCurrentTargetName();
     if (current == null) {
       System.out.println("No active target.");
