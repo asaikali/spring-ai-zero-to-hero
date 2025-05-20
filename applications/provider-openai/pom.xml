@@ -54,7 +54,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>04-agentic-loop</artifactId>
+			<artifactId>01-inner-monologue</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

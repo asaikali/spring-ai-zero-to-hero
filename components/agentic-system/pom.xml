@@ -12,6 +12,7 @@
 	<packaging>pom</packaging>
 	<description>key patterns for building agentic systems</description>
 	<modules>
+		<module>00-common</module>
 		<module>01-inner-monologue</module>
 	</modules>
 </project>

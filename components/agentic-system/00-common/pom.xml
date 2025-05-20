@@ -7,7 +7,7 @@
 		<artifactId>agentic-system</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>01-inner-monologue</artifactId>
+	<artifactId>00-common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
@@ -23,11 +23,6 @@
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-openai</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>00-common</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>
