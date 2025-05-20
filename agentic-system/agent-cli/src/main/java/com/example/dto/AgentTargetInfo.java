@@ -1,4 +1,4 @@
-package com.example.command.target;
+package com.example.dto;
 
 public record AgentTargetInfo(
     String name, String displayName, String description, String basePath) {}
