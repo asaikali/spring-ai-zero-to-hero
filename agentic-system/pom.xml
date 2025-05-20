@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>components</artifactId>
+		<artifactId>spring-ai-zero-to-hero</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>agentic-system</artifactId>
@@ -12,7 +12,8 @@
 	<packaging>pom</packaging>
 	<description>key patterns for building agentic systems</description>
 	<modules>
-		<module>00-common</module>
+		<module>agentic-common</module>
 		<module>01-inner-monologue</module>
+		<module>agent-cli</module>
 	</modules>
 </project>

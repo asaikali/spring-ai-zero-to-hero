@@ -13,4 +13,4 @@ fi
 cd "$PROJECT_ROOT" || exit 1
 
 # Run the agent-cli module
-./mvnw -pl applications/agent-cli spring-boot:run
+./mvnw -pl agentic-system/agent-cli spring-boot:run

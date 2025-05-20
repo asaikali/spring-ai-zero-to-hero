@@ -30,6 +30,7 @@
     <module>applications</module>
     <module>components</module>
     <module>mcp</module>
+    <module>agentic-system</module>
   </modules>
   <dependencyManagement>
     <dependencies>

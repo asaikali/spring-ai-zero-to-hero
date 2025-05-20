@@ -1,0 +1,13 @@
+
+spring:
+  application:
+    name: agent-cli
+
+  shell:
+    interactive:
+      enabled: true  # Keep app running interactively in terminal
+
+agent:
+  discovery-url: http://localhost:8080/agents/targets
+server:
+  port: 8081

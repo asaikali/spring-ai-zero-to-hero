@@ -16,6 +16,5 @@
 		<module>apis</module>
 		<module>patterns</module>
 		<module>config-pgvector</module>
-		<module>agentic-system</module>
 	</modules>
 </project>
