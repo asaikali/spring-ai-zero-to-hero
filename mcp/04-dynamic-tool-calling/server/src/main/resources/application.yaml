@@ -1,0 +1,7 @@
+
+spring:
+  ai:
+    mcp:
+      server:
+        name: my-mcp-server
+        version: 0.0.1

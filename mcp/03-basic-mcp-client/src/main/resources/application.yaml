@@ -1,4 +1,6 @@
 spring:
+  main:
+    web-application-type: none
   ai:
     mcp:
       client:
@@ -10,5 +12,3 @@ spring:
         #       url: http://localhost:8080
   config:
     import: "optional:classpath:/creds.yaml"
-server:
-  port: 8181

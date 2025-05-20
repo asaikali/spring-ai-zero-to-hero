@@ -1,0 +1,13 @@
+
+spring:
+  main:
+    web-application-type: none
+  ai:
+    mcp:
+      client:
+        sse:
+          connections:
+            04-dynamic-tool-calling:
+              url: http://localhost:8080
+  config:
+    import: "optional:classpath:/creds.yaml"
