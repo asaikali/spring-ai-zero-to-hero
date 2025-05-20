@@ -7,28 +7,26 @@ import org.springframework.shell.command.annotation.Option;
 class TargetCommands {
 
   private final TargetContext targetCtx;
-  private final TargetProperties targetProps;
 
-  public TargetCommands(TargetContext targetCtx, TargetProperties targetProps) {
+  public TargetCommands(TargetContext targetCtx) {
     this.targetCtx = targetCtx;
-    this.targetProps = targetProps;
   }
 
   @Command(command = "list", description = "List all available targets")
   public void list() {
-    var systems = targetProps.getResolvedSystems();
+    var systems = targetCtx.getTargets();
     if (systems.isEmpty()) {
       System.out.println("No targets available.");
       return;
     }
     for (var entry : systems.entrySet()) {
-      System.out.println(entry.getKey());
+      System.out.println(entry.getKey() + " -> " + entry.getValue());
     }
   }
 
   @Command(command = "use", description = "Set the current target")
   public void use(@Option(longNames = "name", required = true) String name) {
-    var systems = targetProps.getResolvedSystems();
+    var systems = targetCtx.getTargets();
     if (!systems.containsKey(name)) {
       System.out.println("[ERROR] No target with name: " + name);
       return;
@@ -44,7 +42,7 @@ class TargetCommands {
       System.out.println("No active target.");
       return;
     }
-    var systems = targetProps.getResolvedSystems();
+    var systems = targetCtx.getTargets();
     String url = systems.getOrDefault(current, "unknown URL");
     System.out.println("Current target: " + current);
     System.out.println("URL: " + url);
