@@ -1,3 +1,0 @@
-###  tell the AI your name
-GET localhost:8080/loop/01/hello
-
