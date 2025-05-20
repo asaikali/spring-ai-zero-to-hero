@@ -1,0 +1,7 @@
+
+spring:
+  ai:
+    mcp:
+      server:
+        name: 05-mcp-capabilities-server
+        version: 0.0.1
