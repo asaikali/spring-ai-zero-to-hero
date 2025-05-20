@@ -92,12 +92,22 @@ public class AgentCommands {
 
   @Command(command = "send", description = "Send a message to the current agent")
   public void send(@Option(longNames = "text", required = true) String text) {
-    if (ctx.getCurrentAgentId() == null) {
+    String agentId = ctx.getCurrentAgentId();
+    if (agentId == null) {
       System.out.println("[ERROR] No active agent. Use `agent create` or `agent switch` first.");
       return;
     }
+
     ctx.getMessages().add("[USER] " + text);
-    ctx.getMessages().add("[AGENT] Agent received: \"" + text + "\"");
+
+    try {
+      var response = agentServiceClient.sendMessage(agentId, text);
+      ctx.getMessages().add("[THOUGHT] " + response.innerThoughts());
+      ctx.getMessages().add("[AGENT] " + response.message());
+    } catch (Exception e) {
+      ctx.getMessages().add("[ERROR] Failed to send message: " + e.getMessage());
+    }
+
     printChat();
   }
 
