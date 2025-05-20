@@ -1,7 +1,7 @@
 package com.example.agentic.inner_monologue;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.openai.OpenAiChatOptions;
@@ -25,7 +25,6 @@ public class Agent {
 
   private final String id;
   private final ChatClient chatClient;
-  private final PromptChatMemoryAdvisor promptChatMemoryAdvisor;
 
   public Agent(ChatClient.Builder builder, String id) {
     this.id = id;
@@ -34,7 +33,7 @@ public class Agent {
         MessageWindowChatMemory.builder()
             .chatMemoryRepository(new InMemoryChatMemoryRepository())
             .build();
-    this.promptChatMemoryAdvisor = PromptChatMemoryAdvisor.builder(memory).build();
+    var chatMemoryAdvisor = MessageChatMemoryAdvisor.builder(memory).build();
 
     this.chatClient =
         builder
@@ -42,7 +41,7 @@ public class Agent {
             .defaultOptions(OpenAiChatOptions.builder().toolChoice("required").build())
             .defaultTools(new AgentTools())
             .defaultSystem(SYSTEM_PROMPT)
-            .defaultAdvisors(promptChatMemoryAdvisor)
+            .defaultAdvisors(chatMemoryAdvisor)
             .build();
   }
 

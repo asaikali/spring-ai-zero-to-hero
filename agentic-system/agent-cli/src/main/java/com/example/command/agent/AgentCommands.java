@@ -51,7 +51,7 @@ public class AgentCommands {
     ctx.setCurrentAgentId(id);
     ctx.getMessages().clear();
     ctx.getMessages().add("[SYSTEM] Created agent with ID: " + id);
-    ctx.getMessages().add("[SYSTEM] Switched to agent: " + id);
+    ctx.getMessages().add("[SYSTEM] Switched to agent: " + id + "\n");
     printChat();
   }
 
@@ -85,7 +85,7 @@ public class AgentCommands {
     }
     ctx.setCurrentAgentId(id);
     ctx.getMessages().clear();
-    ctx.getMessages().add("[SYSTEM] Switched to agent: " + id);
+    ctx.getMessages().add("[SYSTEM] Switched to agent: " + id + "\n");
     printChat();
     refreshPrompt();
   }
@@ -103,7 +103,7 @@ public class AgentCommands {
     try {
       var response = agentServiceClient.sendMessage(agentId, text);
       ctx.getMessages().add("[THOUGHT] " + response.innerThoughts());
-      ctx.getMessages().add("[AGENT] " + response.message());
+      ctx.getMessages().add("[AGENT] " + response.message() + "\n");
     } catch (Exception e) {
       ctx.getMessages().add("[ERROR] Failed to send message: " + e.getMessage());
     }
