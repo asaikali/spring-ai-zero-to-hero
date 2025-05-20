@@ -1,4 +1,4 @@
-package com.example.agentic.loop_01;
+package com.example.agentic.inner_monologue;
 
 import com.example.agentic.memgpt.MemgptTools;
 import org.springframework.ai.chat.client.ChatClient;
