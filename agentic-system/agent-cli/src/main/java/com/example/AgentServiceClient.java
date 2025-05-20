@@ -26,4 +26,9 @@ public class AgentServiceClient {
     RestClient targetRestClient = this.targetContext.getCurrentTargetRestClient();
     return targetRestClient.post().uri("/{id}", agentId).retrieve().body(AgentJson.class);
   }
+
+  public AgentJson getAgent(String agentId) {
+    RestClient client = targetContext.getCurrentTargetRestClient();
+    return client.get().uri("/{id}", agentId).retrieve().body(AgentJson.class);
+  }
 }

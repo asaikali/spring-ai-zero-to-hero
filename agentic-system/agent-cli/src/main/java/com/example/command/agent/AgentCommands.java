@@ -1,5 +1,7 @@
 package com.example.command.agent;
 
+import static com.example.JsonUtils.toPrettyJson;
+
 import com.example.AgentServiceClient;
 import com.example.command.target.TargetContext;
 import java.util.*;
@@ -100,11 +102,15 @@ public class AgentCommands {
 
   @Command(command = "status", description = "Show the currently active agent")
   public void status() {
-    if (ctx.getCurrentAgentId() == null) {
+    String agentId = ctx.getCurrentAgentId();
+    if (agentId == null) {
       System.out.println("No active agent.");
-    } else {
-      System.out.println("Current agent: " + ctx.getCurrentAgentId());
+      return;
     }
+
+    var agent = agentServiceClient.getAgent(agentId);
+    String json = toPrettyJson(agent);
+    System.out.println(json);
   }
 
   @Command(command = "list", description = "List all created agents")
