@@ -1,5 +1,6 @@
 package com.example.agentic.loop_01;
 
+import com.example.agentic.memgpt.MemgptTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.ChatClient.CallResponseSpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class SelfEditingMemoryController {
   public SelfEditingMemoryController(ChatClient.Builder builder) {
     this.chatClient =
         builder
-            .defaultTools(new AgentWithSelfEditingMemory())
+            .defaultTools(new MemgptTools())
             .defaultSystem(
                 """
             Your an AI Agent that helps humans solve problems. While solving

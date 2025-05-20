@@ -38,6 +38,7 @@ public class RouteConfig {
   public RouterFunction<ServerResponse> readBodyRoute(
       HttpServletRequest httpServletRequest, OpenAiAuditor openAiAuditor) {
     return route("openai")
+        .route(path("/letta/**"), http("https://api.openai.com/v1"))
         .route(path("/openai/**"), http("https://api.openai.com/v1/chat/completions"))
         .route(path("/anthropic/**"), http("https://api.anthropic.com"))
         .route(path("/ollama/**"), http("http://localhost:11434/"))

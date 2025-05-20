@@ -1,9 +1,12 @@
-package com.example.agentic.loop_01;
+package com.example.agentic.memgpt;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 
-public class AgentWithSelfEditingMemory {
+public class MemgptTools {
+
+  @Tool(description = "update the core memory")
+  public void updateCoreMemory(String label, String oldValue, String newValue) {}
 
   @Tool(description = "send a message to the user", returnDirect = true)
   public String sendMessage(
