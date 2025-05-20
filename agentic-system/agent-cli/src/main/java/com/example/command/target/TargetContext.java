@@ -11,18 +11,23 @@ import org.springframework.web.client.RestClient;
 @Component
 public class TargetContext {
 
-  private final RestClient restClient;
+  private final RestClient.Builder restClientBuilder;
   private final TargetProperties props;
   private Map<String, String> targets = new HashMap<>();
   private String currentTargetName;
+  private final String baseUrl;
+  private final String discoveryUrl;
 
   public TargetContext(TargetProperties props, RestClient.Builder restClientBuilder) {
     this.props = props;
-    this.restClient = restClientBuilder.baseUrl(props.getDiscoveryUrl()).build();
+    this.baseUrl = "http://" + props.getHost() + ":" + props.getPort();
+    this.discoveryUrl = baseUrl + "/agents/targets";
+    this.restClientBuilder = restClientBuilder;
     refreshTargets(); // optional: load at startup
   }
 
   public void refreshTargets() {
+    RestClient restClient = restClientBuilder.baseUrl(discoveryUrl).build();
     AgentTargetInfo[] result = restClient.get().uri("").retrieve().body(AgentTargetInfo[].class);
 
     if (result != null) {
@@ -42,5 +47,18 @@ public class TargetContext {
 
   public void setCurrentTargetName(String currentTargetName) {
     this.currentTargetName = currentTargetName;
+  }
+
+  public RestClient getCurrentTargetRestClient() {
+    String targetUrl = this.baseUrl + "/" + targets.get(currentTargetName);
+    return restClientBuilder.baseUrl(targetUrl).build();
+  }
+
+  public String getBaseUrl() {
+    return this.baseUrl;
+  }
+
+  public String getDiscoveryUrl() {
+    return this.discoveryUrl;
   }
 }

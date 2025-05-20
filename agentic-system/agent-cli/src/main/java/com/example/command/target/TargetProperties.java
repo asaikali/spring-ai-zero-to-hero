@@ -3,16 +3,26 @@ package com.example.command.target;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "agent")
 @Component
+@ConfigurationProperties(prefix = "agent")
 public class TargetProperties {
-  private String discoveryUrl = "http://localhost:8080/agents/targets";
 
-  public String getDiscoveryUrl() {
-    return discoveryUrl;
+  private String host = "localhost";
+  private int port = 8080;
+
+  public String getHost() {
+    return host;
   }
 
-  public void setDiscoveryUrl(String discoveryUrl) {
-    this.discoveryUrl = discoveryUrl;
+  public void setHost(String host) {
+    this.host = host;
+  }
+
+  public int getPort() {
+    return port;
+  }
+
+  public void setPort(int port) {
+    this.port = port;
   }
 }

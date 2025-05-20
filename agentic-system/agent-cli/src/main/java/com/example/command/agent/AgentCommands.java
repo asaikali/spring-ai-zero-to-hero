@@ -1,5 +1,6 @@
 package com.example.command.agent;
 
+import com.example.AgentServiceClient;
 import com.example.command.target.TargetContext;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -24,10 +25,13 @@ public class AgentCommands {
 
   private final AgentContext ctx;
   private final TargetContext targetCtx;
+  private final AgentServiceClient agentServiceClient;
 
-  public AgentCommands(AgentContext ctx, TargetContext targetCtx) {
+  public AgentCommands(
+      AgentContext ctx, TargetContext targetCtx, AgentServiceClient agentServiceClient) {
     this.ctx = ctx;
     this.targetCtx = targetCtx;
+    this.agentServiceClient = agentServiceClient;
   }
 
   @Command(command = "create", description = "Create a new agent")
@@ -35,6 +39,7 @@ public class AgentCommands {
     if (id == null || id.isBlank()) {
       id = generateUniqueAgentId();
     }
+    this.agentServiceClient.createAgent(id);
     ctx.getAgents().add(id);
     ctx.setCurrentAgentId(id);
     ctx.getMessages().clear();

@@ -5,10 +5,13 @@ import com.example.agentic.AgentTargetInfo;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/agents/inner-monologue")
@@ -30,10 +33,19 @@ public class InnerMonologueAgentController implements AgentSystemDescriptor {
         "/agents/inner-monologue");
   }
 
-  @GetMapping("/create/{id}")
-  public Agent createAgent(@PathVariable(name = "id") String agentId) {
+  @PostMapping("/{id}")
+  public AgentJson createAgent(@PathVariable(name = "id") String agentId) {
     Agent agent = new Agent(this.builder, agentId);
     agents.put(agentId, agent);
-    return agent;
+    return AgentJson.from(agent);
+  }
+
+  @GetMapping("/{id}")
+  public AgentJson getAgent(@PathVariable(name = "id") String agentId) {
+    Agent agent = this.agents.get(agentId);
+    if (agent == null) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agent not found");
+    }
+    return AgentJson.from(agent);
   }
 }

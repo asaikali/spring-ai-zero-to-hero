@@ -1,0 +1,1 @@
+find src -type f -exec bash -c 'echo "--- {} ---"; cat "{}"' \;

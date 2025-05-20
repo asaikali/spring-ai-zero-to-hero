@@ -9,5 +9,5 @@ spring:
       enabled: true  # Keep app running interactively in terminal
 
 agent:
-  discovery-url: http://localhost:8080/agents/targets
-
+  host: localhost
+  port: 8080
