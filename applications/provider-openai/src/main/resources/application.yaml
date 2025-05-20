@@ -33,7 +33,6 @@ logging:
             observation: DEBUG
             client:
               observation: DEBUG
-
 management:
   endpoints:
     web:
