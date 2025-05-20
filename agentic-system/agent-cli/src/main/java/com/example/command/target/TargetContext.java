@@ -1,4 +1,4 @@
-package com.example;
+package com.example.command.target;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,5 +1,6 @@
-package com.example;
+package com.example.command.agent;
 
+import com.example.command.target.TargetContext;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.shell.command.annotation.Command;

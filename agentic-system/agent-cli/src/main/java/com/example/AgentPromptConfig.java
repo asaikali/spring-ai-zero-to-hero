@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.command.agent.AgentContext;
+import com.example.command.target.TargetContext;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.command.target;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

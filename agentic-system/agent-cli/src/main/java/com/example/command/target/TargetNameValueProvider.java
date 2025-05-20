@@ -1,4 +1,4 @@
-package com.example;
+package com.example.command.target;
 
 import java.util.List;
 import org.springframework.shell.CompletionContext;

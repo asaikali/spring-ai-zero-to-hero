@@ -1,4 +1,4 @@
-package com.example;
+package com.example.command.agent;
 
 import java.util.*;
 import org.springframework.stereotype.Component;
