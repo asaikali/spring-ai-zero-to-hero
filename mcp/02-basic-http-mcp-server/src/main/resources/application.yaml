@@ -1,18 +1,9 @@
-#
-# we need to turn off the console output because MCP expects stdin /
-# stdout to only contain JSON-RPC messages otherwise the MCP client can't
-# negotiate a connection with the server.
-#
-logging:
-  pattern:
-    console:
-
 spring:
   ai:
     mcp:
       server:
-        stdio: true
-        name: basic-stdio-mcp-server
+        # stdio: true
+        name: basic-http-mcp-server
         version: 1.0.0
         type: SYNC
 
