@@ -51,7 +51,7 @@ public class InnerMonologueAgentController implements AgentSystemDescriptor {
     return AgentJson.from(agent);
   }
 
-  @GetMapping("/")
+  @GetMapping(path = {"", "/"})
   public List<String> getAgentIds() {
     return this.agents.keySet().stream().collect(Collectors.toList());
   }

@@ -48,7 +48,6 @@ public class AgentCommands {
       id = generateUniqueAgentId();
     }
     this.agentServiceClient.createAgent(id);
-    ctx.getAgents().add(id);
     ctx.setCurrentAgentId(id);
     ctx.getMessages().clear();
     ctx.getMessages().add("[SYSTEM] Created agent with ID: " + id);
@@ -57,18 +56,21 @@ public class AgentCommands {
   }
 
   private String generateUniqueAgentId() {
+    List<String> existing = agentServiceClient.listAgents();
+
     for (int i = 0; i < 100; i++) {
       String candidate =
           MATRIX_AGENT_NAMES.get(ThreadLocalRandom.current().nextInt(MATRIX_AGENT_NAMES.size()));
-      if (!ctx.getAgents().contains(candidate)) {
+      if (!existing.contains(candidate)) {
         return candidate;
       }
     }
-    // Fallback: neo-1, neo-2, etc.
+
+    // Fallback to suffix
     int suffix = 1;
     while (true) {
       String candidate = "neo-" + suffix++;
-      if (!ctx.getAgents().contains(candidate)) {
+      if (!existing.contains(candidate)) {
         return candidate;
       }
     }
@@ -76,8 +78,9 @@ public class AgentCommands {
 
   @Command(command = "switch", description = "Switch to an existing agent")
   public void switchAgent(@Option(longNames = "id", required = true) String id) {
-    if (!ctx.getAgents().contains(id)) {
-      System.out.println("[ERROR] No agent with ID: " + id);
+    List<String> ids = agentServiceClient.listAgents();
+    if (!ids.contains(id)) {
+      System.out.println("[ERROR] No agent with ID: " + id + " on server.");
       return;
     }
     ctx.setCurrentAgentId(id);
@@ -122,12 +125,16 @@ public class AgentCommands {
 
   @Command(command = "list", description = "List all created agents")
   public void list() {
-    if (ctx.getAgents().isEmpty()) {
-      System.out.println("No agents created yet.");
+    List<String> ids = agentServiceClient.listAgents();
+
+    if (ids.isEmpty()) {
+      System.out.println("No agents found on the server.");
       return;
     }
-    for (String id : ctx.getAgents()) {
-      String marker = Objects.equals(id, ctx.getCurrentAgentId()) ? "*" : " ";
+
+    String current = ctx.getCurrentAgentId();
+    for (String id : ids) {
+      String marker = Objects.equals(id, current) ? "*" : " ";
       System.out.println(marker + " " + id);
     }
   }

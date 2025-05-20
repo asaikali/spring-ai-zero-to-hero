@@ -3,6 +3,7 @@ package com.example;
 import com.example.command.agent.AgentContext;
 import com.example.command.target.TargetContext;
 import com.example.dto.AgentJson;
+import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -30,5 +31,11 @@ public class AgentServiceClient {
   public AgentJson getAgent(String agentId) {
     RestClient client = targetContext.getCurrentTargetRestClient();
     return client.get().uri("/{id}", agentId).retrieve().body(AgentJson.class);
+  }
+
+  public List<String> listAgents() {
+    RestClient client = targetContext.getCurrentTargetRestClient();
+    String[] ids = client.get().uri("").retrieve().body(String[].class);
+    return ids != null ? List.of(ids) : List.of();
   }
 }

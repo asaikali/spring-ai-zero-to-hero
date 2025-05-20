@@ -7,15 +7,10 @@ import org.springframework.stereotype.Component;
 public class AgentContext {
 
   private final List<String> messages = new ArrayList<>();
-  private final Set<String> agents = new HashSet<>();
   private String currentAgentId;
 
   public List<String> getMessages() {
     return messages;
-  }
-
-  public Set<String> getAgents() {
-    return agents;
   }
 
   public String getCurrentAgentId() {
