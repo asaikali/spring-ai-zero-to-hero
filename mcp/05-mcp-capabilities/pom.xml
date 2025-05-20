@@ -4,17 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>spring-ai-zero-to-hero</artifactId>
+		<artifactId>mcp</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>mcp</artifactId>
+	<artifactId>05-mcp-capabilities</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<modules>
-		<module>01-basic-stdio-mcp-server</module>
-		<module>02-basic-http-mcp-server</module>
-		<module>03-basic-mcp-client</module>
-		<module>04-dynamic-tool-calling</module>
-		<module>05-mcp-capabilities</module>
-	</modules>
+	
+
 </project>

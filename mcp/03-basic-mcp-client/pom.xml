@@ -7,7 +7,7 @@
 		<artifactId>mcp</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>basic-stdio-mcp-server</artifactId>
+	<artifactId>03-basic-mcp-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
