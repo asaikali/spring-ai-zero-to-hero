@@ -1,4 +1,5 @@
 .env
+agent-cli.log
 
 **/.DS_Store
 **/creds.yaml

@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 
@@ -11,14 +12,48 @@ public class AgentCommands {
   private final Set<String> agents = new HashSet<>();
   private String currentAgentId;
 
+  private final List<String> defaultAgentNames =
+      List.of(
+          "neo",
+          "trinity",
+          "morpheus",
+          "smith",
+          "cypher",
+          "oracle",
+          "apoc",
+          "switch",
+          "tank",
+          "dozer");
+
   @Command(command = "create", description = "Create a new agent")
-  public void create(@Option(longNames = "id", required = true) String id) {
+  public void create(@Option(longNames = "id", required = false) String id) {
+    if (id == null || id.isBlank()) {
+      id = generateUniqueAgentId();
+    }
     agents.add(id);
     currentAgentId = id;
     messages.clear();
     messages.add("[SYSTEM] Created agent with ID: " + id);
     messages.add("[SYSTEM] Switched to agent: " + id);
     printChat();
+  }
+
+  private String generateUniqueAgentId() {
+    for (int i = 0; i < 100; i++) {
+      String candidate =
+          defaultAgentNames.get(ThreadLocalRandom.current().nextInt(defaultAgentNames.size()));
+      if (!agents.contains(candidate)) {
+        return candidate;
+      }
+    }
+    // Fallback: neo-1, neo-2, etc.
+    int suffix = 1;
+    while (true) {
+      String candidate = "neo-" + suffix++;
+      if (!agents.contains(candidate)) {
+        return candidate;
+      }
+    }
   }
 
   @Command(command = "switch", description = "Switch to an existing agent")
