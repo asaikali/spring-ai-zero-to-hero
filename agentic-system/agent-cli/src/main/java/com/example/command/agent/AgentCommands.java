@@ -6,6 +6,7 @@ import com.example.AgentServiceClient;
 import com.example.command.target.TargetContext;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import org.jline.terminal.Terminal;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 
@@ -28,12 +29,17 @@ public class AgentCommands {
   private final AgentContext ctx;
   private final TargetContext targetCtx;
   private final AgentServiceClient agentServiceClient;
+  private final Terminal terminal;
 
   public AgentCommands(
-      AgentContext ctx, TargetContext targetCtx, AgentServiceClient agentServiceClient) {
+      AgentContext ctx,
+      TargetContext targetCtx,
+      AgentServiceClient agentServiceClient,
+      Terminal terminal) {
     this.ctx = ctx;
     this.targetCtx = targetCtx;
     this.agentServiceClient = agentServiceClient;
+    this.terminal = terminal;
   }
 
   @Command(command = "create", description = "Create a new agent")
@@ -78,6 +84,7 @@ public class AgentCommands {
     ctx.getMessages().clear();
     ctx.getMessages().add("[SYSTEM] Switched to agent: " + id);
     printChat();
+    refreshPrompt();
   }
 
   @Command(command = "send", description = "Send a message to the current agent")
@@ -132,5 +139,10 @@ public class AgentCommands {
         "\n=== Agentic Chat [" + "targetName:" + targetName + ":" + agentId + "] ===");
     ctx.getMessages().forEach(System.out::println);
     System.out.println("===============================\n");
+  }
+
+  private void refreshPrompt() {
+    this.terminal.writer().println(); // moves cursor to new line if needed
+    terminal.flush(); // force update
   }
 }

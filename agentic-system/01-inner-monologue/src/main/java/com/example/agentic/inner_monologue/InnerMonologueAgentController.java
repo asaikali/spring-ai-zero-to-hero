@@ -3,7 +3,9 @@ package com.example.agentic.inner_monologue;
 import com.example.agentic.AgentSystemDescriptor;
 import com.example.agentic.AgentTargetInfo;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,5 +49,10 @@ public class InnerMonologueAgentController implements AgentSystemDescriptor {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agent not found");
     }
     return AgentJson.from(agent);
+  }
+
+  @GetMapping()
+  public List<String> getAgentIds() {
+    return this.agents.keySet().stream().collect(Collectors.toList());
   }
 }
