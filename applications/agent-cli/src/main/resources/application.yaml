@@ -1,0 +1,8 @@
+
+spring:
+  application:
+    name: agent-cli
+
+  shell:
+    interactive:
+      enabled: true  # Keep app running interactively in terminal

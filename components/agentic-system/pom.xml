@@ -4,18 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>spring-ai-zero-to-hero</artifactId>
+		<artifactId>components</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>components</artifactId>
+	<artifactId>agentic-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<description>key patterns for building agentic systems</description>
 	<modules>
-		<module>data</module>
-		<module>apis</module>
-		<module>patterns</module>
-		<module>config-pgvector</module>
-		<module>agentic-system</module>
+		<module>01-inner-monologue</module>
 	</modules>
 </project>
