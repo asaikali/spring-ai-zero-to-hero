@@ -124,6 +124,6 @@ public class SimilarityController {
             .toList();
 
     // return the top similar matches
-    return result.subList(0, 3);
+    return result; // .subList(0, 3);
   }
 }

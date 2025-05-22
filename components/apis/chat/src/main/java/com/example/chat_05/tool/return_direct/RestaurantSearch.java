@@ -37,7 +37,8 @@ public class RestaurantSearch {
           LocalTime time,
       @ToolParam(description = "The type of cuisine served by the restaurant") String cuisine,
       @ToolParam(description = "The number of people that the reservation must accommodate")
-          Integer partySize) {
+          Integer partySize,
+      @ToolParam(description = "star rating between 1 and 5") Integer starRating) {
     return FAKE_DATABASE.stream()
         .filter(r -> r.cuisine().equalsIgnoreCase(cuisine))
         .filter(r -> r.capacity() >= partySize)
