@@ -1,9 +1,9 @@
 package com.example;
 
 import com.example.command.agent.AgentContext;
-import com.example.dto.AgentJson;
-import com.example.dto.ChatRequest;
-import com.example.dto.ChatResponse;
+import com.example.command.agent.dto.AgentJson;
+import com.example.command.agent.dto.ChatRequest;
+import com.example.command.agent.dto.ChatResponse;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
