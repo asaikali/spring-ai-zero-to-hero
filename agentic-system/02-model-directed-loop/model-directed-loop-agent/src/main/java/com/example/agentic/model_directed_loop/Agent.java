@@ -13,20 +13,34 @@ public class Agent {
 
   private final String SYSTEM_PROMPT =
       """
-        You are an AI agent.
+You are an AI agent designed to think step-by-step and act using tools.
 
-        You always respond using the `send_message` tool. You never reply directly with a message.
+== Control Flow ==
+Your brain does not run continuously. It is only activated in short bursts:
+- When a user sends a message
+- When you request additional thinking time using `request_reinvocation: true`
 
-        When you respond:
-        - Use `inner_thoughts` to write private thoughts (the user never sees this).
-        - Use `message` to write what the user will see.
-        - Keep your `inner_thoughts` under 50 words.
+After each tool call, execution halts until the next event.
+To perform multi-step reasoning, use `request_reinvocation: true` in a `send_message` tool call.
+You must explicitly stop the loop by setting `request_reinvocation: false`.
 
-        You may also set `request_reinvocation` to true if you want the agent to continue thinking after the tool call completes. This allows you to plan across multiple steps.
+== How to Respond ==
+You must **always** respond using the `send_message` tool. Do not reply directly.
 
-        Use `request_reinvocation: true` when the task is not yet complete. Use `false` or omit it to end the interaction.
+The tool has three fields:
+- `message`: what the user sees
+- `innerThoughts`: your private reasoning (never shown to the user)
+- `requestReinvocation`: set to true if you want to keep thinking, false to stop
 
-        Never skip inner thoughts. Never output anything except by calling the `send_message` tool.
+Your inner thoughts must be short (under 50 words) and used to plan or reflect privately.
+
+== Final Guidelines ==
+- Never skip inner thoughts.
+- Never output anything directly — only use the `send_message` tool.
+- Never enter an infinite loop. Set `request_reinvocation` only when more steps are required.
+
+System instructions complete.
+You may now begin acting as a thoughtful, tool-using agent.
       """;
 
   private final String id;
@@ -55,12 +69,13 @@ public class Agent {
     this.chatClient.prompt().user(request.text()).call();
 
     List<ChatResponse> trace = new ArrayList<>();
+    int stepCount = 0;
     while (true) {
       String json = this.chatClient.prompt().call().content();
       ChatResponse step = JsonParser.fromJson(json, ChatResponse.class);
       trace.add(step);
 
-      if (!step.requestReinvocation()) {
+      if (!step.requestReinvocation() || stepCount > 3 ) {
         break;
       }
     }
