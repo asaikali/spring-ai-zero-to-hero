@@ -1,11 +1,11 @@
-package com.example.command.target;
+package com.example.command.agent;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "agent")
-public class TargetProperties {
+public class AgentProperties {
 
   private String host = "localhost";
   private int port = 8080;

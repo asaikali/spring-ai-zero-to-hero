@@ -3,7 +3,6 @@ package com.example.command.agent;
 import static com.example.JsonUtils.toPrettyJson;
 
 import com.example.AgentServiceClient;
-import com.example.command.target.TargetContext;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.jline.terminal.Terminal;
@@ -27,17 +26,11 @@ public class AgentCommands {
           "dozer");
 
   private final AgentContext ctx;
-  private final TargetContext targetCtx;
   private final AgentServiceClient agentServiceClient;
   private final Terminal terminal;
 
-  public AgentCommands(
-      AgentContext ctx,
-      TargetContext targetCtx,
-      AgentServiceClient agentServiceClient,
-      Terminal terminal) {
+  public AgentCommands(AgentContext ctx, AgentServiceClient agentServiceClient, Terminal terminal) {
     this.ctx = ctx;
-    this.targetCtx = targetCtx;
     this.agentServiceClient = agentServiceClient;
     this.terminal = terminal;
   }
@@ -150,10 +143,8 @@ public class AgentCommands {
   }
 
   private void printChat() {
-    String targetName = targetCtx.getCurrentTargetName();
     String agentId = ctx.getCurrentAgentId();
-    System.out.println(
-        "\n=== Agentic Chat [" + "targetName:" + targetName + ":" + agentId + "] ===");
+    System.out.println("\n=== Agentic Chat [" + agentId + "] ===");
     ctx.getMessages().forEach(System.out::println);
     System.out.println("===============================\n");
   }
