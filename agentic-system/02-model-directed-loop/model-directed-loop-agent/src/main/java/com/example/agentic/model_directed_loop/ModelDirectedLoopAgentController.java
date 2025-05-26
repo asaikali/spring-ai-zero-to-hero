@@ -47,13 +47,12 @@ public class ModelDirectedLoopAgentController {
   }
 
   @PostMapping("/{id}/messages")
-  public ChatResponse sendMessage(
+  public ChatTraceResponse sendMessage(
       @PathVariable(name = "id") String agentId, @RequestBody ChatRequest request) {
     Agent agent = this.agents.get(agentId);
     if (agent == null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agent not found");
     }
-
     return agent.userMessage(request);
   }
 }

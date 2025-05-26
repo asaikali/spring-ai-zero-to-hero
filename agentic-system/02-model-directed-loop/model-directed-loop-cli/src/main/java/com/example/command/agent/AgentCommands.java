@@ -1,6 +1,8 @@
 package com.example.command.agent;
 
 import com.example.JsonUtils;
+import com.example.command.agent.dto.ChatResponse;
+import com.example.command.agent.dto.ChatTraceResponse;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
@@ -49,7 +51,6 @@ public class AgentCommands {
 
   private String generateUniqueAgentId() {
     List<String> existing = agentContext.listAgents();
-
     for (int i = 0; i < 100; i++) {
       String candidate =
           MATRIX_AGENT_NAMES.get(ThreadLocalRandom.current().nextInt(MATRIX_AGENT_NAMES.size()));
@@ -57,8 +58,6 @@ public class AgentCommands {
         return candidate;
       }
     }
-
-    // Fallback to suffix
     int suffix = 1;
     while (true) {
       String candidate = "neo-" + suffix++;
@@ -93,9 +92,12 @@ public class AgentCommands {
     agentContext.getMessages().add("[USER] " + text);
 
     try {
-      var response = agentContext.sendMessage(agentId, text);
-      agentContext.getMessages().add("[THOUGHT] " + response.innerThoughts());
-      agentContext.getMessages().add("[AGENT] " + response.message() + "\n");
+      ChatTraceResponse trace = agentContext.sendMessage(agentId, text);
+      for (ChatResponse step : trace.steps()) {
+        agentContext.getMessages().add("[THOUGHT] " + step.innerThoughts());
+        agentContext.getMessages().add("[AGENT] " + step.message());
+        agentContext.getMessages().add(""); // blank line between steps
+      }
     } catch (Exception e) {
       agentContext.getMessages().add("[ERROR] Failed to send message: " + e.getMessage());
     }
@@ -119,7 +121,6 @@ public class AgentCommands {
       System.out.println("No active agent.");
       return;
     }
-
     var agent = agentContext.getAgent(agentId);
     String json = jsonUtils.toPrettyJson(agent);
     System.out.println(json);
@@ -128,7 +129,6 @@ public class AgentCommands {
   @Command(command = "list", description = "List all created agents")
   public void list() {
     List<String> ids = agentContext.listAgents();
-
     if (ids.isEmpty()) {
       System.out.println("No agents found on the server.");
       return;
@@ -149,7 +149,7 @@ public class AgentCommands {
   }
 
   private void refreshPrompt() {
-    this.terminal.writer().println(); // moves cursor to new line if needed
-    terminal.flush(); // force update
+    this.terminal.writer().println(); // move cursor to next line
+    terminal.flush(); // flush updates
   }
 }

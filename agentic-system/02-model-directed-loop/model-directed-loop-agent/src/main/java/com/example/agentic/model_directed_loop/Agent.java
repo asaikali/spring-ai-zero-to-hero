@@ -1,5 +1,7 @@
 package com.example.agentic.model_directed_loop;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
@@ -49,23 +51,21 @@ public class Agent {
             .build();
   }
 
-  public ChatResponse userMessage(ChatRequest request) {
-    // Send the user message
+  public ChatTraceResponse userMessage(ChatRequest request) {
     this.chatClient.prompt().user(request.text()).call();
 
-    // Run the loop until the model says to stop
-    ChatResponse latest = null;
+    List<ChatResponse> trace = new ArrayList<>();
     while (true) {
       String json = this.chatClient.prompt().call().content();
-      latest = JsonParser.fromJson(json, ChatResponse.class);
+      ChatResponse step = JsonParser.fromJson(json, ChatResponse.class);
+      trace.add(step);
 
-      // Exit loop if no reinvocation requested
-      if (latest.requestReinvocation() == false) {
+      if (!step.requestReinvocation()) {
         break;
       }
     }
 
-    return latest;
+    return new ChatTraceResponse(trace);
   }
 
   public String getId() {

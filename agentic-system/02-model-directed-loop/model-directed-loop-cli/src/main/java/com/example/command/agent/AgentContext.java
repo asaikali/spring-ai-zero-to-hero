@@ -2,7 +2,7 @@ package com.example.command.agent;
 
 import com.example.command.agent.dto.AgentJson;
 import com.example.command.agent.dto.ChatRequest;
-import com.example.command.agent.dto.ChatResponse;
+import com.example.command.agent.dto.ChatTraceResponse;
 import java.util.*;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
@@ -42,7 +42,7 @@ public class AgentContext implements PromptProvider {
             + this.agentProperties.getHost()
             + ":"
             + this.agentProperties.getPort()
-            + "/agents/inner-monologue";
+            + "/agents/model-directed-loop";
     return restClientBuilder.baseUrl(targetUrl).build();
   }
 
@@ -62,14 +62,14 @@ public class AgentContext implements PromptProvider {
     return ids != null ? List.of(ids) : List.of();
   }
 
-  public ChatResponse sendMessage(String agentId, String userText) {
+  public ChatTraceResponse sendMessage(String agentId, String userText) {
     RestClient client = this.getAgentRestClient();
     return client
         .post()
         .uri("/{id}/messages", agentId)
         .body(new ChatRequest(userText))
         .retrieve()
-        .body(ChatResponse.class);
+        .body(ChatTraceResponse.class);
   }
 
   @Override

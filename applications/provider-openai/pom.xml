@@ -57,11 +57,11 @@
 			<artifactId>inner-monologue-agent</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.example</groupId>-->
-<!--			<artifactId>02-model-directed-loop</artifactId>-->
-<!--			<version>${project.version}</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>model-directed-loop-agent</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>self-reflection-agent</artifactId>
