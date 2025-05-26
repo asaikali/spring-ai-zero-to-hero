@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: agent-cli
+  main:
+    web-application-type: none
+  shell:
+    interactive:
+      enabled: true  # Keep app running interactively in terminal
+
+agent:
+  host: localhost
+  port: 8080

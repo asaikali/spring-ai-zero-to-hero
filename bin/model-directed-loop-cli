@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Find the top-level directory of the git repo
+PROJECT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+
+# Check if we're inside a Git repo
+if [ -z "$PROJECT_ROOT" ]; then
+  echo "Error: Not inside a Git repository."
+  exit 1
+fi
+
+# Move to the project root
+cd "$PROJECT_ROOT" || exit 1
+
+# Run the agent-cli module
+./mvnw -pl agentic-system/02-model-directed-loop/model-directed-loop-cli spring-boot:run

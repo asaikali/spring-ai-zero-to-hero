@@ -12,5 +12,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>model-directed-loop-agent</module>
+		<module>model-directed-loop-cli</module>
 	</modules>
 </project>
