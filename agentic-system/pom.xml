@@ -14,5 +14,6 @@
 	<modules>
 		<module>agentic-common</module>
 		<module>01-inner-monologue</module>
+		<module>02-model-directed-loop</module>
 	</modules>
 </project>
