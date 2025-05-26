@@ -1,7 +1,6 @@
 package com.example.command.agent;
 
-import static com.example.JsonUtils.toPrettyJson;
-
+import com.example.JsonUtils;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.jline.terminal.Terminal;
@@ -26,10 +25,12 @@ public class AgentCommands {
 
   private final AgentContext agentContext;
   private final Terminal terminal;
+  private final JsonUtils jsonUtils;
 
-  public AgentCommands(AgentContext agentContext, Terminal terminal) {
+  public AgentCommands(AgentContext agentContext, Terminal terminal, JsonUtils jsonUtils) {
     this.agentContext = agentContext;
     this.terminal = terminal;
+    this.jsonUtils = jsonUtils;
   }
 
   @Command(command = "create", description = "Create a new agent")
@@ -119,7 +120,7 @@ public class AgentCommands {
     }
 
     var agent = agentContext.getAgent(agentId);
-    String json = toPrettyJson(agent);
+    String json = jsonUtils.toPrettyJson(agent);
     System.out.println(json);
   }
 
