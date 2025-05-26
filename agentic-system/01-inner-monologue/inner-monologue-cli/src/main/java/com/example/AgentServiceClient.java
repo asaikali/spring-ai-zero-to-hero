@@ -13,7 +13,7 @@ public class AgentServiceClient {
 
   private final AgentContext agentContext;
 
-  public AgentServiceClient(RestClient.Builder restClientBuilder, AgentContext agentContext) {
+  public AgentServiceClient(AgentContext agentContext) {
     this.agentContext = agentContext;
   }
 
