@@ -23,7 +23,7 @@ public class AgentPromptConfig {
 
       StringBuilder sb = new StringBuilder("agent");
       if (agent != null) {
-        sb.append("@_:").append(agent); // fallback if target missing
+        sb.append("@:").append(agent); // fallback if target missing
       }
       sb.append("> ");
 
