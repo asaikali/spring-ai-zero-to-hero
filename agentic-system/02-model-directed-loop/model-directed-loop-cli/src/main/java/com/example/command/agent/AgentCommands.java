@@ -1,7 +1,8 @@
 package com.example.command.agent;
 
 import com.example.JsonUtils;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import org.jline.terminal.Terminal;
 import org.springframework.shell.command.annotation.Command;
@@ -67,8 +68,8 @@ public class AgentCommands {
     }
   }
 
-  @Command(command = "switch", description = "Switch to an existing agent")
-  public void switchAgent(@Option(longNames = "id", required = true) String id) {
+  @Command(command = "target", description = "set the agent to send messages to")
+  public void targetAgent(@Option(longNames = "id", required = true) String id) {
     List<String> ids = agentContext.listAgents();
     if (!ids.contains(id)) {
       System.out.println("[ERROR] No agent with ID: " + id + " on server.");
