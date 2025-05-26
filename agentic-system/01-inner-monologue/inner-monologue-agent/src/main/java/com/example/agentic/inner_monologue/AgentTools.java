@@ -1,5 +1,6 @@
 package com.example.agentic.inner_monologue;
 
+import com.example.agentic.inner_monologue.dto.ChatResponse;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 

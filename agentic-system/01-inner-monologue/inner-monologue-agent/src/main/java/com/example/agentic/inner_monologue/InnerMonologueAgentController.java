@@ -1,5 +1,8 @@
 package com.example.agentic.inner_monologue;
 
+import com.example.agentic.inner_monologue.dto.AgentJson;
+import com.example.agentic.inner_monologue.dto.ChatRequest;
+import com.example.agentic.inner_monologue.dto.ChatResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +32,7 @@ public class InnerMonologueAgentController {
   public AgentJson createAgent(@PathVariable(name = "id") String agentId) {
     Agent agent = new Agent(this.builder, agentId);
     agents.put(agentId, agent);
-    return AgentJson.from(agent);
+    return toAgentJson(agent);
   }
 
   @GetMapping("/{id}")
@@ -38,7 +41,7 @@ public class InnerMonologueAgentController {
     if (agent == null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agent not found");
     }
-    return AgentJson.from(agent);
+    return toAgentJson(agent);
   }
 
   @GetMapping(path = {"", "/"})
@@ -55,5 +58,9 @@ public class InnerMonologueAgentController {
     }
 
     return agent.userMessage(request);
+  }
+
+  public AgentJson toAgentJson(Agent agent) {
+    return new AgentJson(agent.getId(), agent.getSystemPrompt());
   }
 }

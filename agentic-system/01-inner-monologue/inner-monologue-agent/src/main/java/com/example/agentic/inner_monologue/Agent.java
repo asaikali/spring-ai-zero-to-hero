@@ -1,5 +1,7 @@
 package com.example.agentic.inner_monologue;
 
+import com.example.agentic.inner_monologue.dto.ChatRequest;
+import com.example.agentic.inner_monologue.dto.ChatResponse;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
