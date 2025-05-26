@@ -9,7 +9,7 @@ import org.jline.terminal.Terminal;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 
-@Command(command = "agent", description = "Agentic Chat Commands")
+@Command(group = "Agent Commands")
 public class AgentCommands {
 
   private static final List<String> MATRIX_AGENT_NAMES =
