@@ -1,7 +1,5 @@
 package com.example.agentic.model_directed_loop;
 
-import com.example.agentic.AgentSystemDescriptor;
-import com.example.agentic.AgentTargetInfo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,22 +16,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/agents/model-directed-loop")
-public class ModelDirectedLoopAgentController implements AgentSystemDescriptor {
+public class ModelDirectedLoopAgentController {
 
   private final ChatClient.Builder builder;
   private Map<String, Agent> agents = new HashMap<>();
 
   public ModelDirectedLoopAgentController(ChatClient.Builder builder) {
     this.builder = builder;
-  }
-
-  @Override
-  public AgentTargetInfo getAgentTargetInfo() {
-    return new AgentTargetInfo(
-        "model-directed-loop",
-        "Model Directed Loop",
-        "Tool-calling loop guided by the model's choices",
-        "/agents/model-directed-loop");
   }
 
   @PostMapping("/{id}")

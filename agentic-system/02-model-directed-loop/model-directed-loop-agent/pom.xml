@@ -24,10 +24,5 @@
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-openai</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>agentic-common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 	</dependencies>
 </project>
