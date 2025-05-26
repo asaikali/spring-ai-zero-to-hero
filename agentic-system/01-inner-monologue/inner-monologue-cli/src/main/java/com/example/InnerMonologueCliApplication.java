@@ -6,8 +6,8 @@ import org.springframework.shell.command.annotation.CommandScan;
 
 @CommandScan
 @SpringBootApplication
-public class AgentCliApplication {
+public class InnerMonologueCliApplication {
   public static void main(String[] args) {
-    SpringApplication.run(AgentCliApplication.class, args);
+    SpringApplication.run(InnerMonologueCliApplication.class, args);
   }
 }
