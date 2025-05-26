@@ -4,12 +4,15 @@ import com.example.command.agent.dto.AgentJson;
 import com.example.command.agent.dto.ChatRequest;
 import com.example.command.agent.dto.ChatResponse;
 import java.util.*;
+import org.jline.utils.AttributedString;
+import org.jline.utils.AttributedStyle;
+import org.springframework.shell.jline.PromptProvider;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClient.Builder;
 
 @Component
-public class AgentContext {
+public class AgentContext implements PromptProvider {
 
   private final AgentProperties agentProperties;
   private final List<String> messages = new ArrayList<>();
@@ -67,5 +70,18 @@ public class AgentContext {
         .body(new ChatRequest(userText))
         .retrieve()
         .body(ChatResponse.class);
+  }
+
+  @Override
+  public AttributedString getPrompt() {
+
+    StringBuilder sb = new StringBuilder("agent");
+    if (currentAgentId != null) {
+      sb.append("@").append(currentAgentId); // fallback if target missing
+    }
+    sb.append("> ");
+
+    return new AttributedString(
+        sb.toString(), AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW));
   }
 }
