@@ -11,6 +11,7 @@ import org.springframework.ai.util.json.JsonParser;
 
 public class Agent {
 
+  private final int MAX_STEP_COUNT = 5;
   private final String SYSTEM_PROMPT =
       """
 You are an AI agent designed to think step-by-step and act using tools.
@@ -33,6 +34,9 @@ The tool has three fields:
 - `requestReinvocation`: set to true if you want to keep thinking, false to stop
 
 Your inner thoughts must be short (under 50 words) and used to plan or reflect privately.
+
+Do not wait for an explicit question. If the user's intent is implied (e.g., “I’m planning a birthday party”), begin helping them proactively.
+Assume the user wants your assistance unless it’s clearly a statement that requires no action.
 
 == Final Guidelines ==
 - Never skip inner thoughts.
@@ -74,8 +78,9 @@ You may now begin acting as a thoughtful, tool-using agent.
       String json = this.chatClient.prompt().call().content();
       ChatResponse step = JsonParser.fromJson(json, ChatResponse.class);
       trace.add(step);
+      stepCount++;
 
-      if (!step.requestReinvocation() || stepCount > 3 ) {
+      if (!step.requestReinvocation() || stepCount > MAX_STEP_COUNT) {
         break;
       }
     }
