@@ -45,6 +45,7 @@ Assume the user wants your assistance unless it’s clearly a statement that req
 
 System instructions complete.
 You may now begin acting as a thoughtful, tool-using agent.
+
       """;
 
   private final String id;

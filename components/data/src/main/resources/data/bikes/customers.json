@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Kayla Castro",
+    "email": "kayla.castro@example.com",
+    "address": {
+      "street": "3485 Cedar Street",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "postalCode": "X3H 9B4"
+    },
+    "created_at": "2023-07-26T11:45:42.717042",
+    "updated_at": "2023-09-18T11:45:42.717042"
+  },
+  {
+    "id": 2,
+    "name": "Rickey Walker",
+    "email": "rickey.walker@example.com",
+    "address": {
+      "street": "5653 Elm Street",
+      "city": "Vancouver",
+      "province": "British Columbia",
+      "country": "Canada",
+      "postalCode": "T9P 2T2"
+    },
+    "created_at": "2024-04-12T11:45:42.717068",
+    "updated_at": "2024-04-30T11:45:42.717068"
+  },
+  {
+    "id": 3,
+    "name": "Dustin Henderson",
+    "email": "dustin.henderson@example.com",
+    "address": {
+      "street": "6312 Ash Street",
+      "city": "Montreal",
+      "province": "Quebec",
+      "country": "Canada",
+      "postalCode": "H7J 5E9"
+    },
+    "created_at": "2025-02-07T11:45:42.717080",
+    "updated_at": "2025-03-03T11:45:42.717080"
+  },
+  {
+    "id": 4,
+    "name": "Michele Jones",
+    "email": "michele.jones@example.com",
+    "address": {
+      "street": "9254 Cedar Street",
+      "city": "Calgary",
+      "province": "Alberta",
+      "country": "Canada",
+      "postalCode": "X3R 6E1"
+    },
+    "created_at": "2023-09-04T11:45:42.717088",
+    "updated_at": "2023-10-14T11:45:42.717088"
+  },
+  {
+    "id": 5,
+    "name": "Dr. Denise Smith MD",
+    "email": "denise.smith@example.com",
+    "address": {
+      "street": "9750 Oak Street",
+      "city": "Ottawa",
+      "province": "Ontario",
+      "country": "Canada",
+      "postalCode": "G4B 3R3"
+    },
+    "created_at": "2024-01-02T11:45:42.717094",
+    "updated_at": "2024-02-07T11:45:42.717094"
+  },
+  {
+    "id": 6,
+    "name": "Lindsay Vargas",
+    "email": "lindsay.vargas@example.com",
+    "address": {
+      "street": "8257 Oak Street",
+      "city": "Edmonton",
+      "province": "Alberta",
+      "country": "Canada",
+      "postalCode": "R7E 6G7"
+    },
+    "created_at": "2024-12-09T11:45:42.717100",
+    "updated_at": "2025-01-29T11:45:42.717100"
+  },
+  {
+    "id": 7,
+    "name": "Monica Bell",
+    "email": "monica.bell@example.com",
+    "address": {
+      "street": "8520 Ash Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "country": "Canada",
+      "postalCode": "M6H 4V6"
+    },
+    "created_at": "2024-03-10T11:45:42.717105",
+    "updated_at": "2024-04-17T11:45:42.717105"
+  },
+  {
+    "id": 8,
+    "name": "James Baker",
+    "email": "james.baker@example.com",
+    "address": {
+      "street": "5947 Willow Street",
+      "city": "Halifax",
+      "province": "Nova Scotia",
+      "country": "Canada",
+      "postalCode": "T2E 2L7"
+    },
+    "created_at": "2024-05-22T11:45:42.717114",
+    "updated_at": "2024-06-22T11:45:42.717114"
+  },
+  {
+    "id": 9,
+    "name": "Erin Kirby",
+    "email": "erin.kirby@example.com",
+    "address": {
+      "street": "798 Pine Street",
+      "city": "Saskatoon",
+      "province": "Saskatchewan",
+      "country": "Canada",
+      "postalCode": "T1H 1X7"
+    },
+    "created_at": "2024-01-27T11:45:42.717121",
+    "updated_at": "2024-03-06T11:45:42.717121"
+  },
+  {
+    "id": 10,
+    "name": "Kevin Peck",
+    "email": "kevin.peck@example.com",
+    "address": {
+      "street": "2720 Birch Street",
+      "city": "St. John's",
+      "province": "Newfoundland and Labrador",
+      "country": "Canada",
+      "postalCode": "T6Y 8E4"
+    },
+    "created_at": "2024-03-02T11:45:42.717128",
+    "updated_at": "2024-04-03T11:45:42.717128"
+  }
+]

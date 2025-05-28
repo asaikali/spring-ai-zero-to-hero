@@ -1,0 +1,479 @@
+[
+  {
+    "id": 1,
+    "customer_id": 3,
+    "order_date": "2024-10-21T15:34:10",
+    "created_at": "2024-10-21T15:33:00",
+    "updated_at": "2024-10-26T16:45:00",
+    "status": "delivered",
+    "status_history": [
+      {
+        "status": "pending",
+        "entered_at": "2024-10-21T15:34:10"
+      },
+      {
+        "status": "processing",
+        "entered_at": "2024-10-21T17:00:00"
+      },
+      {
+        "status": "shipped",
+        "entered_at": "2024-10-22T09:00:00"
+      },
+      {
+        "status": "delivered",
+        "entered_at": "2024-10-26T16:45:00"
+      }
+    ],
+    "line_items": [
+      {
+        "product_id": 2,
+        "quantity": 1,
+        "unit_price": 1299.99,
+        "total_price": 1299.99
+      },
+      {
+        "product_id": 5,
+        "quantity": 2,
+        "unit_price": 899.5,
+        "total_price": 1799.0
+      }
+    ],
+    "subtotal": 3098.99,
+    "tax": 403.0,
+    "total_price": 3501.99,
+    "payment": {
+      "payment_method": "credit_card",
+      "provider": "stripe",
+      "card_last4": "4242",
+      "payment_method_display": "Visa ending in 4242",
+      "billing_name": "Kayla Castro",
+      "transaction_id": "txn_1Hh4kL2eZvKYlo2C8pC7X9GH",
+      "status": "paid",
+      "paid_at": "2024-10-21T15:35:00"
+    },
+    "fulfillment": {
+      "packages": [
+        {
+          "package_number": "1/2",
+          "tracking_number": "CP123456789CA",
+          "carrier": "canada_post",
+          "contents": [
+            {
+              "product_id": 2,
+              "quantity": 1
+            }
+          ],
+          "shipped_at": "2024-10-22T10:00:00",
+          "delivered_at": "2024-10-26T16:45:00"
+        },
+        {
+          "package_number": "2/2",
+          "tracking_number": "CP123456790CA",
+          "carrier": "canada_post",
+          "contents": [
+            {
+              "product_id": 5,
+              "quantity": 2
+            }
+          ],
+          "shipped_at": "2024-10-22T10:00:00",
+          "delivered_at": null
+        }
+      ]
+    },
+    "shipping_address": {
+      "street": "3485 Cedar Street",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "postalCode": "X3H 9B4"
+    },
+    "billing_address": {
+      "street": "3485 Cedar Street",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "postalCode": "X3H 9B4"
+    },
+    "refund_status": "not_requested",
+    "refunded_amount": 0.0,
+    "cancellation_reason": null,
+    "cancelled_at": null,
+    "return_eligible_until": "2024-11-25T23:59:59",
+    "support_notes": "Customer requested early delivery, approved via email."
+  },
+  {
+    "id": 200,
+    "customer_id": 5,
+    "order_date": "2025-02-10T09:15:00",
+    "created_at": "2025-02-10T09:15:00",
+    "updated_at": "2025-02-12T14:30:00",
+    "status": "delivered",
+    "status_history": [
+      {
+        "status": "pending",
+        "entered_at": "2025-02-10T09:15:00"
+      },
+      {
+        "status": "processing",
+        "entered_at": "2025-02-10T11:15:00"
+      },
+      {
+        "status": "shipped",
+        "entered_at": "2025-02-10T17:15:00"
+      },
+      {
+        "status": "delivered",
+        "entered_at": "2025-02-12T14:30:00"
+      }
+    ],
+    "line_items": [
+      {
+        "product_id": 2,
+        "quantity": 1,
+        "unit_price": 599.99,
+        "total_price": 599.99
+      },
+      {
+        "product_id": 7,
+        "quantity": 1,
+        "unit_price": 1499.99,
+        "total_price": 1499.99
+      }
+    ],
+    "subtotal": 2099.98,
+    "tax": 272.998,
+    "total_price": 2372.98,
+    "payment": {
+      "payment_method": "credit_card",
+      "provider": "stripe",
+      "card_last4": "1234",
+      "payment_method_display": "Visa ending in 1234",
+      "billing_name": "Dr. Denise Smith MD",
+      "transaction_id": "txn_abcdef123456",
+      "status": "paid",
+      "paid_at": "2025-02-10T11:20:00"
+    },
+    "fulfillment": {
+      "packages": [
+        {
+          "package_number": "1/2",
+          "tracking_number": "CP123456780CA",
+          "carrier": "canada_post",
+          "contents": [
+            {
+              "product_id": 2,
+              "quantity": 1
+            }
+          ],
+          "shipped_at": "2025-02-10T17:15:00",
+          "delivered_at": "2025-02-12T14:30:00"
+        },
+        {
+          "package_number": "2/2",
+          "tracking_number": "CP123456781CA",
+          "carrier": "canada_post",
+          "contents": [
+            {
+              "product_id": 7,
+              "quantity": 1
+            }
+          ],
+          "shipped_at": "2025-02-10T17:15:00",
+          "delivered_at": "2025-02-12T14:30:00"
+        }
+      ]
+    },
+    "shipping_address": {
+      "street": "9750 Oak Street",
+      "city": "Ottawa",
+      "province": "Ontario",
+      "country": "Canada",
+      "postalCode": "G4B 3R3"
+    },
+    "billing_address": {
+      "street": "9750 Oak Street",
+      "city": "Ottawa",
+      "province": "Ontario",
+      "country": "Canada",
+      "postalCode": "G4B 3R3"
+    },
+    "refund_status": "not_requested",
+    "refunded_amount": 0.00,
+    "cancellation_reason": null,
+    "cancelled_at": null,
+    "return_eligible_until": "2025-03-14T14:30:00",
+    "support_notes": "Order delivered with no issues."
+  },
+  {
+    "id": 201,
+    "customer_id": 2,
+    "order_date": "2025-03-05T08:00:00",
+    "created_at": "2025-03-05T08:00:00",
+    "updated_at": "2025-03-05T16:00:00",
+    "status": "shipped",
+    "status_history": [
+      { "status": "pending",    "entered_at": "2025-03-05T08:00:00" },
+      { "status": "processing", "entered_at": "2025-03-05T10:00:00" },
+      { "status": "shipped",    "entered_at": "2025-03-05T16:00:00" }
+    ],
+    "line_items": [
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "unit_price": 799.99,
+        "total_price": 799.99
+      },
+      {
+        "product_id": 6,
+        "quantity": 1,
+        "unit_price": 1299.99,
+        "total_price": 1299.99
+      }
+    ],
+    "subtotal": 2099.98,
+    "tax": 272.9974,
+    "total_price": 2372.98,
+    "payment": {
+      "payment_method": "credit_card",
+      "provider": "stripe",
+      "card_last4": "5678",
+      "payment_method_display": "Visa ending in 5678",
+      "billing_name": "Rickey Walker",
+      "transaction_id": "txn_ghijkl789012",
+      "status": "paid",
+      "paid_at": "2025-03-05T10:05:00"
+    },
+    "fulfillment": {
+      "packages": [
+        {
+          "package_number": "1/2",
+          "tracking_number": "CP234567890CA",
+          "carrier": "canada_post",
+          "contents": [
+            { "product_id": 3, "quantity": 1 }
+          ],
+          "shipped_at": "2025-03-05T16:00:00",
+          "delivered_at": "2025-03-07T14:30:00"
+        },
+        {
+          "package_number": "2/2",
+          "tracking_number": "1Z999AA10123456784",
+          "carrier": "ups",
+          "contents": [
+            { "product_id": 6, "quantity": 1 }
+          ],
+          "shipped_at": "2025-03-05T16:00:00",
+          "delivered_at": null
+        }
+      ]
+    },
+    "shipping_address": {
+      "street": "5653 Elm Street",
+      "city": "Vancouver",
+      "province": "British Columbia",
+      "country": "Canada",
+      "postalCode": "E9Y4S6"
+    },
+    "billing_address": {
+      "street": "5653 Elm Street",
+      "city": "Vancouver",
+      "province": "British Columbia",
+      "country": "Canada",
+      "postalCode": "E9Y4S6"
+    },
+    "refund_status": "not_requested",
+    "refunded_amount": 0.00,
+    "cancellation_reason": null,
+    "cancelled_at": null,
+    "return_eligible_until": "2025-04-06T14:30:00",
+    "support_notes": "Box 1 delivered via Canada Post; box 2 is still in transit with UPS."
+  },
+  {
+    "id": 202,
+    "customer_id": 6,
+    "order_date": "2025-04-01T08:00:00",
+    "created_at": "2025-04-01T08:00:00",
+    "updated_at": "2025-05-20T10:00:00",
+    "status": "refunded",
+    "status_history": [
+      { "status": "pending",    "entered_at": "2025-04-01T08:00:00" },
+      { "status": "processing", "entered_at": "2025-04-01T10:00:00" },
+      { "status": "shipped",    "entered_at": "2025-04-01T16:00:00" },
+      { "status": "delivered",  "entered_at": "2025-04-03T15:00:00" },
+      { "status": "returned",   "entered_at": "2025-04-10T12:00:00" },
+      { "status": "refunded",   "entered_at": "2025-05-20T10:00:00" }
+    ],
+    "line_items": [
+      {
+        "product_id": 1,
+        "quantity": 1,
+        "unit_price": 1499.99,
+        "total_price": 1499.99
+      }
+    ],
+    "subtotal": 1499.99,
+    "tax": 195.00,
+    "total_price": 1694.99,
+    "payment": {
+      "payment_method": "credit_card",
+      "provider": "stripe",
+      "card_last4": "3333",
+      "payment_method_display": "Visa ending in 3333",
+      "billing_name": "Lindsay Vargas",
+      "transaction_id": "txn_refund2025",
+      "status": "refunded",
+      "paid_at": "2025-04-01T10:00:00",
+      "refunded_at": "2025-05-20T10:00:00"
+    },
+    "fulfillment": {
+      "packages": [
+        {
+          "package_number": "1/1",
+          "tracking_number": "CP345678901CA",
+          "carrier": "canada_post",
+          "contents": [
+            { "product_id": 1, "quantity": 1 }
+          ],
+          "shipped_at": "2025-04-01T16:00:00",
+          "delivered_at": "2025-04-03T15:00:00"
+        }
+      ]
+    },
+    "shipping_address": {
+      "street": "8257 Oak Street",
+      "city": "Edmonton",
+      "province": "Alberta",
+      "country": "Canada",
+      "postalCode": "R7E 6G7"
+    },
+    "billing_address": {
+      "street": "8257 Oak Street",
+      "city": "Edmonton",
+      "province": "Alberta",
+      "country": "Canada",
+      "postalCode": "R7E 6G7"
+    },
+    "refund_status": "processed",
+    "refunded_amount": 1694.99,
+    "cancellation_reason": null,
+    "cancelled_at": null,
+    "return_eligible_until": null,
+    "support_notes": "Customer returned the bike due to dissatisfaction with its quality; refund processed."
+  },
+  {
+    "id": 203,
+    "customer_id": 8,
+    "order_date": "2025-05-10T10:00:00",
+    "created_at": "2025-05-10T10:00:00",
+    "updated_at": "2025-05-12T09:00:00",
+    "status": "cancelled",
+    "status_history": [
+      { "status": "pending",    "entered_at": "2025-05-10T10:00:00" },
+      { "status": "processing", "entered_at": "2025-05-10T12:00:00" },
+      { "status": "cancelled",  "entered_at": "2025-05-12T09:00:00" }
+    ],
+    "line_items": [
+      {
+        "product_id": 4,
+        "quantity": 1,
+        "unit_price": 399.99,
+        "total_price": 399.99
+      }
+    ],
+    "subtotal": 399.99,
+    "tax": 52.00,
+    "total_price": 451.99,
+    "payment": {
+      "payment_method": "credit_card",
+      "provider": "stripe",
+      "card_last4": "9012",
+      "payment_method_display": "Visa ending in 9012",
+      "billing_name": "James Baker",
+      "transaction_id": "txn_cancel203",
+      "status": "refunded",
+      "paid_at": "2025-05-10T12:00:00",
+      "refunded_at": "2025-05-12T09:00:00"
+    },
+    "fulfillment": {
+      "packages": []
+    },
+    "shipping_address": {
+      "street": "5947 Willow Street",
+      "city": "Halifax",
+      "province": "Nova Scotia",
+      "country": "Canada",
+      "postalCode": "T2E 2L7"
+    },
+    "billing_address": {
+      "street": "5947 Willow Street",
+      "city": "Halifax",
+      "province": "Nova Scotia",
+      "country": "Canada",
+      "postalCode": "T2E 2L7"
+    },
+    "refund_status": "processed",
+    "refunded_amount": 451.99,
+    "cancellation_reason": "shipping_delay",
+    "cancelled_at": "2025-05-12T09:00:00",
+    "return_eligible_until": null,
+    "support_notes": "Customer cancelled order due to slow shipping; full refund issued."
+  },
+  {
+    "id": 204,
+    "customer_id": 3,
+    "order_date": "2025-05-25T10:00:00",
+    "created_at": "2025-05-25T10:00:00",
+    "updated_at": "2025-05-25T12:00:00",
+    "status": "on_hold",
+    "status_history": [
+      { "status": "pending",    "entered_at": "2025-05-25T10:00:00" },
+      { "status": "processing", "entered_at": "2025-05-25T11:00:00" },
+      { "status": "on_hold",    "entered_at": "2025-05-25T12:00:00" }
+    ],
+    "line_items": [
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "unit_price": 799.99,
+        "total_price": 799.99
+      }
+    ],
+    "subtotal": 799.99,
+    "tax": 103.00,
+    "total_price": 902.99,
+    "payment": {
+      "payment_method": "credit_card",
+      "provider": "stripe",
+      "card_last4": "3456",
+      "payment_method_display": "Visa ending in 3456",
+      "billing_name": "Dustin Henderson",
+      "transaction_id": "txn_inventory204",
+      "status": "paid",
+      "paid_at": "2025-05-25T11:05:00"
+    },
+    "fulfillment": {
+      "packages": []
+    },
+    "shipping_address": {
+      "street": "6312 Ash Street",
+      "city": "Montreal",
+      "province": "Quebec",
+      "country": "Canada",
+      "postalCode": "H7J 5E9"
+    },
+    "billing_address": {
+      "street": "6312 Ash Street",
+      "city": "Montreal",
+      "province": "Quebec",
+      "country": "Canada",
+      "postalCode": "H7J 5E9"
+    },
+    "refund_status": "not_requested",
+    "refunded_amount": 0.00,
+    "cancellation_reason": null,
+    "cancelled_at": null,
+    "return_eligible_until": null,
+    "support_notes": "Order on hold awaiting inventory; warehouse ETA is 2025-06-01."
+  }
+]
