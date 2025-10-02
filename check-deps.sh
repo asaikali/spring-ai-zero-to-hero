@@ -7,10 +7,10 @@ check_java() {
     echo "============================"
     if command -v java &> /dev/null
     then
-        echo "Java is installed. Version details:"
+        echo "✅ Java is installed. Version details:"
         java -version
     else
-        echo "Java is not installed."
+        echo "❌ Java is not installed."
     fi
     echo ""
 }
@@ -22,10 +22,10 @@ check_ollama() {
     echo "==============================="
     if command -v ollama &> /dev/null
     then
-        echo "Ollama is installed. Version details:"
+        echo "✅ Ollama is installed. Version details:"
         ollama --version
     else
-        echo "Ollama is not installed."
+        echo "❌ Ollama is not installed."
     fi
     echo ""
 }
@@ -39,12 +39,12 @@ check_llama3_model() {
     then
         if ollama list | grep -q "llama3.2"
         then
-            echo "llama3.2 model is pulled and available."
+            echo "✅ llama3.2 model is pulled and available."
         else
-            echo "llama3.2 model is not pulled. Please pull it using 'ollama pull llama3.2'."
+            echo "❌ llama3.2 model is not pulled. Please pull it using 'ollama pull llama3.2'."
         fi
     else
-        echo "Ollama is not installed, so the llama3.2 model cannot be checked."
+        echo "❌ Ollama is not installed, so the llama3.2 model cannot be checked."
     fi
     echo ""
 }
@@ -58,12 +58,12 @@ check_mxbai_embed_large_model() {
     then
         if ollama list | grep -q "mxbai-embed-large"
         then
-            echo "mxbai-embed-large model is pulled and available."
+            echo "✅ mxbai-embed-large model is pulled and available."
         else
-            echo "mxbai-embed-large model is not pulled. Please pull it using 'ollama pull mxbai-embed-large'."
+            echo "❌ mxbai-embed-large model is not pulled. Please pull it using 'ollama pull mxbai-embed-large'."
         fi
     else
-        echo "Ollama is not installed, so the mxbai-embed-large model cannot be checked."
+        echo "❌ Ollama is not installed, so the mxbai-embed-large model cannot be checked."
     fi
     echo ""
 }
@@ -77,12 +77,12 @@ check_llava_model() {
     then
         if ollama list | grep -q "llava"
         then
-            echo "llava model is pulled and available."
+            echo "✅ llava model is pulled and available."
         else
-            echo "llava model is not pulled. Please pull it using 'ollama pull llava'."
+            echo "❌ llava model is not pulled. Please pull it using 'ollama pull llava'."
         fi
     else
-        echo "Ollama is not installed, so the llava model cannot be checked."
+        echo "❌ Ollama is not installed, so the llava model cannot be checked."
     fi
     echo ""
 }
@@ -95,10 +95,10 @@ check_docker() {
     echo "=============================="
     if command -v docker &> /dev/null
     then
-        echo "Docker is installed. Version details:"
+        echo "✅ Docker is installed. Version details:"
         docker --version
     else
-        echo "Docker is not installed."
+        echo "❌ Docker is not installed."
     fi
     echo ""
 }
@@ -109,9 +109,9 @@ check_docker_image() {
     echo "Checking Docker image: $image"
     if docker images --format "{{.Repository}}:{{.Tag}}" | grep -q "$image"
     then
-        echo "Docker image $image is pulled."
+        echo "✅ Docker image $image is pulled."
     else
-        echo "Docker image $image is not pulled. Please pull it using 'docker pull $image'."
+        echo "❌ Docker image $image is not pulled. Please pull it using 'docker pull $image'."
     fi
     echo ""
 }
@@ -123,10 +123,10 @@ check_httpie() {
     echo "==============================="
     if command -v http &> /dev/null
     then
-        echo "HTTPie is installed. Version details:"
+        echo "✅ HTTPie is installed. Version details:"
         http --version
     else
-        echo "HTTPie is not installed."
+        echo "❌ HTTPie is not installed."
     fi
     echo ""
 }
