@@ -2,53 +2,53 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
 public class LineItem {
-    @JsonProperty("product_id")
-    private int productId;
-    private int quantity;
+  @JsonProperty("product_id")
+  private int productId;
 
-    @JsonProperty("unit_price")
-    private BigDecimal unitPrice;
+  private int quantity;
 
-    @JsonProperty("total_price")
-    private BigDecimal totalPrice;
+  @JsonProperty("unit_price")
+  private BigDecimal unitPrice;
 
-    public int getProductId() {
-        return productId;
-    }
+  @JsonProperty("total_price")
+  private BigDecimal totalPrice;
 
-    public LineItem setProductId(int productId) {
-        this.productId = productId;
-        return this;
-    }
+  public int getProductId() {
+    return productId;
+  }
 
-    public int getQuantity() {
-        return quantity;
-    }
+  public LineItem setProductId(int productId) {
+    this.productId = productId;
+    return this;
+  }
 
-    public LineItem setQuantity(int quantity) {
-        this.quantity = quantity;
-        return this;
-    }
+  public int getQuantity() {
+    return quantity;
+  }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
+  public LineItem setQuantity(int quantity) {
+    this.quantity = quantity;
+    return this;
+  }
 
-    public LineItem setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-        return this;
-    }
+  public BigDecimal getUnitPrice() {
+    return unitPrice;
+  }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
+  public LineItem setUnitPrice(BigDecimal unitPrice) {
+    this.unitPrice = unitPrice;
+    return this;
+  }
 
-    public LineItem setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-        return this;
-    }
+  public BigDecimal getTotalPrice() {
+    return totalPrice;
+  }
+
+  public LineItem setTotalPrice(BigDecimal totalPrice) {
+    this.totalPrice = totalPrice;
+    return this;
+  }
 }

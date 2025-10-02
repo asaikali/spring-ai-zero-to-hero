@@ -2,112 +2,112 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.LocalDateTime;
 
 public class Payment {
-    @JsonProperty("payment_method")
-    private String paymentMethod;
-    private String provider;
+  @JsonProperty("payment_method")
+  private String paymentMethod;
 
-    @JsonProperty("card_last4")
-    private String cardLast4;
+  private String provider;
 
-    @JsonProperty("payment_method_display")
-    private String paymentMethodDisplay;
+  @JsonProperty("card_last4")
+  private String cardLast4;
 
-    @JsonProperty("billing_name")
-    private String billingName;
+  @JsonProperty("payment_method_display")
+  private String paymentMethodDisplay;
 
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  @JsonProperty("billing_name")
+  private String billingName;
 
-    private String status;
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    @JsonProperty("paid_at")
-    private LocalDateTime paidAt;
+  private String status;
 
-    @JsonProperty("refunded_at")
-    private LocalDateTime refundedAt;
+  @JsonProperty("paid_at")
+  private LocalDateTime paidAt;
 
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
+  @JsonProperty("refunded_at")
+  private LocalDateTime refundedAt;
 
-    public Payment setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-        return this;
-    }
+  public String getPaymentMethod() {
+    return paymentMethod;
+  }
 
-    public String getProvider() {
-        return provider;
-    }
+  public Payment setPaymentMethod(String paymentMethod) {
+    this.paymentMethod = paymentMethod;
+    return this;
+  }
 
-    public Payment setProvider(String provider) {
-        this.provider = provider;
-        return this;
-    }
+  public String getProvider() {
+    return provider;
+  }
 
-    public String getCardLast4() {
-        return cardLast4;
-    }
+  public Payment setProvider(String provider) {
+    this.provider = provider;
+    return this;
+  }
 
-    public Payment setCardLast4(String cardLast4) {
-        this.cardLast4 = cardLast4;
-        return this;
-    }
+  public String getCardLast4() {
+    return cardLast4;
+  }
 
-    public String getPaymentMethodDisplay() {
-        return paymentMethodDisplay;
-    }
+  public Payment setCardLast4(String cardLast4) {
+    this.cardLast4 = cardLast4;
+    return this;
+  }
 
-    public Payment setPaymentMethodDisplay(String paymentMethodDisplay) {
-        this.paymentMethodDisplay = paymentMethodDisplay;
-        return this;
-    }
+  public String getPaymentMethodDisplay() {
+    return paymentMethodDisplay;
+  }
 
-    public String getBillingName() {
-        return billingName;
-    }
+  public Payment setPaymentMethodDisplay(String paymentMethodDisplay) {
+    this.paymentMethodDisplay = paymentMethodDisplay;
+    return this;
+  }
 
-    public Payment setBillingName(String billingName) {
-        this.billingName = billingName;
-        return this;
-    }
+  public String getBillingName() {
+    return billingName;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public Payment setBillingName(String billingName) {
+    this.billingName = billingName;
+    return this;
+  }
 
-    public Payment setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-        return this;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public String getStatus() {
-        return status;
-    }
+  public Payment setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+    return this;
+  }
 
-    public Payment setStatus(String status) {
-        this.status = status;
-        return this;
-    }
+  public String getStatus() {
+    return status;
+  }
 
-    public LocalDateTime getPaidAt() {
-        return paidAt;
-    }
+  public Payment setStatus(String status) {
+    this.status = status;
+    return this;
+  }
 
-    public Payment setPaidAt(LocalDateTime paidAt) {
-        this.paidAt = paidAt;
-        return this;
-    }
+  public LocalDateTime getPaidAt() {
+    return paidAt;
+  }
 
-    public LocalDateTime getRefundedAt() {
-        return refundedAt;
-    }
+  public Payment setPaidAt(LocalDateTime paidAt) {
+    this.paidAt = paidAt;
+    return this;
+  }
 
-    public Payment setRefundedAt(LocalDateTime refundedAt) {
-        this.refundedAt = refundedAt;
-        return this;
-    }
+  public LocalDateTime getRefundedAt() {
+    return refundedAt;
+  }
+
+  public Payment setRefundedAt(LocalDateTime refundedAt) {
+    this.refundedAt = refundedAt;
+    return this;
+  }
 }

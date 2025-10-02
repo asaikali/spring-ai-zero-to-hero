@@ -30,5 +30,4 @@ public class FakeDataTest {
     Order[] orders = dataFiles.getOrders();
     assertThat(orders).hasSize(6);
   }
-
 }

@@ -13,7 +13,7 @@ public class Agent {
 
   private final int MAX_STEP_COUNT = 5;
   private final String SYSTEM_PROMPT =
-      """
+"""
 You are an AI agent designed to think step-by-step and act using tools.
 
 == Control Flow ==
@@ -45,8 +45,7 @@ Assume the user wants your assistance unless it’s clearly a statement that req
 
 System instructions complete.
 You may now begin acting as a thoughtful, tool-using agent.
-
-      """;
+""";
 
   private final String id;
   private final ChatClient chatClient;
