@@ -55,7 +55,7 @@ before the workshop starts. After install:
 ============================
 Checking Java installation:
 ============================
-Java is installed. Version details:
+✅ Java is installed. Version details:
 openjdk version "25" 2025-09-16 LTS
 OpenJDK Runtime Environment Temurin-25+36 (build 25+36-LTS)
 OpenJDK 64-Bit Server VM Temurin-25+36 (build 25+36-LTS, mixed mode, sharing)
@@ -63,40 +63,40 @@ OpenJDK 64-Bit Server VM Temurin-25+36 (build 25+36-LTS, mixed mode, sharing)
 ===============================
 Checking Ollama installation:
 ===============================
-Ollama is installed. Version details:
-ollama version is 0.10.1
+✅ Ollama is installed. Version details:
+ollama version is 0.12.0
 
 ========================================
 Checking if llama3.2 model is pulled:
 ========================================
-llama3.2 model is pulled and available.
+✅ llama3.2 model is pulled and available.
 
 ========================================
 Checking if mxbai-embed-large model is pulled:
 ========================================
-mxbai-embed-large model is pulled and available.
+✅ mxbai-embed-large model is pulled and available.
 
 ========================================
 Checking if llava model is pulled:
 ========================================
-llava model is pulled and available.
+✅ llava model is pulled and available.
 
 ==============================
 Checking Docker installation:
 ==============================
-Docker is installed. Version details:
+✅ Docker is installed. Version details:
 Docker version 28.1.1, build 4eba377
 
 Checking Docker image: pgvector/pgvector:pg17
-Docker image pgvector/pgvector:pg17 is pulled.
+✅ Docker image pgvector/pgvector:pg17 is pulled.
 
 Checking Docker image: dpage/pgadmin4:9.8.0
-Docker image dpage/pgadmin4:9.8.0 is pulled.
+✅ Docker image dpage/pgadmin4:9.8.0 is pulled.
 
 ===============================
 Checking HTTPie installation:
 ===============================
-HTTPie is installed. Version details:
+✅ HTTPie is installed. Version details:
 3.2.4
 ```
 
