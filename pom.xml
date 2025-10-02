@@ -20,7 +20,7 @@
     <spring-ai.version>1.0.0</spring-ai.version>
     <spring-cloud.version>2025.0.0</spring-cloud.version>
     <spring-cloud-azure.version>5.22.0</spring-cloud-azure.version>
-    <spotless.version>2.44.4</spotless.version>
+    <spotless.version>2.46.1</spotless.version>
     <loki-logback-appender.version>1.6.0</loki-logback-appender.version>
     <spring-shell.version>3.4.0</spring-shell.version>
   </properties>
@@ -105,7 +105,7 @@
         <configuration>
           <java>
             <googleJavaFormat>
-              <!--                            <version>17</version>-->
+              <version>1.28.0</version>
             </googleJavaFormat>
           </java>
         </configuration>
