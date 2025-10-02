@@ -30,21 +30,21 @@ check_ollama() {
     echo ""
 }
 
-# Function to check if the llama3.1 model is pulled for Ollama
+# Function to check if the llama3.2 model is pulled for Ollama
 check_llama3_model() {
     echo "========================================"
-    echo "Checking if llama4 model is pulled:"
+    echo "Checking if llama3.2 model is pulled:"
     echo "========================================"
     if command -v ollama &> /dev/null
     then
-        if ollama list | grep -q "llama4"
+        if ollama list | grep -q "llama3.2"
         then
-            echo "llama4 model is pulled and available."
+            echo "llama3.2 model is pulled and available."
         else
-            echo "llama4 model is not pulled. Please pull it using 'ollama pull llama4'."
+            echo "llama3.2 model is not pulled. Please pull it using 'ollama pull llama3.2'."
         fi
     else
-        echo "Ollama is not installed, so the llama3.1 model cannot be checked."
+        echo "Ollama is not installed, so the llama3.2 model cannot be checked."
     fi
     echo ""
 }
@@ -139,5 +139,5 @@ check_mxbai_embed_large_model
 check_llava_model
 check_docker
 check_docker_image "pgvector/pgvector:pg17"
-check_docker_image "dpage/pgadmin4:9.3"
+check_docker_image "dpage/pgadmin4:9.8.0"
 check_httpie
