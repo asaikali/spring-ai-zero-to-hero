@@ -5,14 +5,14 @@ AI projects.
 
 ## Software Prerequisites
 
-**You need the following software installed: Java 21, docker, ollama, httpie,
+**You need the following software installed: Java 21+, docker, ollama, httpie,
 and your favourite Java IDE. This is a lot of GBs to download so please make
 sure to have all this stuff installed before the conference workshop, as the
 conference wifi may be slow, so you might not be able to run the samples.**
 
 ### Java development tooling
 
-* Java 21 you can use [sdkman.io](https://sdkman.io/)
+* Java 21+ you can use [sdkman.io](https://sdkman.io/)
 * [Maven](https://maven.apache.org/index.html)
 * Favourite Java IDE one of
     * [IntelliJ](https://www.jetbrains.com/idea/download)
@@ -44,7 +44,7 @@ very educational. You can run the models locally and learn how they work.
 Please make sure that the software list above is installed on your laptop
 before the workshop starts. After install:
 
-1. clone this repo to your laptop
+1. Clone this repo to your laptop
 2. Run the `./download-deps.sh` script pull local AI models, and container
    images.
 2. Run the `check-deps.sh` script to check that the all the required
@@ -56,20 +56,20 @@ before the workshop starts. After install:
 Checking Java installation:
 ============================
 Java is installed. Version details:
-openjdk version "21.0.7" 2025-04-15 LTS
-OpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)
-OpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)
+openjdk version "25" 2025-09-16 LTS
+OpenJDK Runtime Environment Temurin-25+36 (build 25+36-LTS)
+OpenJDK 64-Bit Server VM Temurin-25+36 (build 25+36-LTS, mixed mode, sharing)
 
 ===============================
 Checking Ollama installation:
 ===============================
 Ollama is installed. Version details:
-ollama version is 0.6.5
+ollama version is 0.10.1
 
 ========================================
-Checking if llama4 model is pulled:
+Checking if llama3.2 model is pulled:
 ========================================
-llama4 model is not pulled. Please pull it using 'ollama pull llama4'.
+llama3.2 model is pulled and available.
 
 ========================================
 Checking if mxbai-embed-large model is pulled:
@@ -90,8 +90,8 @@ Docker version 28.1.1, build 4eba377
 Checking Docker image: pgvector/pgvector:pg17
 Docker image pgvector/pgvector:pg17 is pulled.
 
-Checking Docker image: dpage/pgadmin4:9.3
-Docker image dpage/pgadmin4:9.3 is pulled.
+Checking Docker image: dpage/pgadmin4:9.8.0
+Docker image dpage/pgadmin4:9.8.0 is pulled.
 
 ===============================
 Checking HTTPie installation:
@@ -100,14 +100,15 @@ HTTPie is installed. Version details:
 3.2.4
 ```
 
-if you run into issues try running the commands in the `check-deps.sh`
+If you run into issues try running the commands in the `check-deps.sh`
 script one at a time.
 
 ## API Keys
 
 You will be provided with API keys for online AI services during the
 workshop, these keys will only be valid during the workshop. Highly
-recommend you get your own keys to continue experimenting after the workshop.
+recommend you get your own keys to continue experimenting after
+the workshop.
 
 ### OpenAI
 
