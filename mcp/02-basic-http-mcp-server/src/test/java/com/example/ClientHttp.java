@@ -28,10 +28,10 @@ public class ClientHttp {
 
   public static void main(String[] args) {
 
-    var client =
-        McpClient.sync(
-                new WebFluxSseClientTransport(WebClient.builder().baseUrl("http://localhost:8080")))
+    var transport =
+        WebFluxSseClientTransport.builder(WebClient.builder().baseUrl("http://localhost:8080"))
             .build();
+    var client = McpClient.sync(transport).build();
 
     client.initialize();
 

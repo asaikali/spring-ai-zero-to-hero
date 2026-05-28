@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.6</version>
+    <version>4.0.3</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.example</groupId>
@@ -17,12 +17,15 @@
   <description>spring-ai-zero-to-hero</description>
   <properties>
     <java.version>21</java.version>
-    <spring-ai.version>1.0.3</spring-ai.version>
-    <spring-cloud.version>2025.0.0</spring-cloud.version>
+    <spring-ai.version>2.0.0-M2</spring-ai.version>
+    <!-- Spring Cloud 2025.1.1 (Oakwood) — compatible with Spring Boot 4.0.x -->
+    <spring-cloud.version>2025.1.1</spring-cloud.version>
+    <!-- Spring Cloud Azure 6.x targets Boot 3.x; provider-azure is excluded until a Boot 4.0-compatible version is released -->
     <spring-cloud-azure.version>6.0.0</spring-cloud-azure.version>
     <spotless.version>2.46.1</spotless.version>
     <loki-logback-appender.version>1.6.0</loki-logback-appender.version>
-    <spring-shell.version>3.4.1</spring-shell.version>
+    <!-- Spring Shell 4.0.1 — compatible with Spring Boot 4.0.x -->
+    <spring-shell.version>4.0.1</spring-shell.version>
   </properties>
 
   <modules>
@@ -52,13 +55,14 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
+      <!-- spring-cloud-azure excluded: 6.x targets Boot 3.x; re-enable with a Boot 4.0-compatible version -->
+      <!-- <dependency>
         <groupId>com.azure.spring</groupId>
         <artifactId>spring-cloud-azure-dependencies</artifactId>
         <version>${spring-cloud-azure.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
+      </dependency> -->
       <dependency>
         <groupId>org.springframework.shell</groupId>
         <artifactId>spring-shell-dependencies</artifactId>
@@ -87,6 +91,17 @@
       </releases>
     </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <build>
     <plugins>

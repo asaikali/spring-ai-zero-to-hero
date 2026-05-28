@@ -13,11 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.logaritex.mcp</groupId>
-			<artifactId>spring-ai-mcp-annotations</artifactId>
-			<version>0.1.0</version>
-		</dependency>
+		<!-- logaritex removed in Spring AI 2.0: resources/prompts/completions are registered directly -->
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>

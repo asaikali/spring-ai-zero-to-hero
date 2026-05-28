@@ -2,15 +2,17 @@ spring:
   application:
     name: ollama-provider
   profiles:
-    active: # spy,pgvector,observation
+    active: "" #spy #,pgvector,observation
   ai:
     ollama:
       base-url: "http://localhost:11434/"
-      embedding:        
+      embedding:
         model: mxbai-embed-large
       chat:
-        model: llama3.2
-        # model: llava
+#        model: llama3.2
+#        model: gemma3:4b
+#        model: qwen2.5:3b
+        model: qwen3:32b
   threads:
     virtual:
       enabled: true
@@ -39,6 +41,11 @@ spring:
         index-type: HNSW
         distance-type: COSINE_DISTANCE
         dimension: 1024
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
 ---
 spring:
   config:

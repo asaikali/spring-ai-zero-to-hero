@@ -38,7 +38,8 @@ public class ClientStdio {
                 "mcp/01-basic-stdio-mcp-server/target/01-basic-stdio-mcp-server-0.0.1-SNAPSHOT.jar")
             .build();
 
-    var client = McpClient.sync(new StdioClientTransport(stdioParams)).build();
+    var transport = new StdioClientTransport(stdioParams);
+    var client = McpClient.sync(transport).build();
 
     client.initialize();
 

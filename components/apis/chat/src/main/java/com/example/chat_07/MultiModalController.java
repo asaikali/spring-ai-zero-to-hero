@@ -2,6 +2,8 @@ package com.example.chat_07;
 
 import java.io.IOException;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.util.MimeTypeUtils;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chat/07")
 public class MultiModalController {
-  private final ChatClient chatClient;
+  private ChatClient chatClient;
 
   @Value("classpath:/multimodal.test.png")
   private Resource image;
@@ -21,9 +23,16 @@ public class MultiModalController {
     this.chatClient = builder.build();
   }
 
+  // Provider apps can register a "visionChatClient" bean to override the default model.
+  // For Ollama, OllamaVisionConfig provides a llava-backed client since qwen3:32b has no vision.
+  @Autowired(required = false)
+  @Qualifier("visionChatClient")
+  public void setVisionChatClient(ChatClient visionChatClient) {
+    this.chatClient = visionChatClient;
+  }
+
   @GetMapping("/explain")
   public String explain() throws IOException {
-
     return chatClient
         .prompt()
         .user(

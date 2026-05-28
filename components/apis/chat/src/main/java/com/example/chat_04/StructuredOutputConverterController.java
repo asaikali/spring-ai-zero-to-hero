@@ -89,6 +89,7 @@ public class StructuredOutputConverterController {
                         """
                 Provide a list of the plays written by {author}.
                 Provide only the list no other commentary.
+                Output HAS TO BE valid JSON. make sure the output JSON ends with ']'
                 """)
                     .param("author", topic))
         .call()

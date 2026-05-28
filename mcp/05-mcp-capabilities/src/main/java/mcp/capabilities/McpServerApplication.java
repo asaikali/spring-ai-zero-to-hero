@@ -15,7 +15,6 @@
  */
 package mcp.capabilities;
 
-import com.logaritex.mcp.spring.SpringAiMcpAnnotationProvider;
 import io.modelcontextprotocol.server.McpServerFeatures.SyncCompletionSpecification;
 import io.modelcontextprotocol.server.McpServerFeatures.SyncPromptSpecification;
 import io.modelcontextprotocol.server.McpServerFeatures.SyncResourceSpecification;
@@ -26,6 +25,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * MCP server demonstrating tools, resources, prompts, and completions.
+ *
+ * <p>In Spring AI 2.0 the third-party logaritex annotation processor is no longer needed.
+ * Resources, prompts, and completions are registered by returning {@code
+ * List<SyncResourceSpecification>}, {@code List<SyncPromptSpecification>}, and {@code
+ * List<SyncCompletionSpecification>} beans directly.
+ */
 @SpringBootApplication
 public class McpServerApplication {
 
@@ -41,19 +48,17 @@ public class McpServerApplication {
   @Bean
   public List<SyncResourceSpecification> resourceSpecs(
       UserProfileResourceProvider userProfileResourceProvider) {
-    return SpringAiMcpAnnotationProvider.createSyncResourceSpecifications(
-        List.of(userProfileResourceProvider));
+    return userProfileResourceProvider.specifications();
   }
 
   @Bean
   public List<SyncPromptSpecification> promptSpecs(PromptProvider promptProvider) {
-    return SpringAiMcpAnnotationProvider.createSyncPromptSpecifications(List.of(promptProvider));
+    return promptProvider.specifications();
   }
 
   @Bean
   public List<SyncCompletionSpecification> completionSpecs(
       AutocompleteProvider autocompleteProvider) {
-    return SpringAiMcpAnnotationProvider.createSyncCompleteSpecifications(
-        List.of(autocompleteProvider));
+    return autocompleteProvider.specifications();
   }
 }

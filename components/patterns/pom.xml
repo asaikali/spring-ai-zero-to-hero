@@ -17,5 +17,6 @@
 		<module>03-chat-memory</module>
 		<module>self-reflection-agent</module>
 		<module>chain-of-thought</module>
+		<module>04-recursive-advisors</module>
 	</modules>
 </project>

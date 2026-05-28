@@ -15,10 +15,14 @@
 	<modules>
 		<module>provider-ollama</module>
 		<module>provider-openai</module>
-		<module>provider-azure</module>
+		<!-- provider-azure excluded: spring-cloud-azure-dependencies 6.x targets Boot 3.x.
+		     Re-enable when a Boot 4.0-compatible spring-cloud-azure version is released. -->
+		<!-- <module>provider-azure</module> -->
+		<!-- gateway excluded: spring-cloud-starter-gateway-mvc is not yet in Spring Cloud 2025.1.1 BOM.
+		     Re-enable when Spring Cloud 2025.1.x includes gateway-mvc in its BOM. -->
+		<!-- <module>gateway</module> -->
 		<module>provider-aws</module>
 		<module>provider-google</module>
 		<module>provider-anthropic</module>
-		<module>gateway</module>
 	</modules>
 </project>

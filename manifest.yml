@@ -1,0 +1,13 @@
+---
+version: 1
+applications:
+  - name: spring-zero-to-hero
+    memory: 1G
+    path: applications/provider-openai/target/provider-openai-0.0.1-SNAPSHOT.jar
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 25.+ } }'
+    buildpacks:
+      - java_buildpack_offline
+    services:
+      - my-chat
+      - my-embed
